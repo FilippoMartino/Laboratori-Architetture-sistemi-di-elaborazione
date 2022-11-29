@@ -15,7 +15,6 @@ int main(int argc, char const *argv[]){
 	int quant_quant[SIZE] = {};
 
 	int temp;
-	int k;
 
 	/* estrazione id calorie e quantità (uso vettore quantity oredered da appoggio per risp variab */
 	for (int i = 0, k = 0; i < SIZE; i++, k += 2){
