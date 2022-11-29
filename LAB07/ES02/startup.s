@@ -149,7 +149,7 @@ temp			RN	9
 elements		RN 	10
 temp_2			RN	12
 
-Most_caloric	RN	11
+most_caloric	RN	11
 
 Reset_Handler   PROC
                 EXPORT  Reset_Handler             [WEAK]                                            
@@ -238,7 +238,8 @@ NO_SWAP_Q
 				CMP		i, elements
 				BNE		EX_LOOP
 				
-				
+				LDR		temp, [calories_rdr, #0]
+				MOV		most_caloric, temp						; most_caloric = calories_rdr[0]
 				
 				
 

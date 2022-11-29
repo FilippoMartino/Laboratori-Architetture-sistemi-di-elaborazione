@@ -311,17 +311,17 @@ ARM Macro Assembler    Page 5
                        temp_2  RN               12
   151 00000000         
   152 00000000        B 
-                       Most_caloric
+                       most_caloric
                                RN               11
   153 00000000         
   154 00000000         Reset_Handler
                                PROC
   155 00000000                 EXPORT           Reset_Handler             [WEAK
 ]
-  156 00000000 4834            LDR              R0, =Reset_Handler
+  156 00000000 4835            LDR              R0, =Reset_Handler
   157 00000002         
   158 00000002         ; your code here
-  159 00000002 4835            LDR              calories,   =INGREDIENT_CALORIE
+  159 00000002 4836            LDR              calories,   =INGREDIENT_CALORIE
 S 
 
 
@@ -331,14 +331,14 @@ ARM Macro Assembler    Page 6
 
                                                             ; assegnazione punt
                                                             atori
-  160 00000004 4935            LDR              quantity,   =INGREDIENT_QUANTIT
+  160 00000004 4936            LDR              quantity,   =INGREDIENT_QUANTIT
 Y
-  161 00000006 4A36            LDR              calories_rdr, =CALORIES_ORDERED
-  162 00000008 4B36            LDR              cal_quant,  =CAL_QUANT
-  163 0000000A 4C37            LDR              quantity_rdr,  =QUANTITY_ORDERE
+  161 00000006 4A37            LDR              calories_rdr, =CALORIES_ORDERED
+  162 00000008 4B37            LDR              cal_quant,  =CAL_QUANT
+  163 0000000A 4C38            LDR              quantity_rdr,  =QUANTITY_ORDERE
 D
-  164 0000000C 4D37            LDR              quant_quant, =QUANT_QUANT
-  165 0000000E F8DF A0E0       LDR              elements,  =NUM_INGREDIENTS
+  164 0000000C 4D38            LDR              quant_quant, =QUANT_QUANT
+  165 0000000E F8DF A0E4       LDR              elements,  =NUM_INGREDIENTS
   166 00000012 F8DA A000       LDR              elements,  [elements] ; molto i
                                                             mportante, ricordar
                                                             si di estrarre
@@ -475,225 +475,228 @@ ARM Macro Assembler    Page 8
   238 000000B8 4556            CMP              i, elements
   239 000000BA D1CE            BNE              EX_LOOP
   240 000000BC         
-  241 000000BC         
-  242 000000BC         
-  243 000000BC         
-  244 000000BC         
-  245 000000BC         
-  246 000000BC         
-  247 000000BC         
-  248 000000BC         
-  249 000000BC         
-  250 000000BC         ; STR  j, [Calories_rdr]
-  251 000000BC         
-  252 000000BC E7FE            B                .
-  253 000000BE         
-  254 000000BE                 ENDP
-  255 000000BE         
-  256 000000BE         
-  257 000000BE         
-  258 000000BE         
-  259 000000BE         ; Dummy Exception Handlers (infinite loops which can be 
+  241 000000BC F8D2 9000       LDR              temp, [calories_rdr, #0]
+  242 000000C0 46CB            MOV              most_caloric, temp ; most_calor
+                                                            ic = calories_rdr[0
+                                                            ]
+  243 000000C2         
+  244 000000C2         
+  245 000000C2         
+  246 000000C2         
+  247 000000C2         
+  248 000000C2         
+  249 000000C2         
+  250 000000C2         
+  251 000000C2         ; STR  j, [Calories_rdr]
+  252 000000C2         
+  253 000000C2 E7FE            B                .
+  254 000000C4         
+  255 000000C4                 ENDP
+  256 000000C4         
+  257 000000C4         
+  258 000000C4         
+  259 000000C4         
+  260 000000C4         ; Dummy Exception Handlers (infinite loops which can be 
                        modified)
-  260 000000BE         
-  261 000000BE         NMI_Handler
+  261 000000C4         
+  262 000000C4         NMI_Handler
                                PROC
-  262 000000BE                 EXPORT           NMI_Handler               [WEAK
+  263 000000C4                 EXPORT           NMI_Handler               [WEAK
 ]
-  263 000000BE E7FE            B                .
-  264 000000C0                 ENDP
-  266 000000C0         HardFault_Handler
+  264 000000C4 E7FE            B                .
+  265 000000C6                 ENDP
+  267 000000C6         HardFault_Handler
                                PROC
-  267 000000C0                 EXPORT           HardFault_Handler         [WEAK
+  268 000000C6                 EXPORT           HardFault_Handler         [WEAK
 ]
-  268 000000C0 E7FE            B                .
-  269 000000C2                 ENDP
-  271 000000C2         MemManage_Handler
+  269 000000C6 E7FE            B                .
+  270 000000C8                 ENDP
+  272 000000C8         MemManage_Handler
                                PROC
-  272 000000C2                 EXPORT           MemManage_Handler         [WEAK
+  273 000000C8                 EXPORT           MemManage_Handler         [WEAK
 ]
-  273 000000C2 E7FE            B                .
-  274 000000C4                 ENDP
-  276 000000C4         BusFault_Handler
-                               PROC
-  277 000000C4                 EXPORT           BusFault_Handler          [WEAK
-]
+  274 000000C8 E7FE            B                .
+  275 000000CA                 ENDP
+  277 000000CA         BusFault_Handler
 
 
 
 ARM Macro Assembler    Page 9 
 
 
-  278 000000C4 E7FE            B                .
-  279 000000C6                 ENDP
-  281 000000C6         UsageFault_Handler
                                PROC
-  282 000000C6                 EXPORT           UsageFault_Handler        [WEAK
+  278 000000CA                 EXPORT           BusFault_Handler          [WEAK
 ]
-  283 000000C6 E7FE            B                .
-  284 000000C8                 ENDP
-  285 000000C8         SVC_Handler
+  279 000000CA E7FE            B                .
+  280 000000CC                 ENDP
+  282 000000CC         UsageFault_Handler
                                PROC
-  286 000000C8                 EXPORT           SVC_Handler               [WEAK
+  283 000000CC                 EXPORT           UsageFault_Handler        [WEAK
 ]
-  287 000000C8 E7FE            B                .
-  288 000000CA                 ENDP
-  290 000000CA         DebugMon_Handler
+  284 000000CC E7FE            B                .
+  285 000000CE                 ENDP
+  286 000000CE         SVC_Handler
                                PROC
-  291 000000CA                 EXPORT           DebugMon_Handler          [WEAK
+  287 000000CE                 EXPORT           SVC_Handler               [WEAK
 ]
-  292 000000CA E7FE            B                .
-  293 000000CC                 ENDP
-  294 000000CC         PendSV_Handler
+  288 000000CE E7FE            B                .
+  289 000000D0                 ENDP
+  291 000000D0         DebugMon_Handler
                                PROC
-  295 000000CC                 EXPORT           PendSV_Handler            [WEAK
+  292 000000D0                 EXPORT           DebugMon_Handler          [WEAK
 ]
-  296 000000CC E7FE            B                .
-  297 000000CE                 ENDP
-  298 000000CE         SysTick_Handler
+  293 000000D0 E7FE            B                .
+  294 000000D2                 ENDP
+  295 000000D2         PendSV_Handler
                                PROC
-  299 000000CE                 EXPORT           SysTick_Handler           [WEAK
+  296 000000D2                 EXPORT           PendSV_Handler            [WEAK
 ]
-  300 000000CE E7FE            B                .
-  301 000000D0                 ENDP
-  302 000000D0         
-  303 000000D0         Default_Handler
+  297 000000D2 E7FE            B                .
+  298 000000D4                 ENDP
+  299 000000D4         SysTick_Handler
                                PROC
-  304 000000D0         
-  305 000000D0                 EXPORT           WDT_IRQHandler            [WEAK
+  300 000000D4                 EXPORT           SysTick_Handler           [WEAK
 ]
-  306 000000D0                 EXPORT           TIMER0_IRQHandler         [WEAK
+  301 000000D4 E7FE            B                .
+  302 000000D6                 ENDP
+  303 000000D6         
+  304 000000D6         Default_Handler
+                               PROC
+  305 000000D6         
+  306 000000D6                 EXPORT           WDT_IRQHandler            [WEAK
 ]
-  307 000000D0                 EXPORT           TIMER1_IRQHandler         [WEAK
+  307 000000D6                 EXPORT           TIMER0_IRQHandler         [WEAK
 ]
-  308 000000D0                 EXPORT           TIMER2_IRQHandler         [WEAK
+  308 000000D6                 EXPORT           TIMER1_IRQHandler         [WEAK
 ]
-  309 000000D0                 EXPORT           TIMER3_IRQHandler         [WEAK
+  309 000000D6                 EXPORT           TIMER2_IRQHandler         [WEAK
 ]
-  310 000000D0                 EXPORT           UART0_IRQHandler          [WEAK
+  310 000000D6                 EXPORT           TIMER3_IRQHandler         [WEAK
 ]
-  311 000000D0                 EXPORT           UART1_IRQHandler          [WEAK
+  311 000000D6                 EXPORT           UART0_IRQHandler          [WEAK
 ]
-  312 000000D0                 EXPORT           UART2_IRQHandler          [WEAK
+  312 000000D6                 EXPORT           UART1_IRQHandler          [WEAK
 ]
-  313 000000D0                 EXPORT           UART3_IRQHandler          [WEAK
+  313 000000D6                 EXPORT           UART2_IRQHandler          [WEAK
 ]
-  314 000000D0                 EXPORT           PWM1_IRQHandler           [WEAK
+  314 000000D6                 EXPORT           UART3_IRQHandler          [WEAK
 ]
-  315 000000D0                 EXPORT           I2C0_IRQHandler           [WEAK
+  315 000000D6                 EXPORT           PWM1_IRQHandler           [WEAK
 ]
-  316 000000D0                 EXPORT           I2C1_IRQHandler           [WEAK
 
 
 
 ARM Macro Assembler    Page 10 
 
 
+  316 000000D6                 EXPORT           I2C0_IRQHandler           [WEAK
 ]
-  317 000000D0                 EXPORT           I2C2_IRQHandler           [WEAK
+  317 000000D6                 EXPORT           I2C1_IRQHandler           [WEAK
 ]
-  318 000000D0                 EXPORT           SPI_IRQHandler            [WEAK
+  318 000000D6                 EXPORT           I2C2_IRQHandler           [WEAK
 ]
-  319 000000D0                 EXPORT           SSP0_IRQHandler           [WEAK
+  319 000000D6                 EXPORT           SPI_IRQHandler            [WEAK
 ]
-  320 000000D0                 EXPORT           SSP1_IRQHandler           [WEAK
+  320 000000D6                 EXPORT           SSP0_IRQHandler           [WEAK
 ]
-  321 000000D0                 EXPORT           PLL0_IRQHandler           [WEAK
+  321 000000D6                 EXPORT           SSP1_IRQHandler           [WEAK
 ]
-  322 000000D0                 EXPORT           RTC_IRQHandler            [WEAK
+  322 000000D6                 EXPORT           PLL0_IRQHandler           [WEAK
 ]
-  323 000000D0                 EXPORT           EINT0_IRQHandler          [WEAK
+  323 000000D6                 EXPORT           RTC_IRQHandler            [WEAK
 ]
-  324 000000D0                 EXPORT           EINT1_IRQHandler          [WEAK
+  324 000000D6                 EXPORT           EINT0_IRQHandler          [WEAK
 ]
-  325 000000D0                 EXPORT           EINT2_IRQHandler          [WEAK
+  325 000000D6                 EXPORT           EINT1_IRQHandler          [WEAK
 ]
-  326 000000D0                 EXPORT           EINT3_IRQHandler          [WEAK
+  326 000000D6                 EXPORT           EINT2_IRQHandler          [WEAK
 ]
-  327 000000D0                 EXPORT           ADC_IRQHandler            [WEAK
+  327 000000D6                 EXPORT           EINT3_IRQHandler          [WEAK
 ]
-  328 000000D0                 EXPORT           BOD_IRQHandler            [WEAK
+  328 000000D6                 EXPORT           ADC_IRQHandler            [WEAK
 ]
-  329 000000D0                 EXPORT           USB_IRQHandler            [WEAK
+  329 000000D6                 EXPORT           BOD_IRQHandler            [WEAK
 ]
-  330 000000D0                 EXPORT           CAN_IRQHandler            [WEAK
+  330 000000D6                 EXPORT           USB_IRQHandler            [WEAK
 ]
-  331 000000D0                 EXPORT           DMA_IRQHandler            [WEAK
+  331 000000D6                 EXPORT           CAN_IRQHandler            [WEAK
 ]
-  332 000000D0                 EXPORT           I2S_IRQHandler            [WEAK
+  332 000000D6                 EXPORT           DMA_IRQHandler            [WEAK
 ]
-  333 000000D0                 EXPORT           ENET_IRQHandler           [WEAK
+  333 000000D6                 EXPORT           I2S_IRQHandler            [WEAK
 ]
-  334 000000D0                 EXPORT           RIT_IRQHandler            [WEAK
+  334 000000D6                 EXPORT           ENET_IRQHandler           [WEAK
 ]
-  335 000000D0                 EXPORT           MCPWM_IRQHandler          [WEAK
+  335 000000D6                 EXPORT           RIT_IRQHandler            [WEAK
 ]
-  336 000000D0                 EXPORT           QEI_IRQHandler            [WEAK
+  336 000000D6                 EXPORT           MCPWM_IRQHandler          [WEAK
 ]
-  337 000000D0                 EXPORT           PLL1_IRQHandler           [WEAK
+  337 000000D6                 EXPORT           QEI_IRQHandler            [WEAK
 ]
-  338 000000D0                 EXPORT           USBActivity_IRQHandler    [WEAK
+  338 000000D6                 EXPORT           PLL1_IRQHandler           [WEAK
 ]
-  339 000000D0                 EXPORT           CANActivity_IRQHandler    [WEAK
+  339 000000D6                 EXPORT           USBActivity_IRQHandler    [WEAK
 ]
-  340 000000D0         
-  341 000000D0         WDT_IRQHandler
-  342 000000D0         TIMER0_IRQHandler
-  343 000000D0         TIMER1_IRQHandler
-  344 000000D0         TIMER2_IRQHandler
-  345 000000D0         TIMER3_IRQHandler
-  346 000000D0         UART0_IRQHandler
-  347 000000D0         UART1_IRQHandler
-  348 000000D0         UART2_IRQHandler
-  349 000000D0         UART3_IRQHandler
-  350 000000D0         PWM1_IRQHandler
-  351 000000D0         I2C0_IRQHandler
+  340 000000D6                 EXPORT           CANActivity_IRQHandler    [WEAK
+]
+  341 000000D6         
+  342 000000D6         WDT_IRQHandler
+  343 000000D6         TIMER0_IRQHandler
+  344 000000D6         TIMER1_IRQHandler
+  345 000000D6         TIMER2_IRQHandler
+  346 000000D6         TIMER3_IRQHandler
+  347 000000D6         UART0_IRQHandler
+  348 000000D6         UART1_IRQHandler
+  349 000000D6         UART2_IRQHandler
 
 
 
 ARM Macro Assembler    Page 11 
 
 
-  352 000000D0         I2C1_IRQHandler
-  353 000000D0         I2C2_IRQHandler
-  354 000000D0         SPI_IRQHandler
-  355 000000D0         SSP0_IRQHandler
-  356 000000D0         SSP1_IRQHandler
-  357 000000D0         PLL0_IRQHandler
-  358 000000D0         RTC_IRQHandler
-  359 000000D0         EINT0_IRQHandler
-  360 000000D0         EINT1_IRQHandler
-  361 000000D0         EINT2_IRQHandler
-  362 000000D0         EINT3_IRQHandler
-  363 000000D0         ADC_IRQHandler
-  364 000000D0         BOD_IRQHandler
-  365 000000D0         USB_IRQHandler
-  366 000000D0         CAN_IRQHandler
-  367 000000D0         DMA_IRQHandler
-  368 000000D0         I2S_IRQHandler
-  369 000000D0         ENET_IRQHandler
-  370 000000D0         RIT_IRQHandler
-  371 000000D0         MCPWM_IRQHandler
-  372 000000D0         QEI_IRQHandler
-  373 000000D0         PLL1_IRQHandler
-  374 000000D0         USBActivity_IRQHandler
-  375 000000D0         CANActivity_IRQHandler
-  376 000000D0         
-  377 000000D0 E7FE            B                .
-  378 000000D2         
-  379 000000D2                 ENDP
-  380 000000D2         
-  381 000000D2         
-  382 000000D2 00 00           ALIGN
-  383 000000D4         
-  384 000000D4         
-  385 000000D4         ; User Initial Stack & Heap
-  386 000000D4         
-  387 000000D4                 EXPORT           __initial_sp
-  388 000000D4                 EXPORT           __heap_base
-  389 000000D4                 EXPORT           __heap_limit
-  390 000000D4         
-  391 000000D4                 END
+  350 000000D6         UART3_IRQHandler
+  351 000000D6         PWM1_IRQHandler
+  352 000000D6         I2C0_IRQHandler
+  353 000000D6         I2C1_IRQHandler
+  354 000000D6         I2C2_IRQHandler
+  355 000000D6         SPI_IRQHandler
+  356 000000D6         SSP0_IRQHandler
+  357 000000D6         SSP1_IRQHandler
+  358 000000D6         PLL0_IRQHandler
+  359 000000D6         RTC_IRQHandler
+  360 000000D6         EINT0_IRQHandler
+  361 000000D6         EINT1_IRQHandler
+  362 000000D6         EINT2_IRQHandler
+  363 000000D6         EINT3_IRQHandler
+  364 000000D6         ADC_IRQHandler
+  365 000000D6         BOD_IRQHandler
+  366 000000D6         USB_IRQHandler
+  367 000000D6         CAN_IRQHandler
+  368 000000D6         DMA_IRQHandler
+  369 000000D6         I2S_IRQHandler
+  370 000000D6         ENET_IRQHandler
+  371 000000D6         RIT_IRQHandler
+  372 000000D6         MCPWM_IRQHandler
+  373 000000D6         QEI_IRQHandler
+  374 000000D6         PLL1_IRQHandler
+  375 000000D6         USBActivity_IRQHandler
+  376 000000D6         CANActivity_IRQHandler
+  377 000000D6         
+  378 000000D6 E7FE            B                .
+  379 000000D8         
+  380 000000D8                 ENDP
+  381 000000D8         
+  382 000000D8         
+  383 000000D8                 ALIGN
+  384 000000D8         
+  385 000000D8         
+  386 000000D8         ; User Initial Stack & Heap
+  387 000000D8         
+  388 000000D8                 EXPORT           __initial_sp
+  389 000000D8                 EXPORT           __heap_base
+  390 000000D8                 EXPORT           __heap_limit
+  391 000000D8         
+  392 000000D8                 END
               00000000 
               00000000 
               00000000 
@@ -738,7 +741,7 @@ Symbol: __initial_sp
       At line 35 in file startup.s
    Uses
       At line 59 in file startup.s
-      At line 387 in file startup.s
+      At line 388 in file startup.s
 
 3 symbols
 
@@ -769,7 +772,7 @@ Symbol: __heap_base
    Definitions
       At line 45 in file startup.s
    Uses
-      At line 388 in file startup.s
+      At line 389 in file startup.s
 Comment: __heap_base used once
 __heap_limit 00000000
 
@@ -777,7 +780,7 @@ Symbol: __heap_limit
    Definitions
       At line 47 in file startup.s
    Uses
-      At line 389 in file startup.s
+      At line 390 in file startup.s
 Comment: __heap_limit used once
 4 symbols
 
@@ -926,56 +929,56 @@ Symbol: .text
    Uses
       None
 Comment: .text unused
-ADC_IRQHandler 000000D0
+ADC_IRQHandler 000000D6
 
 Symbol: ADC_IRQHandler
    Definitions
-      At line 363 in file startup.s
+      At line 364 in file startup.s
    Uses
       At line 99 in file startup.s
-      At line 327 in file startup.s
+      At line 328 in file startup.s
 
-BOD_IRQHandler 000000D0
+BOD_IRQHandler 000000D6
 
 Symbol: BOD_IRQHandler
    Definitions
-      At line 364 in file startup.s
+      At line 365 in file startup.s
    Uses
       At line 100 in file startup.s
-      At line 328 in file startup.s
+      At line 329 in file startup.s
 
-BusFault_Handler 000000C4
+BusFault_Handler 000000CA
 
 Symbol: BusFault_Handler
    Definitions
-      At line 276 in file startup.s
+      At line 277 in file startup.s
    Uses
       At line 64 in file startup.s
-      At line 277 in file startup.s
+      At line 278 in file startup.s
 
-CANActivity_IRQHandler 000000D0
+CANActivity_IRQHandler 000000D6
 
 Symbol: CANActivity_IRQHandler
    Definitions
-      At line 375 in file startup.s
+      At line 376 in file startup.s
    Uses
       At line 111 in file startup.s
-      At line 339 in file startup.s
+      At line 340 in file startup.s
 
-CAN_IRQHandler 000000D0
+CAN_IRQHandler 000000D6
 
 Symbol: CAN_IRQHandler
    Definitions
-      At line 366 in file startup.s
+      At line 367 in file startup.s
    Uses
       At line 102 in file startup.s
-      At line 330 in file startup.s
+      At line 331 in file startup.s
 
-DMA_IRQHandler 000000D0
+DMA_IRQHandler 000000D6
 
 Symbol: DMA_IRQHandler
    Definitions
-      At line 367 in file startup.s
+      At line 368 in file startup.s
    Uses
 
 
@@ -984,62 +987,62 @@ ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Relocatable symbols
 
       At line 103 in file startup.s
-      At line 331 in file startup.s
+      At line 332 in file startup.s
 
-DebugMon_Handler 000000CA
+DebugMon_Handler 000000D0
 
 Symbol: DebugMon_Handler
    Definitions
-      At line 290 in file startup.s
+      At line 291 in file startup.s
    Uses
       At line 71 in file startup.s
-      At line 291 in file startup.s
+      At line 292 in file startup.s
 
-Default_Handler 000000D0
+Default_Handler 000000D6
 
 Symbol: Default_Handler
    Definitions
-      At line 303 in file startup.s
+      At line 304 in file startup.s
    Uses
       None
 Comment: Default_Handler unused
-EINT0_IRQHandler 000000D0
+EINT0_IRQHandler 000000D6
 
 Symbol: EINT0_IRQHandler
    Definitions
-      At line 359 in file startup.s
+      At line 360 in file startup.s
    Uses
       At line 95 in file startup.s
-      At line 323 in file startup.s
+      At line 324 in file startup.s
 
-EINT1_IRQHandler 000000D0
+EINT1_IRQHandler 000000D6
 
 Symbol: EINT1_IRQHandler
    Definitions
-      At line 360 in file startup.s
+      At line 361 in file startup.s
    Uses
       At line 96 in file startup.s
-      At line 324 in file startup.s
+      At line 325 in file startup.s
 
-EINT2_IRQHandler 000000D0
+EINT2_IRQHandler 000000D6
 
 Symbol: EINT2_IRQHandler
    Definitions
-      At line 361 in file startup.s
+      At line 362 in file startup.s
    Uses
       At line 97 in file startup.s
-      At line 325 in file startup.s
+      At line 326 in file startup.s
 
-EINT3_IRQHandler 000000D0
+EINT3_IRQHandler 000000D6
 
 Symbol: EINT3_IRQHandler
    Definitions
-      At line 362 in file startup.s
+      At line 363 in file startup.s
    Uses
       At line 98 in file startup.s
-      At line 326 in file startup.s
+      At line 327 in file startup.s
 
-ENET_IRQHandler 000000D0
+ENET_IRQHandler 000000D6
 
 Symbol: ENET_IRQHandler
 
@@ -1049,10 +1052,10 @@ ARM Macro Assembler    Page 3 Alphabetic symbol ordering
 Relocatable symbols
 
    Definitions
-      At line 369 in file startup.s
+      At line 370 in file startup.s
    Uses
       At line 105 in file startup.s
-      At line 333 in file startup.s
+      At line 334 in file startup.s
 
 EX_LOOP 0000005A
 
@@ -1062,50 +1065,50 @@ Symbol: EX_LOOP
    Uses
       At line 239 in file startup.s
 Comment: EX_LOOP used once
-HardFault_Handler 000000C0
+HardFault_Handler 000000C6
 
 Symbol: HardFault_Handler
    Definitions
-      At line 266 in file startup.s
+      At line 267 in file startup.s
    Uses
       At line 62 in file startup.s
-      At line 267 in file startup.s
+      At line 268 in file startup.s
 
-I2C0_IRQHandler 000000D0
+I2C0_IRQHandler 000000D6
 
 Symbol: I2C0_IRQHandler
    Definitions
-      At line 351 in file startup.s
+      At line 352 in file startup.s
    Uses
       At line 87 in file startup.s
-      At line 315 in file startup.s
+      At line 316 in file startup.s
 
-I2C1_IRQHandler 000000D0
+I2C1_IRQHandler 000000D6
 
 Symbol: I2C1_IRQHandler
    Definitions
-      At line 352 in file startup.s
+      At line 353 in file startup.s
    Uses
       At line 88 in file startup.s
-      At line 316 in file startup.s
+      At line 317 in file startup.s
 
-I2C2_IRQHandler 000000D0
+I2C2_IRQHandler 000000D6
 
 Symbol: I2C2_IRQHandler
    Definitions
-      At line 353 in file startup.s
+      At line 354 in file startup.s
    Uses
       At line 89 in file startup.s
-      At line 317 in file startup.s
+      At line 318 in file startup.s
 
-I2S_IRQHandler 000000D0
+I2S_IRQHandler 000000D6
 
 Symbol: I2S_IRQHandler
    Definitions
-      At line 368 in file startup.s
+      At line 369 in file startup.s
    Uses
       At line 104 in file startup.s
-      At line 332 in file startup.s
+      At line 333 in file startup.s
 
 
 
@@ -1129,32 +1132,32 @@ Symbol: LOAD_LOOP
    Uses
       At line 194 in file startup.s
 Comment: LOAD_LOOP used once
-MCPWM_IRQHandler 000000D0
+MCPWM_IRQHandler 000000D6
 
 Symbol: MCPWM_IRQHandler
    Definitions
-      At line 371 in file startup.s
+      At line 372 in file startup.s
    Uses
       At line 107 in file startup.s
-      At line 335 in file startup.s
+      At line 336 in file startup.s
 
-MemManage_Handler 000000C2
+MemManage_Handler 000000C8
 
 Symbol: MemManage_Handler
    Definitions
-      At line 271 in file startup.s
+      At line 272 in file startup.s
    Uses
       At line 63 in file startup.s
-      At line 272 in file startup.s
+      At line 273 in file startup.s
 
-NMI_Handler 000000BE
+NMI_Handler 000000C4
 
 Symbol: NMI_Handler
    Definitions
-      At line 261 in file startup.s
+      At line 262 in file startup.s
    Uses
       At line 61 in file startup.s
-      At line 262 in file startup.s
+      At line 263 in file startup.s
 
 NO_SWAP_C 00000088
 
@@ -1178,65 +1181,65 @@ Comment: NO_SWAP_Q used once
 ARM Macro Assembler    Page 5 Alphabetic symbol ordering
 Relocatable symbols
 
-PLL0_IRQHandler 000000D0
+PLL0_IRQHandler 000000D6
 
 Symbol: PLL0_IRQHandler
    Definitions
-      At line 357 in file startup.s
+      At line 358 in file startup.s
    Uses
       At line 93 in file startup.s
-      At line 321 in file startup.s
+      At line 322 in file startup.s
 
-PLL1_IRQHandler 000000D0
+PLL1_IRQHandler 000000D6
 
 Symbol: PLL1_IRQHandler
    Definitions
-      At line 373 in file startup.s
+      At line 374 in file startup.s
    Uses
       At line 109 in file startup.s
-      At line 337 in file startup.s
+      At line 338 in file startup.s
 
-PWM1_IRQHandler 000000D0
+PWM1_IRQHandler 000000D6
 
 Symbol: PWM1_IRQHandler
    Definitions
-      At line 350 in file startup.s
+      At line 351 in file startup.s
    Uses
       At line 86 in file startup.s
-      At line 314 in file startup.s
+      At line 315 in file startup.s
 
-PendSV_Handler 000000CC
+PendSV_Handler 000000D2
 
 Symbol: PendSV_Handler
    Definitions
-      At line 294 in file startup.s
+      At line 295 in file startup.s
    Uses
       At line 73 in file startup.s
-      At line 295 in file startup.s
+      At line 296 in file startup.s
 
-QEI_IRQHandler 000000D0
+QEI_IRQHandler 000000D6
 
 Symbol: QEI_IRQHandler
    Definitions
-      At line 372 in file startup.s
+      At line 373 in file startup.s
    Uses
       At line 108 in file startup.s
-      At line 336 in file startup.s
+      At line 337 in file startup.s
 
-RIT_IRQHandler 000000D0
+RIT_IRQHandler 000000D6
 
 Symbol: RIT_IRQHandler
    Definitions
-      At line 370 in file startup.s
+      At line 371 in file startup.s
    Uses
       At line 106 in file startup.s
-      At line 334 in file startup.s
+      At line 335 in file startup.s
 
-RTC_IRQHandler 000000D0
+RTC_IRQHandler 000000D6
 
 Symbol: RTC_IRQHandler
    Definitions
-      At line 358 in file startup.s
+      At line 359 in file startup.s
 
 
 
@@ -1245,7 +1248,7 @@ Relocatable symbols
 
    Uses
       At line 94 in file startup.s
-      At line 322 in file startup.s
+      At line 323 in file startup.s
 
 Reset_Handler 00000000
 
@@ -1257,50 +1260,50 @@ Symbol: Reset_Handler
       At line 155 in file startup.s
       At line 156 in file startup.s
 
-SPI_IRQHandler 000000D0
+SPI_IRQHandler 000000D6
 
 Symbol: SPI_IRQHandler
    Definitions
-      At line 354 in file startup.s
+      At line 355 in file startup.s
    Uses
       At line 90 in file startup.s
-      At line 318 in file startup.s
+      At line 319 in file startup.s
 
-SSP0_IRQHandler 000000D0
+SSP0_IRQHandler 000000D6
 
 Symbol: SSP0_IRQHandler
    Definitions
-      At line 355 in file startup.s
+      At line 356 in file startup.s
    Uses
       At line 91 in file startup.s
-      At line 319 in file startup.s
+      At line 320 in file startup.s
 
-SSP1_IRQHandler 000000D0
+SSP1_IRQHandler 000000D6
 
 Symbol: SSP1_IRQHandler
    Definitions
-      At line 356 in file startup.s
+      At line 357 in file startup.s
    Uses
       At line 92 in file startup.s
-      At line 320 in file startup.s
+      At line 321 in file startup.s
 
-SVC_Handler 000000C8
+SVC_Handler 000000CE
 
 Symbol: SVC_Handler
    Definitions
-      At line 285 in file startup.s
+      At line 286 in file startup.s
    Uses
       At line 70 in file startup.s
-      At line 286 in file startup.s
+      At line 287 in file startup.s
 
-SysTick_Handler 000000CE
+SysTick_Handler 000000D4
 
 Symbol: SysTick_Handler
    Definitions
-      At line 298 in file startup.s
+      At line 299 in file startup.s
    Uses
       At line 74 in file startup.s
-      At line 299 in file startup.s
+      At line 300 in file startup.s
 
 
 
@@ -1308,65 +1311,65 @@ Symbol: SysTick_Handler
 ARM Macro Assembler    Page 7 Alphabetic symbol ordering
 Relocatable symbols
 
-TIMER0_IRQHandler 000000D0
+TIMER0_IRQHandler 000000D6
 
 Symbol: TIMER0_IRQHandler
    Definitions
-      At line 342 in file startup.s
+      At line 343 in file startup.s
    Uses
       At line 78 in file startup.s
-      At line 306 in file startup.s
+      At line 307 in file startup.s
 
-TIMER1_IRQHandler 000000D0
+TIMER1_IRQHandler 000000D6
 
 Symbol: TIMER1_IRQHandler
    Definitions
-      At line 343 in file startup.s
+      At line 344 in file startup.s
    Uses
       At line 79 in file startup.s
-      At line 307 in file startup.s
+      At line 308 in file startup.s
 
-TIMER2_IRQHandler 000000D0
+TIMER2_IRQHandler 000000D6
 
 Symbol: TIMER2_IRQHandler
    Definitions
-      At line 344 in file startup.s
+      At line 345 in file startup.s
    Uses
       At line 80 in file startup.s
-      At line 308 in file startup.s
+      At line 309 in file startup.s
 
-TIMER3_IRQHandler 000000D0
+TIMER3_IRQHandler 000000D6
 
 Symbol: TIMER3_IRQHandler
    Definitions
-      At line 345 in file startup.s
+      At line 346 in file startup.s
    Uses
       At line 81 in file startup.s
-      At line 309 in file startup.s
+      At line 310 in file startup.s
 
-UART0_IRQHandler 000000D0
+UART0_IRQHandler 000000D6
 
 Symbol: UART0_IRQHandler
    Definitions
-      At line 346 in file startup.s
+      At line 347 in file startup.s
    Uses
       At line 82 in file startup.s
-      At line 310 in file startup.s
+      At line 311 in file startup.s
 
-UART1_IRQHandler 000000D0
+UART1_IRQHandler 000000D6
 
 Symbol: UART1_IRQHandler
    Definitions
-      At line 347 in file startup.s
+      At line 348 in file startup.s
    Uses
       At line 83 in file startup.s
-      At line 311 in file startup.s
+      At line 312 in file startup.s
 
-UART2_IRQHandler 000000D0
+UART2_IRQHandler 000000D6
 
 Symbol: UART2_IRQHandler
    Definitions
-      At line 348 in file startup.s
+      At line 349 in file startup.s
 
 
 
@@ -1375,52 +1378,52 @@ Relocatable symbols
 
    Uses
       At line 84 in file startup.s
-      At line 312 in file startup.s
+      At line 313 in file startup.s
 
-UART3_IRQHandler 000000D0
+UART3_IRQHandler 000000D6
 
 Symbol: UART3_IRQHandler
    Definitions
-      At line 349 in file startup.s
+      At line 350 in file startup.s
    Uses
       At line 85 in file startup.s
-      At line 313 in file startup.s
+      At line 314 in file startup.s
 
-USBActivity_IRQHandler 000000D0
+USBActivity_IRQHandler 000000D6
 
 Symbol: USBActivity_IRQHandler
    Definitions
-      At line 374 in file startup.s
+      At line 375 in file startup.s
    Uses
       At line 110 in file startup.s
-      At line 338 in file startup.s
+      At line 339 in file startup.s
 
-USB_IRQHandler 000000D0
+USB_IRQHandler 000000D6
 
 Symbol: USB_IRQHandler
    Definitions
-      At line 365 in file startup.s
+      At line 366 in file startup.s
    Uses
       At line 101 in file startup.s
-      At line 329 in file startup.s
+      At line 330 in file startup.s
 
-UsageFault_Handler 000000C6
+UsageFault_Handler 000000CC
 
 Symbol: UsageFault_Handler
    Definitions
-      At line 281 in file startup.s
+      At line 282 in file startup.s
    Uses
       At line 65 in file startup.s
-      At line 282 in file startup.s
+      At line 283 in file startup.s
 
-WDT_IRQHandler 000000D0
+WDT_IRQHandler 000000D6
 
 Symbol: WDT_IRQHandler
    Definitions
-      At line 341 in file startup.s
+      At line 342 in file startup.s
    Uses
       At line 77 in file startup.s
-      At line 305 in file startup.s
+      At line 306 in file startup.s
 
 52 symbols
 
