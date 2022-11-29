@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]){
 
 
 	for (int i = 0; i < SIZE; i++){
-		for (int j = 0; j < SIZE; j++){
+		for (int j = 0; j < SIZE - 1; j++){
 
 			/* controllo sulle calorie */
 
@@ -63,6 +63,7 @@ int main(int argc, char const *argv[]){
 			}
 		}
 	}
+	
 
 	printf("calories_ordered: [");
 	for(int i = 0; i < SIZE - 1; i++)
