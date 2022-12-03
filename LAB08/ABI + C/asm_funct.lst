@@ -25,13 +25,59 @@ ARM Macro Assembler    Page 1
    19 00000012         ; restore volatile registers
    20 00000012 E8BD 8DF0       LDMFD            sp!,{r4-r8,r10-r11,pc}
    21 00000016         
-   22 00000016                 END
+   22 00000016         
+   23 00000016         
+   24 00000016         
+   25 00000016         
+   26 00000016         check_square
+                               PROC
+   27 00000016                 EXPORT           check_square
+   28 00000016         
+   29 00000016 E92D 4DF0       PUSH             {R4-R8, R10-R11, LR} ; Salvo i 
+                                                            valori dei registri
+                                                             in cui possono ess
+                                                            ere salvate variaib
+                                                            li e il valore dell
+                                                            o stack pointer
+   30 0000001A         
+   31 0000001A FB00 F000       MUL              R0, R0, R0  ; R0 = x^2
+   32 0000001E FB01 F101       MUL              R1, R1, R1  ; R1 = y^2
+   33 00000022 FB02 F202       MUL              R2, R2, R2  ; R2 = r^2
+   34 00000026 4408            ADD              R0, R0, R1  ; R0 = x^2 + y^2
+   35 00000028 4290            CMP              R0, R2
+   36 0000002A BFB8 2001       MOVLT            R0, #1
+   37 0000002E BFC8 2000       MOVGT            R0, #0
+   38 00000032 BF08 2001       MOVEQ            R0, #1
+   39 00000036         
+   40 00000036 E8BD 8DF0       POP              {R4-R8, R10-R11, PC}
+   41 0000003A         
+   42 0000003A                 ENDP
+   43 0000003A         
+   44 0000003A         
+   45 0000003A         my_division
+                               PROC
+   46 0000003A                 IMPORT           __aeabi_fdiv
+   47 0000003A                 EXPORT           my_division
+   48 0000003A         ; your assembly here
+   49 0000003A F7FF FFFE       bl               __aeabi_fdiv
+   50 0000003E         ; your assembly here
+   51 0000003E                 ENDP
+   52 0000003E         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   53 0000003E         
+   54 0000003E                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=.\asm_funct.d -o.\asm_funct.o -I.\RTE\_Target_1 -IC:\Users\ernesto
-\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\ernesto\
-AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.6.0\Device\Include --predefine="__EV
-AL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ SETA 1" 
---predefine="LPC175x_6x SETA 1" --list=.\asm_funct.lst ASM_funct.s
+ork --depend=.\asm_funct.d -o.\asm_funct.o -I.\RTE\_Target_1 -IC:\Users\Filma\A
+ppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include -IC:\Users\Filma\AppD
+ata\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include --predefine="__EVAL S
+ETA 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SETA 1" --pr
+edefine="LPC175x_6x SETA 1" --predefine="_RTE_ SETA 1" --list=.\asm_funct.lst A
+SM_funct.s
 
 
 
@@ -54,5 +100,36 @@ Symbol: asm_functions
    Uses
       None
 Comment: asm_functions unused
-2 symbols
-336 symbols in table
+check_square 00000016
+
+Symbol: check_square
+   Definitions
+      At line 26 in file ASM_funct.s
+   Uses
+      At line 27 in file ASM_funct.s
+Comment: check_square used once
+my_division 0000003A
+
+Symbol: my_division
+   Definitions
+      At line 45 in file ASM_funct.s
+   Uses
+      At line 47 in file ASM_funct.s
+Comment: my_division used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+__aeabi_fdiv 00000000
+
+Symbol: __aeabi_fdiv
+   Definitions
+      At line 46 in file ASM_funct.s
+   Uses
+      At line 49 in file ASM_funct.s
+Comment: __aeabi_fdiv used once
+1 symbol
+339 symbols in table

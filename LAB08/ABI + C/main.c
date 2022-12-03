@@ -1,12 +1,33 @@
+#include<stdio.h>
 
-extern int ASM_funct(int, int, int, int, int, int);
+
+/* Prototipo funzione assembler, riceve 6 interi e ne restituisce 1 */
+extern int check_square(int x, int y, int r);
+extern float my_division(float* a, float* b);
+
+extern char _ROWS;
+extern char	_COLUMNS;
+extern int 	_Matrix_Coordinates[11][22];
 
 int main(void){
 
-	int i=0xFFFFFFFF, j=2, k=3, l=4, m=5, n=6;
-	volatile int r=0;
+	/* devo recuperare le informazioni sulla matrice dal file assembly */
+	
+	
+	
+	int i, j;
+	float r = 2, sum = 0, pi;
+	
 
-	r = ASM_funct(i, j, k, l, m, n);
-		
+
+	for (i = 0; i < 11; i++){
+			for(j = 0; j < 22; j+=2){
+				sum += check_square(_Matrix_Coordinates[i][j], _Matrix_Coordinates[i][j + 1], r);
+			}
+	}
+	r = r * r;
+	pi = my_division(&sum, &r);
+	
+
 	while(1);
 }
