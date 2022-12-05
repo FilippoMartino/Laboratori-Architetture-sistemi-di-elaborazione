@@ -16,7 +16,7 @@ int main(void){
 	
 	
 	int i, j;
-	float r = 2, sum = 0, pi;
+	float r = 5, sum = 0, pi;
 	
 
 
@@ -28,6 +28,7 @@ int main(void){
 	r = r * r;
 	pi = my_division(&sum, &r);
 	
+	printf("Pi: %.2f\n", pi);
 
 	while(1);
 }

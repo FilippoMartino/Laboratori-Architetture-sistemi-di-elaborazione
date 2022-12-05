@@ -1,27 +1,7 @@
-				
-				
-				AREA asm_functions, CODE, READONLY				
-                EXPORT  ASM_funct
-ASM_funct
-				; save current SP for a faster access 
-				; to parameters in the stack
-				MOV   r12, sp
-				; save volatile registers
-				STMFD sp!,{r4-r8,r10-r11,lr}				
-				; extract argument 4 and 5 into R4 and R5
-				LDR   r4, [r12]
-				LDR   r5, [r12,#4]
-				
-				add	  r5, r4, r5
-				; setup a value for R0 to return
-				
-				MOV	  r0, r5
-				; restore volatile registers
-				LDMFD sp!,{r4-r8,r10-r11,pc}
 
 				
 
-				
+				AREA	mycode, CODE, READONLY
 				
 check_square  			PROC
 						EXPORT  check_square            
@@ -44,13 +24,17 @@ check_square  			PROC
 
 my_division  			PROC
 						IMPORT __aeabi_fdiv
-						EXPORT  my_division      
-						; your assembly here
-						bl __aeabi_fdiv
-						; your assembly here
+						EXPORT  my_division
+						PUSH	{R4-R8, R10-R11, LR}	; salviamo parametri
+						
+						LDR		R0, [R0]
+						LDR		R1, [R1]				; carichiamo i valori puntati dagli indirizzi negli argomenti
+						
+						bl __aeabi_fdiv					; salto a funzione che deve effettuare divisione tra due registri 
+						
+						POP		{R4-R8, R10-R11, PC}	
+						
 						ENDP
-					
-
 						END
                 
 					

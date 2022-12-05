@@ -6,117 +6,94 @@ ARM Macro Assembler    Page 1
 
     1 00000000         
     2 00000000         
-    3 00000000                 AREA             asm_functions, CODE, READONLY
-    4 00000000                 EXPORT           ASM_funct
-    5 00000000         ASM_funct
-    6 00000000         ; save current SP for a faster access 
-    7 00000000         ; to parameters in the stack
-    8 00000000 46EC            MOV              r12, sp
-    9 00000002         ; save volatile registers
-   10 00000002 E92D 4DF0       STMFD            sp!,{r4-r8,r10-r11,lr}
-   11 00000006         ; extract argument 4 and 5 into R4 and R5
-   12 00000006 F8DC 4000       LDR              r4, [r12]
-   13 0000000A F8DC 5004       LDR              r5, [r12,#4]
-   14 0000000E         
-   15 0000000E 4425            add              r5, r4, r5
-   16 00000010         ; setup a value for R0 to return
-   17 00000010         
-   18 00000010 4628            MOV              r0, r5
-   19 00000012         ; restore volatile registers
-   20 00000012 E8BD 8DF0       LDMFD            sp!,{r4-r8,r10-r11,pc}
-   21 00000016         
-   22 00000016         
-   23 00000016         
-   24 00000016         
-   25 00000016         
-   26 00000016         check_square
+    3 00000000         
+    4 00000000                 AREA             mycode, CODE, READONLY
+    5 00000000         
+    6 00000000         check_square
                                PROC
-   27 00000016                 EXPORT           check_square
-   28 00000016         
-   29 00000016 E92D 4DF0       PUSH             {R4-R8, R10-R11, LR} ; Salvo i 
+    7 00000000                 EXPORT           check_square
+    8 00000000         
+    9 00000000 E92D 4DF0       PUSH             {R4-R8, R10-R11, LR} ; Salvo i 
                                                             valori dei registri
                                                              in cui possono ess
                                                             ere salvate variaib
                                                             li e il valore dell
                                                             o stack pointer
-   30 0000001A         
-   31 0000001A FB00 F000       MUL              R0, R0, R0  ; R0 = x^2
-   32 0000001E FB01 F101       MUL              R1, R1, R1  ; R1 = y^2
-   33 00000022 FB02 F202       MUL              R2, R2, R2  ; R2 = r^2
-   34 00000026 4408            ADD              R0, R0, R1  ; R0 = x^2 + y^2
-   35 00000028 4290            CMP              R0, R2
-   36 0000002A BFB8 2001       MOVLT            R0, #1
-   37 0000002E BFC8 2000       MOVGT            R0, #0
-   38 00000032 BF08 2001       MOVEQ            R0, #1
-   39 00000036         
-   40 00000036 E8BD 8DF0       POP              {R4-R8, R10-R11, PC}
-   41 0000003A         
-   42 0000003A                 ENDP
-   43 0000003A         
-   44 0000003A         
-   45 0000003A         my_division
+   10 00000004         
+   11 00000004 FB00 F000       MUL              R0, R0, R0  ; R0 = x^2
+   12 00000008 FB01 F101       MUL              R1, R1, R1  ; R1 = y^2
+   13 0000000C FB02 F202       MUL              R2, R2, R2  ; R2 = r^2
+   14 00000010 4408            ADD              R0, R0, R1  ; R0 = x^2 + y^2
+   15 00000012 4290            CMP              R0, R2
+   16 00000014 BFB8 2001       MOVLT            R0, #1
+   17 00000018 BFC8 2000       MOVGT            R0, #0
+   18 0000001C BF08 2001       MOVEQ            R0, #1
+   19 00000020         
+   20 00000020 E8BD 8DF0       POP              {R4-R8, R10-R11, PC}
+   21 00000024         
+   22 00000024                 ENDP
+   23 00000024         
+   24 00000024         
+   25 00000024         my_division
                                PROC
-   46 0000003A                 IMPORT           __aeabi_fdiv
-   47 0000003A                 EXPORT           my_division
-   48 0000003A         ; your assembly here
-   49 0000003A F7FF FFFE       bl               __aeabi_fdiv
-   50 0000003E         ; your assembly here
-   51 0000003E                 ENDP
-   52 0000003E         
-
-
-
-ARM Macro Assembler    Page 2 
-
-
-   53 0000003E         
-   54 0000003E                 END
+   26 00000024                 IMPORT           __aeabi_fdiv
+   27 00000024                 EXPORT           my_division
+   28 00000024 E92D 4DF0       PUSH             {R4-R8, R10-R11, LR} ; salviamo
+                                                             parametri
+   29 00000028         
+   30 00000028 6800            LDR              R0, [R0]
+   31 0000002A 6809            LDR              R1, [R1]    ; carichiamo i valo
+                                                            ri puntati dagli in
+                                                            dirizzi negli argom
+                                                            enti
+   32 0000002C         
+   33 0000002C F7FF FFFE       bl               __aeabi_fdiv ; salto a funzione
+                                                             che deve effettuar
+                                                            e divisione tra due
+                                                             registri 
+   34 00000030         
+   35 00000030 E8BD 8DF0       POP              {R4-R8, R10-R11, PC}
+   36 00000034         
+   37 00000034                 ENDP
+   38 00000034                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=.\asm_funct.d -o.\asm_funct.o -I.\RTE\_Target_1 -IC:\Users\Filma\A
-ppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include -IC:\Users\Filma\AppD
-ata\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include --predefine="__EVAL S
-ETA 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SETA 1" --pr
-edefine="LPC175x_6x SETA 1" --predefine="_RTE_ SETA 1" --list=.\asm_funct.lst A
-SM_funct.s
+ork --depend=.\asm_funct.d -o.\asm_funct.o -I.\RTE\_Target_1 -I"C:\Users\Filipp
+o Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include" -I"C:\Use
+rs\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Includ
+e" --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 536" --prede
+fine="_RTE_ SETA 1" --predefine="LPC175x_6x SETA 1" --predefine="_RTE_ SETA 1" 
+--list=.\asm_funct.lst ASM_funct.s
 
 
 
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-ASM_funct 00000000
-
-Symbol: ASM_funct
-   Definitions
-      At line 5 in file ASM_funct.s
-   Uses
-      At line 4 in file ASM_funct.s
-Comment: ASM_funct used once
-asm_functions 00000000
-
-Symbol: asm_functions
-   Definitions
-      At line 3 in file ASM_funct.s
-   Uses
-      None
-Comment: asm_functions unused
-check_square 00000016
+check_square 00000000
 
 Symbol: check_square
    Definitions
-      At line 26 in file ASM_funct.s
+      At line 6 in file ASM_funct.s
    Uses
-      At line 27 in file ASM_funct.s
+      At line 7 in file ASM_funct.s
 Comment: check_square used once
-my_division 0000003A
+my_division 00000024
 
 Symbol: my_division
    Definitions
-      At line 45 in file ASM_funct.s
+      At line 25 in file ASM_funct.s
    Uses
-      At line 47 in file ASM_funct.s
+      At line 27 in file ASM_funct.s
 Comment: my_division used once
-4 symbols
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 4 in file ASM_funct.s
+   Uses
+      None
+Comment: mycode unused
+3 symbols
 
 
 
@@ -127,9 +104,9 @@ __aeabi_fdiv 00000000
 
 Symbol: __aeabi_fdiv
    Definitions
-      At line 46 in file ASM_funct.s
+      At line 26 in file ASM_funct.s
    Uses
-      At line 49 in file ASM_funct.s
+      At line 33 in file ASM_funct.s
 Comment: __aeabi_fdiv used once
 1 symbol
-339 symbols in table
+338 symbols in table
