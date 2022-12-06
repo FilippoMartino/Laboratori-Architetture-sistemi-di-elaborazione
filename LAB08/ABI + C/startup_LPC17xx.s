@@ -31,7 +31,8 @@
 Stack_Size      EQU     0x00000200
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
-Stack_Mem       SPACE   Stack_Size
+				SPACE	Stack_Size/2
+Stack_Mem       SPACE   Stack_Size/2
 __initial_sp
 
 
@@ -39,7 +40,7 @@ __initial_sp
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size       EQU     0x00000000
+Heap_Size       EQU     0x00000200
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base
@@ -117,12 +118,12 @@ CRP_Key         DCD     0xFFFFFFFF
                 ENDIF
 					
 					
-						AREA my_data, DATA, READONLY, ALIGN=2
-						EXPORT 	_Matrix_Coordinates
-						EXPORT 	_ROWS					
-						EXPORT 	_COLUMNS
+				AREA my_data, DATA, READONLY, ALIGN=2
+				EXPORT 	_Matrix_Coordinates
+				EXPORT 	_ROWS					
+				EXPORT 	_COLUMNS
 						
-_Matrix_Coordinates 	DCD -5,5 ,	-4,5, 	-3,5,	-2,5, 	-1,5, 	0,5, 	1,5, 	2,5, 	3,5, 	4,5, 	5,5
+_Matrix_Coordinates 	DCD -5,5,	-4,5, 	-3,5,	-2,5, 	-1,5, 	0,5, 	1,5, 	2,5, 	3,5, 	4,5, 	5,5
 						DCD -5,4, 	-4,4, 	-3,4, 	-2,4, 	-1,4, 	0,4, 	1,4, 	2,4, 	3,4, 	4,4, 	5,4
 						DCD -5,3, 	-4,3, 	-3,3, 	-2,3, 	-1,3, 	0,3, 	1,3, 	2,3, 	3,3, 	4,3, 	5,3
 						DCD -5,2, 	-4,2, 	-3,2, 	-2,2, 	-1,2, 	0,2, 	1,2, 	2,2, 	3,2, 	4,2, 	5,2
@@ -134,8 +135,13 @@ _Matrix_Coordinates 	DCD -5,5 ,	-4,5, 	-3,5,	-2,5, 	-1,5, 	0,5, 	1,5, 	2,5, 	3,5
 						DCD -5,-4, 	-4,-4, 	-3,-4, 	-2,-4, 	-1,-4, 	0,-4, 	1,-4, 	2,-4, 	3,-4, 	4,-4, 	5,-4
 						DCD -5,-5, 	-4,-5, 	-3,-5, 	-2,-5, 	-1,-5, 	0,-5, 	1,-5, 	2,-5, 	3,-5, 	4,-5, 	5,-5
 						
-_COLUMNS		 		DCB 22
-_ROWS		 			DCB 11
+_COLUMNS		 		DCD 22
+_ROWS		 			DCD 11
+	
+				AREA my_O_data, DATA, READWRITE, ALIGN=3
+				
+_Opt_M_Coordinates		SPACE 22 * 11
+
 
 
                 AREA    |.text|, CODE, READONLY
@@ -145,6 +151,10 @@ _ROWS		 			DCB 11
 
 Reset_Handler   PROC
                 EXPORT 	Reset_Handler           [WEAK]
+				
+				MOV		R0, #3
+				MSR		CONTROL, R0			; assegnamo modalità utente (non privilegiata)
+				LDR		SP, =Stack_Mem		; riassegnamo valore stack pointer con quello deidicato all'utente
 				
                 IMPORT  main                
                 LDR     R0, =main
@@ -179,7 +189,68 @@ UsageFault_Handler\
                 ENDP
 SVC_Handler     PROC
                 EXPORT  SVC_Handler               [WEAK]
-                B       .
+				
+				; sappiamo già di trovarci in user mode quando la SVC viene invocata
+				
+				PUSH 	{R0-R12, LR}			; salvataggio dei registri e del LR
+				
+				MRS		R1, PSP					; salvo il valore del PSP
+				LDR		R0, [R1, #24]			; recupero il valore del PC, in sesta posizione
+				LDR		R0, [R0, #-4]			; recupero istruzione dell SVC
+				
+				BIC		R0, #0xFF000000
+				LSR		R0, #16					; pulizia istruzione per ottenere valore immediato
+				
+				CMP		R0, #0xCA			
+				BEQ		REG
+				CMP		R0, #0xFE
+				BEQ		NORM
+				B		USCITA
+
+REG
+				EOR		R0, R0, R1				; la XOR in ARM si fa con istruzione EOR
+				EOR		R0, R0, R2
+				EOR		R0, R0, R3
+				EOR		R0, R0, R4
+				EOR		R0, R0, R5
+				EOR		R0, R0, R6
+				EOR		R0, R0, R7
+				EOR		R0, R0, R8
+				EOR		R0, R0, R9
+				EOR		R0, R0, R10
+				EOR		R0, R0, R11
+				EOR		R0, R0, R12
+				EOR		R0, R0, LR
+				MRS		R1, XPSR				; devo prima savarmi il process status register con istruzione MRS
+				EOR		R0, R0, R1				; e solo dopo fare una XOR
+				
+				MRS		R1, PSP					; indirizzo di partenza stack utente
+				ADD		R1, R1, #32				; vado avanti di 8 posizioni
+				STR		R0, [R1]				; facciamo la store del valore di R0 nella posizione sopra XPSR (+8 posizioni da R0)
+
+NORM			
+
+				LDR		R0, _ROWS
+				LDR		R1, _COLUMNS			; ricavo dimensione matrice
+				MUL		R0, R0, R1
+				MOV		R1, #0
+				LDR		R3, _Matrix_Coordinates
+				LDR		R4, =_Opt_M_Coordinates
+				MOV		R2, #0
+
+EXT_LOOP
+				
+				LDR		R5, [R3, R2, LSL #2]
+				STR		R5, [R4, R2]
+				ADD		R2, R2, #1
+				CMP		R2, R0
+				BNE		EXT_LOOP
+
+				
+USCITA			
+				POP		{R0-R12, LR}			; ripristino valori e salto all'uscita
+				BX		LR
+				
                 ENDP
 DebugMon_Handler\
                 PROC
