@@ -38,5 +38,6 @@ int main (void) {
 	
 	translate_morse((char*) vett_input, 100, vett_output, 100, change_symbol, space, sentence_end);
 
+	return 0;
 
 }
