@@ -49,60 +49,178 @@ F00, 0xFFFF0111, 0xFFFFF101, 0xFFFF0100
               FFF11111         DCD              0xFFF00000, 0xFFF10000, 0xFFF11
 000, 0xFFF11100, 0xFFF11110, 0xFFF11111
     9 00000090         
-   10 00000090         
-   11 00000090                 AREA             myCode, CODE, READONLY
-   12 00000000         
-   13 00000000         translate_morse
-                               PROC
-   14 00000000                 EXPORT           translate_morse
-   15 00000000         
-   16 00000000 E92D 4DF0       PUSH             {R4-R8, R10-R11, LR} 
-                                                            ; save registers
-   17 00000004         
-   18 00000004         ; R0 -> *vett_input
-   19 00000004         ; R1 -> vett_input_size
-   20 00000004         ; R2 -> *vett_output
-   21 00000004         ; R3 -> vett_output_size
+   10 00000090 41 42 43 
+              44 45 46 CONVERSION
+                               DCB              "A", "B", "C", "D", "E", "F"
+   11 00000096 47 48 49 
+              4A 4B 4C         DCB              "G", "H", "I", "J", "K", "L"
+   12 0000009C 4D 4E 4F 
+              50 51 52         DCB              "M", "N", "O", "P", "Q", "R"
+   13 000000A2 53 54 55 
+              56 57 58         DCB              "S", "T", "U", "V", "W", "X"
+   14 000000A8 59 5A 31 
+              32 33 34         DCB              "Y", "Z", "1", "2", "3", "4"
+   15 000000AE 35 36 37 
+              38 39 30         DCB              "5", "6", "7", "8", "9", "0"
+   16 000000B4         
 
 
 
 ARM Macro Assembler    Page 2 
 
 
-   22 00000004         
-   23 00000004 F89D 4000       LDRB             R4, [SP]
-   24 00000008 F89D 5004       LDRB             R5, [SP, #4]
-   25 0000000C F89D 6008       LDRB             R6, [SP, #8]
-   26 00000010         
-   27 00000010         ; R4 -> change_symbol
-   28 00000010         ; R5 -> space
-   29 00000010         ; R6 -> sentence_end
-   30 00000010         
-   31 00000010         ; R7 -> counter
-   32 00000010         ; R8 -> mask
-   33 00000010         
-   34 00000010         ; R9 -> pointer to morse table
-   35 00000010         ; R10 -> pointer to conversion table
-   36 00000010         ; R11 -> conversion counter
-   37 00000010         LOOP
-   38 00000010         
-   39 00000010 F810 8007       LDRB             R8, [R0, R7]
-   40 00000014 EA4F 0888       LSL              R8, #2
-   41 00000018 F107 0701       ADD              R7, R7, #1
-   42 0000001C 2F04            CMP              R7, #4
-   43 0000001E D1F7            BNE              LOOP
-   44 00000020         
-   45 00000020         
-   46 00000020         
-   47 00000020 E8BD 8DF0       POP              {R4-R8, R10-R11, PC} 
+   17 000000B4                 AREA             myCode, CODE, READONLY
+   18 00000000         
+   19 00000000         translate_morse
+                               PROC
+   20 00000000                 EXPORT           translate_morse
+   21 00000000         
+   22 00000000 E92D 4DF0       PUSH             {R4-R8, R10-R11, LR} 
+                                                            ; save registers
+   23 00000004         
+   24 00000004         ; R0 -> *vett_input
+   25 00000004         ; R1 -> vett_input_size
+   26 00000004         ; R2 -> *vett_output
+   27 00000004         ; R3 -> vett_output_size
+   28 00000004         ; R11 -> output_counter
+   29 00000004         
+   30 00000004 F04F 0B00       MOV              R11, #0
+   31 00000008         
+   32 00000008 F89D 4000       LDRB             R4, [SP]
+   33 0000000C F89D 5004       LDRB             R5, [SP, #4]
+   34 00000010 F89D 6008       LDRB             R6, [SP, #8]
+   35 00000014         
+   36 00000014         ; R4 -> change_symbol
+   37 00000014         ; R5 -> space
+   38 00000014         ; R6 -> sentence_end
+   39 00000014         
+   40 00000014         ; R7 -> counter
+   41 00000014         
+   42 00000014 F04F 0700       MOV              R7, #0
+   43 00000018         
+   44 00000018         ; R8 -> mask
+   45 00000018         
+   46 00000018 F04F 38FF 
+                       LOOP    MOV              R8, #0xFFFFFFFF
+   47 0000001C         
+   48 0000001C         ; R9 -> input
+   49 0000001C         
+   50 0000001C F810 9007 
+                       READ    LDRB             R9, [R0, R7] ; carico valore mo
+                                                            rse (bit)
+   51 00000020 F107 0701       ADD              R7, R7, #1
+   52 00000024 428F            CMP              R7, R1
+   53 00000026 D01A            BEQ              END_TM
+   54 00000028 F1B9 0F30       CMP              R9, #'0'    ; inizio i confront
+                                                            i
+   55 0000002C D007            BEQ              is_zero
+   56 0000002E F1B9 0F31       CMP              R9, #'1'
+   57 00000032 D009            BEQ              is_one
+   58 00000034 F7FF FFFE       BL               convert     ; nel caso debba co
+                                                            nvertire chiamo la 
+                                                            procedura
+   59 00000038 45B1            CMP              R9, R6
+   60 0000003A D010            BEQ              END_TM
+   61 0000003C E7EC            B                LOOP        ; ritorno dalla pro
+                                                            cedura
+   62 0000003E         
+   63 0000003E EA4F 1808 
+                       is_zero LSL              R8, #4      ; sposta a sinistra
+                                                             di una posizione l
+                                                            a maschera (4 byte 
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                                                            in hex)
+   64 00000042 F088 0800       EOR              R8, #0      ; OR con 0 per esse
+                                                            re sicuri che ultim
+                                                            a cifra scritta sia
+                                                             uno zero
+   65 00000046 E7E9            B                READ
+   66 00000048         
+   67 00000048 EA4F 1808 
+                       is_one  LSL              R8, #4
+   68 0000004C F088 0801       EOR              R8, #1      ; shift come prima 
+                                                            e OR per essere sic
+                                                            uri di aver uno com
+                                                            e ultima cifra
+   69 00000050 E7E4            B                READ
+   70 00000052         
+   71 00000052         is_space
+   72 00000052         
+   73 00000052 EA4F 0888       LSL              R8, #2
+   74 00000056 F107 0701       ADD              R7, R7, #1
+   75 0000005A 2F04            CMP              R7, #4
+   76 0000005C D1DC            BNE              LOOP
+   77 0000005E         
+   78 0000005E         
+   79 0000005E         
+   80 0000005E E8BD 8DF0 
+                       END_TM  POP              {R4-R8, R10-R11, PC} 
                                                             ; restore registers
                                                             
-   48 00000024         
-   49 00000024                 ENDP
-   50 00000024         
-   51 00000024         
-   52 00000024         
-   53 00000024                 END
+   81 00000062                 ENDP
+   82 00000062         
+   83 00000062         convert PROC
+   84 00000062 E92D 57FF       PUSH             {R0-R10, R12, LR}
+   85 00000066 480E            LDR              R0, =MORSE
+   86 00000068 490E            LDR              R1, =CONVERSION ; puntatori all
+                                                            e tabelle per conve
+                                                            rsione
+   87 0000006A F04F 33FF       MOV              R3, #-1     ; counter
+   88 0000006E         
+   89 0000006E E002            B                load_morse  ; salvo parola
+   90 00000070         
+   91 00000070 45A9    check_space
+                               CMP              R9, R5
+   92 00000072 D00C            BEQ              load_space
+   93 00000074 E012            B                END_CONV
+   94 00000076         
+   95 00000076 F103 0301 
+                       load_morse
+                               ADD              R3, R3, #1
+   96 0000007A F850 4023       LDR              R4, [R0, R3, LSL #2] ; scorro i
+                                                             valori della tabel
+                                                            la morse e carico i
+                                                            n R4
+   97 0000007E 4544            CMP              R4, R8      ; confronto con la 
+                                                            maschera
+   98 00000080 D1F9            BNE              load_morse
+   99 00000082 5CCE            LDRB             R6, [R1, R3] ; carico il valore
+                                                             corrispondente all
+                                                            'indirizzo nella ta
+                                                            b di conv
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+  100 00000084 F802 600B       STRB             R6, [R2, R11]
+  101 00000088 F10B 0B01       ADD              R11, R11, #1 ; carico il valore
+                                                             nel vettore di out
+                                                            put ed incremento c
+                                                            ontatore
+  102 0000008C E7F0            B                check_space
+  103 0000008E         
+  104 0000008E F04F 0320 
+                       load_space
+                               MOV              R3, #' '
+  105 00000092 F802 300B       STRB             R3, [R2, R11]
+  106 00000096 F10B 0B01       ADD              R11, R11, #1
+  107 0000009A E7FF            B                END_CONV
+  108 0000009C         
+  109 0000009C E8BD 97FF 
+                       END_CONV
+                               POP              {R0-R10, R12, PC}
+  110 000000A0                 ENDP
+  111 000000A0         
+  112 000000A0                 END
+              00000000 
+              00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\functions.d -o.\functions.o -I.\RTE\_Target_1 -I"C:\Users\Filipp
 o Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include" -I"C:\Use
@@ -116,14 +234,22 @@ fine="_RTE_ SETA 1" --predefine="LPC175x_6x SETA 1" --predefine="_RTE_ SETA 1"
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
+CONVERSION 00000090
+
+Symbol: CONVERSION
+   Definitions
+      At line 10 in file functions.s
+   Uses
+      At line 86 in file functions.s
+Comment: CONVERSION used once
 MORSE 00000000
 
 Symbol: MORSE
    Definitions
       At line 3 in file functions.s
    Uses
-      None
-Comment: MORSE unused
+      At line 85 in file functions.s
+Comment: MORSE used once
 MorseData 00000000
 
 Symbol: MorseData
@@ -132,26 +258,117 @@ Symbol: MorseData
    Uses
       None
 Comment: MorseData unused
-2 symbols
+3 symbols
 
 
 
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-LOOP 00000010
+END_CONV 0000009C
+
+Symbol: END_CONV
+   Definitions
+      At line 109 in file functions.s
+   Uses
+      At line 93 in file functions.s
+      At line 107 in file functions.s
+
+END_TM 0000005E
+
+Symbol: END_TM
+   Definitions
+      At line 80 in file functions.s
+   Uses
+      At line 53 in file functions.s
+      At line 60 in file functions.s
+
+LOOP 00000018
 
 Symbol: LOOP
    Definitions
-      At line 37 in file functions.s
+      At line 46 in file functions.s
    Uses
-      At line 43 in file functions.s
-Comment: LOOP used once
+      At line 61 in file functions.s
+      At line 76 in file functions.s
+
+READ 0000001C
+
+Symbol: READ
+   Definitions
+      At line 50 in file functions.s
+   Uses
+      At line 65 in file functions.s
+      At line 69 in file functions.s
+
+check_space 00000070
+
+Symbol: check_space
+   Definitions
+      At line 91 in file functions.s
+   Uses
+      At line 102 in file functions.s
+Comment: check_space used once
+convert 00000062
+
+Symbol: convert
+   Definitions
+      At line 83 in file functions.s
+   Uses
+      At line 58 in file functions.s
+Comment: convert used once
+is_one 00000048
+
+Symbol: is_one
+   Definitions
+      At line 67 in file functions.s
+   Uses
+      At line 57 in file functions.s
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+Comment: is_one used once
+is_space 00000052
+
+Symbol: is_space
+   Definitions
+      At line 71 in file functions.s
+   Uses
+      None
+Comment: is_space unused
+is_zero 0000003E
+
+Symbol: is_zero
+   Definitions
+      At line 63 in file functions.s
+   Uses
+      At line 55 in file functions.s
+Comment: is_zero used once
+load_morse 00000076
+
+Symbol: load_morse
+   Definitions
+      At line 95 in file functions.s
+   Uses
+      At line 89 in file functions.s
+      At line 98 in file functions.s
+
+load_space 0000008E
+
+Symbol: load_space
+   Definitions
+      At line 104 in file functions.s
+   Uses
+      At line 92 in file functions.s
+Comment: load_space used once
 myCode 00000000
 
 Symbol: myCode
    Definitions
-      At line 11 in file functions.s
+      At line 17 in file functions.s
    Uses
       None
 Comment: myCode unused
@@ -159,9 +376,9 @@ translate_morse 00000000
 
 Symbol: translate_morse
    Definitions
-      At line 13 in file functions.s
+      At line 19 in file functions.s
    Uses
-      At line 14 in file functions.s
+      At line 20 in file functions.s
 Comment: translate_morse used once
-3 symbols
-339 symbols in table
+13 symbols
+352 symbols in table
