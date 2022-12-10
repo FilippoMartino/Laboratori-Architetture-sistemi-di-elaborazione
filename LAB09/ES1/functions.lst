@@ -1,0 +1,167 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             MorseData, DATA, READONLY
+    2 00000000         
+    3 00000000 FFFFFF01 
+              FFFF1000 
+              FFFF1010 
+              FFFFF100 
+              FFFFFFF0 
+              FFFF0010 MORSE   DCD              0xFFFFFF01, 0xFFFF1000, 0xFFFF1
+010, 0xFFFFF100, 0xFFFFFFF0, 0xFFFF0010
+    4 00000018 FFFFF110 
+              FFFF0000 
+              FFFFFF00 
+              FFFF0111 
+              FFFFF101 
+              FFFF0100         DCD              0xFFFFF110, 0xFFFF0000, 0xFFFFF
+F00, 0xFFFF0111, 0xFFFFF101, 0xFFFF0100
+    5 00000030 FFFFFF11 
+              FFFFFF10 
+              FFFFF111 
+              FFFF0110 
+              FFFF1101 
+              FFFFF010         DCD              0xFFFFFF11, 0xFFFFFF10, 0xFFFFF
+111, 0xFFFF0110, 0xFFFF1101, 0xFFFFF010
+    6 00000048 FFFFF000 
+              FFFFFFF1 
+              FFFFF001 
+              FFFF0001 
+              FFFFF011 
+              FFFF1001         DCD              0xFFFFF000, 0xFFFFFFF1, 0xFFFFF
+001, 0xFFFF0001, 0xFFFFF011, 0xFFFF1001
+    7 00000060 FFFF1011 
+              FFFF1100 
+              FFF01111 
+              FFF00111 
+              FFF00011 
+              FFF00001         DCD              0xFFFF1011, 0xFFFF1100, 0xFFF01
+111, 0xFFF00111, 0xFFF00011, 0xFFF00001
+    8 00000078 FFF00000 
+              FFF10000 
+              FFF11000 
+              FFF11100 
+              FFF11110 
+              FFF11111         DCD              0xFFF00000, 0xFFF10000, 0xFFF11
+000, 0xFFF11100, 0xFFF11110, 0xFFF11111
+    9 00000090         
+   10 00000090         
+   11 00000090                 AREA             myCode, CODE, READONLY
+   12 00000000         
+   13 00000000         translate_morse
+                               PROC
+   14 00000000                 EXPORT           translate_morse
+   15 00000000         
+   16 00000000 E92D 4DF0       PUSH             {R4-R8, R10-R11, LR} 
+                                                            ; save registers
+   17 00000004         
+   18 00000004         ; R0 -> *vett_input
+   19 00000004         ; R1 -> vett_input_size
+   20 00000004         ; R2 -> *vett_output
+   21 00000004         ; R3 -> vett_output_size
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   22 00000004         
+   23 00000004 F89D 4000       LDRB             R4, [SP]
+   24 00000008 F89D 5004       LDRB             R5, [SP, #4]
+   25 0000000C F89D 6008       LDRB             R6, [SP, #8]
+   26 00000010         
+   27 00000010         ; R4 -> change_symbol
+   28 00000010         ; R5 -> space
+   29 00000010         ; R6 -> sentence_end
+   30 00000010         
+   31 00000010         ; R7 -> counter
+   32 00000010         ; R8 -> mask
+   33 00000010         
+   34 00000010         ; R9 -> pointer to morse table
+   35 00000010         ; R10 -> pointer to conversion table
+   36 00000010         ; R11 -> conversion counter
+   37 00000010         LOOP
+   38 00000010         
+   39 00000010 F810 8007       LDRB             R8, [R0, R7]
+   40 00000014 EA4F 0888       LSL              R8, #2
+   41 00000018 F107 0701       ADD              R7, R7, #1
+   42 0000001C 2F04            CMP              R7, #4
+   43 0000001E D1F7            BNE              LOOP
+   44 00000020         
+   45 00000020         
+   46 00000020         
+   47 00000020 E8BD 8DF0       POP              {R4-R8, R10-R11, PC} 
+                                                            ; restore registers
+                                                            
+   48 00000024         
+   49 00000024                 ENDP
+   50 00000024         
+   51 00000024         
+   52 00000024         
+   53 00000024                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\functions.d -o.\functions.o -I.\RTE\_Target_1 -I"C:\Users\Filipp
+o Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include" -I"C:\Use
+rs\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Includ
+e" --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 536" --prede
+fine="_RTE_ SETA 1" --predefine="LPC175x_6x SETA 1" --predefine="_RTE_ SETA 1" 
+--list=.\functions.lst functions.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+MORSE 00000000
+
+Symbol: MORSE
+   Definitions
+      At line 3 in file functions.s
+   Uses
+      None
+Comment: MORSE unused
+MorseData 00000000
+
+Symbol: MorseData
+   Definitions
+      At line 1 in file functions.s
+   Uses
+      None
+Comment: MorseData unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+LOOP 00000010
+
+Symbol: LOOP
+   Definitions
+      At line 37 in file functions.s
+   Uses
+      At line 43 in file functions.s
+Comment: LOOP used once
+myCode 00000000
+
+Symbol: myCode
+   Definitions
+      At line 11 in file functions.s
+   Uses
+      None
+Comment: myCode unused
+translate_morse 00000000
+
+Symbol: translate_morse
+   Definitions
+      At line 13 in file functions.s
+   Uses
+      At line 14 in file functions.s
+Comment: translate_morse used once
+3 symbols
+339 symbols in table
