@@ -3,6 +3,20 @@
 
 #include "../led/led.h"
 
+/*
+	Questo file permette la configurazione degli handler per gli interrupt causati
+	dai pulsanti, o meglio dalla loro attivazione.
+*/
+
+
+/*
+	Ognuna di queste funzioni specifica le operazioni da realizzare ogni qual volta il pulsante 0 (piuttosto che 1 o 2)
+	venga premuto
+	
+	Alla fine di ogni funzione si pulisce l'interrupt, che altrimenti rimarrebbe a "sporcare" la IVT (interrupt vector table)
+	specificando il registro EXTINT in bitwise AND con la maschera per selezionare a quale pin di input si stia specificando, 
+	in questo caso 0, 1, o 2 in base al pulsante
+*/
 void EINT0_IRQHandler (void)	  
 {
 	LED_On(0);
