@@ -27,7 +27,8 @@ extern void ASM_conversion(void);
 */
 void EINT0_IRQHandler (void)	  
 {
-
+	
+	EINT1_IRQHandler();
   LPC_SC->EXTINT &= (1 << 0);     /* clear pending interrupt         */
 }
 
