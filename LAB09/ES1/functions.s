@@ -18,7 +18,8 @@ CONVERSION			DCB	"A", "B", "C", "D", "E", "F"
 			
 translate_morse		PROC
 					EXPORT	translate_morse
-						
+					
+					MOV		R12, SP						; salvo il valore dello SP per poter recuperare gli altri argomenti
 					PUSH	{R4-R8, R10-R11, LR}		; save registers
 					
 					; R0 -> *vett_input
@@ -27,12 +28,9 @@ translate_morse		PROC
 					; R3 -> vett_output_size
 					; R11 -> output_counter
 					
-					MOV		R11, #0
-					ADD		SP, SP, #32
-					LDRB	R4, [SP]
-					LDRB	R5, [SP, #4]
-					LDRB	R6, [SP, #8]
-					ADD		SP, SP, #-32
+					LDRB	R4, [R12]
+					LDRB	R5, [R12, #4]
+					LDRB	R6, [R12, #8]				; recupero parametri
 					
 					; R4 -> change_symbol
 					; R5 -> space
