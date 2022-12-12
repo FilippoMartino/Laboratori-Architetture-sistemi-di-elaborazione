@@ -27,7 +27,6 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 
 /* vettore dichiarato globale */										
 char	vett_input[100] = {'0', '0', '0', '0', '2', '1', '1', '1', '2', '0', '1', '0', '0', '2', '0', '1', '3', '1', '1', '2', '0', '0', '1', '2', '1', '0', '2', '1', '0', '0', '2', '1', '1', '1', '3', '0', '1', '1', '1', '1', '2', '0', '0', '1', '1', '1', '4'};	
-										
 /*----------------------------------------------------------------------------
   Main Program
  *----------------------------------------------------------------------------*/
@@ -61,8 +60,12 @@ void c_led_setup(void){
 	
 	/* ciclo per ogni valore morse presente nel vettore */
 	for (i = 0; i < 100; i++){
-		if (vett_input[i] == '2' || vett_input[i] == '3'){
+		if (vett_input[i] == '2'){
 			count ++;
+			convert(count);
+		}
+		if (vett_input[i] == '3'){
+			count += 2;
 			convert(count);
 		}
 		if (vett_input[i] == '4'){
