@@ -76,7 +76,7 @@ void BUTTON_init(void) {
   /*
     Abilitazione delle interruzzioni, sovrascrive quello già implementato "weak" dal sistema
   */
-
+	
   NVIC_EnableIRQ(EINT2_IRQn);              /* enable irq in nvic                 */
   NVIC_EnableIRQ(EINT1_IRQn);              /* enable irq in nvic                 */
   NVIC_EnableIRQ(EINT0_IRQn);              /* enable irq in nvic                 */

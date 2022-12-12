@@ -16,8 +16,11 @@ extern int translate_morse(char* vett_input,
 	Funzione per la conversione del vettore in input 
 */
 void c_led_setup(void);
-/* Funzione per la conversione decimale-binario */
-void convert(int to_convert);
+
+/*
+	Funzione per la conversione del morse con ASM
+*/
+void ASM_conversion(void);
 										
 /* Led external variables from funct_led */
 extern unsigned char led_value;					/* defined in funct_led								*/
@@ -50,8 +53,6 @@ int main (void) {
 
 }
 
-
-
 void c_led_setup(void){
 	
 	/* variabile conteggio caratteri morse */
@@ -62,39 +63,24 @@ void c_led_setup(void){
 	for (i = 0; i < 100; i++){
 		if (vett_input[i] == '2'){
 			count ++;
-			convert(count);
+			LED_Out(count);
 		}
 		if (vett_input[i] == '3'){
 			count += 2;
-			convert(count);
+			LED_Out(count);
 		}
 		if (vett_input[i] == '4'){
 			count ++;
-			convert(count);
+			LED_Out(count);
+			/* Dopo aver convertito tutto il messaggio tutti i led devono essere accesi */
+			LED_Out(255);
 			break;
 		}
 	}
 	return;
 }
 
-void convert(int to_convert){
 
-	int i;
-	/* vettore in cui salvare numero binario (8 bit per 8 led) */
-	int bin[8];
-	
-	/* Spengo tutti i led */
-	LED_Out(0);
-	for (i = 0; i < 8; i++){
-		bin[i] = to_convert % 2;
-		to_convert /= 2;
-	}
+void ASM_conversion(void){
 
-	/* Accendiamo i led a seconda del valore binario */
-	for (i = 0; i < 8; i++){
-		if (bin[i])
-			LED_On(i);
-	}
-	
-	return;
 }

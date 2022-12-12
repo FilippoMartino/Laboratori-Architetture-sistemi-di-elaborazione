@@ -35,8 +35,10 @@ void EINT0_IRQHandler (void)
 void EINT1_IRQHandler (void)	  
 {
   /* la funzione LED_Out assegna a tutti i led il valore in argomento */
-	LPC_SC->EXTINT &= (1 << 1);     /* clear pending interrupt         */
 	c_led_setup();
+	LPC_SC->EXTINT &= (1 << 1);     /* clear pending interrupt         */
+	
+	
 }
 
 void EINT2_IRQHandler (void)	  
