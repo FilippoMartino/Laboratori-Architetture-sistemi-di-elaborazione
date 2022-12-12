@@ -5,6 +5,7 @@
 
 #include "../led/led.h"
 extern void c_led_setup(void);
+extern void ASM_conversion(void);
 /*
 	Questo file permette la configurazione degli handler per gli interrupt causati
 	dai pulsanti, o meglio dalla loro attivazione.
@@ -20,6 +21,10 @@ extern void c_led_setup(void);
 	in questo caso 0, 1, o 2 in base al pulsante
 */
 
+
+/*
+	Premendo INT0 devo riniziare dal punto 1, ossia dal trigger di KEY 1
+*/
 void EINT0_IRQHandler (void)	  
 {
 
@@ -41,10 +46,25 @@ void EINT1_IRQHandler (void)
 	
 }
 
+/*
+	Premendo il tasto due inizia la conversione del messaggio in ASCII:
+	- durante la conversione devono essere disabilitati INT0 e KEY1
+	- al ritorno della chiamata i led mostrano il numero totale di simboli convertiti
+	- i pulsanti disabilitati devono essere riabilitati
+*/
 void EINT2_IRQHandler (void)	  
 {
-	LED_Off(0);
-	LED_Off(1);
+	
+	/* disabilitiamo INT0 */
+	NVIC_DisableIRQ(EINT0_IRQn);
+	/* disabilitiamo KEY1 */
+	NVIC_DisableIRQ(EINT1_IRQn);
+	
+	ASM_conversion();
+	
+	/* Riabilitiamo i due pulsanti */
+	NVIC_EnableIRQ(EINT0_IRQn);
+	NVIC_EnableIRQ(EINT1_IRQn);
   LPC_SC->EXTINT &= (1 << 2);     /* clear pending interrupt         */    
 }
 

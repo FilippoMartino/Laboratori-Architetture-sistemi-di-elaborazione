@@ -35,7 +35,7 @@ void LED_Off(unsigned int num) {
 }
 
 /*----------------------------------------------------------------------------
-  Function that outputs value to LEDs
+  Function that outputs value to LEDs (da decimale in binario)
  *----------------------------------------------------------------------------*/
 void LED_Out(unsigned int value) {
   int i;

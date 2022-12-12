@@ -28,8 +28,13 @@ extern unsigned char led_value;					/* defined in funct_led								*/
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
 #endif
 
-/* vettore dichiarato globale */										
+/* variabili globali */										
 char	vett_input[100] = {'0', '0', '0', '0', '2', '1', '1', '1', '2', '0', '1', '0', '0', '2', '0', '1', '3', '1', '1', '2', '0', '0', '1', '2', '1', '0', '2', '1', '0', '0', '2', '1', '1', '1', '3', '0', '1', '1', '1', '1', '2', '0', '0', '1', '1', '1', '4'};	
+char	vett_output[100];
+char	change_symbol 		= '2';
+char	space							= '3';
+char	sentence_end			= '4';
+	
 /*----------------------------------------------------------------------------
   Main Program
  *----------------------------------------------------------------------------*/
@@ -38,10 +43,7 @@ int main (void) {
 	/* definizione variabili */
 	/* int 	vett_input[100] 	= {0, 0, 0, 0, 2, 1, 1, 1, 2, 0, 1, 0, 0, 2, 0, 1, 3, 1, 1, 2, 0, 0, 1, 2, 1, 0, 2, 1, 0, 0, 2, 1, 1, 1, 3, 0, 1, 1, 1, 1, 2, 0, 0, 1, 1, 1, 4}; */
 
-	char	vett_output[100];
-	char	change_symbol 		= '2';
-	char	space							= '3';
-	char	sentence_end			= '4';
+	
 	
 	SystemInit();
 	LED_init();
@@ -82,5 +84,14 @@ void c_led_setup(void){
 
 
 void ASM_conversion(void){
-
+	
+	int char_num = translate_morse(	vett_input,
+																	100,
+																	vett_output, 
+																	100,
+																	'2', 
+																	'3',
+																	'4');
+	LED_Out(char_num);
+	
 }

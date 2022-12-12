@@ -28,10 +28,11 @@ translate_morse		PROC
 					; R11 -> output_counter
 					
 					MOV		R11, #0
-					
+					ADD		SP, SP, #32
 					LDRB	R4, [SP]
 					LDRB	R5, [SP, #4]
 					LDRB	R6, [SP, #8]
+					ADD		SP, SP, #-32
 					
 					; R4 -> change_symbol
 					; R5 -> space
@@ -78,6 +79,8 @@ is_space
 
 					
 END_TM				POP		{R4-R8, R10-R11, PC}		; restore registers
+					MOV		R0, R11
+					MOV		R1, #2
 					ENDP
 						
 convert				PROC
