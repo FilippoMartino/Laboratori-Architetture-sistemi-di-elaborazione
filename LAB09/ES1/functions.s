@@ -76,8 +76,8 @@ is_space
 					
 
 					
-END_TM				POP		{R4-R8, R10-R11, PC}		; restore registers
-					MOV		R0, R11
+END_TM				MOV		R0, R11
+					POP		{R4-R8, R10-R11, PC}		; restore registers
 					MOV		R1, #2
 					ENDP
 						
