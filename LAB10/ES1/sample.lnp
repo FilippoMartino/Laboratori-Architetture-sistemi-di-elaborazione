@@ -8,6 +8,8 @@
 ".\lib_led.o"
 ".\irq_button.o"
 ".\lib_button.o"
+".\irq_rit.o"
+".\lib_rit.o"
 ".\retarget_io.o"
 --strict --scatter ".\sample.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

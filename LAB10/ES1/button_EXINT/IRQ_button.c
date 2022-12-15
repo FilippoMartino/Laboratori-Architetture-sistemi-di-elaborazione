@@ -4,8 +4,12 @@
 #include "lpc17xx.h"
 
 #include "../led/led.h"
-extern void c_led_setup(void);
-extern void ASM_conversion(void);
+#include "../RIT/RIT.h"	
+
+/* recupero le variabili di stato inizializzate nella libreria del RIT */
+extern int down_1;
+extern int down_2;
+
 /*
 	Questo file permette la configurazione degli handler per gli interrupt causati
 	dai pulsanti, o meglio dalla loro attivazione.
@@ -39,10 +43,9 @@ void EINT0_IRQHandler (void)
 */
 void EINT1_IRQHandler (void)	  
 {
-  /* la funzione LED_Out assegna a tutti i led il valore in argomento */
-	c_led_setup();
+ 
+	down_1 = 1;
 	LPC_SC->EXTINT &= (1 << 1);     /* clear pending interrupt         */
-	
 	
 }
 
@@ -55,16 +58,7 @@ void EINT1_IRQHandler (void)
 void EINT2_IRQHandler (void)	  
 {
 	
-	/* disabilitiamo INT0 */
-	NVIC_DisableIRQ(EINT0_IRQn);
-	/* disabilitiamo KEY1 */
-	NVIC_DisableIRQ(EINT1_IRQn);
-	
-	ASM_conversion();
-	
-	/* Riabilitiamo i due pulsanti */
-	NVIC_EnableIRQ(EINT0_IRQn);
-	NVIC_EnableIRQ(EINT1_IRQn);
+	down_2 = 1;
   LPC_SC->EXTINT &= (1 << 2);     /* clear pending interrupt         */    
 }
 

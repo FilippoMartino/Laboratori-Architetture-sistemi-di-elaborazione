@@ -10,3 +10,4 @@
 .\sample.o: C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\system_LPC17xx.h
 .\sample.o: led/led.h
 .\sample.o: button_EXINT/button.h
+.\sample.o: RIT/RIT.h
