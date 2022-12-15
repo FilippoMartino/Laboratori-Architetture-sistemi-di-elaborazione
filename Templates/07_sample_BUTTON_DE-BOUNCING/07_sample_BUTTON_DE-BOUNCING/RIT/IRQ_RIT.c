@@ -60,7 +60,7 @@ void RIT_IRQHandler (void)
 		LPC_PINCON->PINSEL4    |= (1 << 22);     /* External interrupt 1 pin selection */
 		}
 	}
-		if (down_2 != 0) {
+	if (down_2 != 0) {
 			if ((LPC_GPIO2->FIOPIN & (1<<12)) == 0){
 				down_2 ++;
 				switch (down_2){

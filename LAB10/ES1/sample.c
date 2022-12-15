@@ -2,7 +2,6 @@
 #include "LPC17xx.H"                    /* LPC17xx definitions                */
 #include "led/led.h"
 #include "button_EXINT/button.h"
-#include "RIT/RIT.h"	
 
 /* funzioni assembly */
 extern int translate_morse(char* vett_input,
@@ -49,10 +48,6 @@ int main (void) {
 	SystemInit();
 	LED_init();
 	BUTTON_init();
-	init_RIT(0x1312D0); /* inizializzo con costante per 50ms */
-	
-	/* Dopo aver fatto tutte le inizializzazioni attivo il rit */
-	enable_RIT();
 	
 	//translate_morse((char*) vett_input, 100, vett_output, 100, change_symbol, space, sentence_end);
 
