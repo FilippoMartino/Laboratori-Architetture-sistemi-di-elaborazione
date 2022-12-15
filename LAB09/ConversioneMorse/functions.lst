@@ -161,11 +161,10 @@ ARM Macro Assembler    Page 3
    76 0000005C         
    77 0000005C         
    78 0000005C         
-   79 0000005C E8BD 8DF0 
-                       END_TM  POP              {R4-R8, R10-R11, PC} 
+   79 0000005C 4658    END_TM  MOV              R0, R11
+   80 0000005E E8BD 8DF0       POP              {R4-R8, R10-R11, PC} 
                                                             ; restore registers
                                                             
-   80 00000060 4658            MOV              R0, R11
    81 00000062 F04F 0102       MOV              R1, #2
    82 00000066                 ENDP
    83 00000066         
@@ -193,13 +192,13 @@ ARM Macro Assembler    Page 3
                                                             n R4
    98 00000082 4544            CMP              R4, R8      ; confronto con la 
                                                             maschera
+   99 00000084 D1F9            BNE              load_morse
 
 
 
 ARM Macro Assembler    Page 4 
 
 
-   99 00000084 D1F9            BNE              load_morse
   100 00000086 5CCE            LDRB             R6, [R1, R3] ; carico il valore
                                                              corrispondente all
                                                             'indirizzo nella ta
