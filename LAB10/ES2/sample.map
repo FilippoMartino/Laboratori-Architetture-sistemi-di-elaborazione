@@ -19,7 +19,7 @@ Section Cross References
     sample.o(.text) refers to system_lpc17xx.o(.text) for SystemInit
     sample.o(.text) refers to lib_led.o(.text) for LED_init
     sample.o(.text) refers to lib_button.o(.text) for BUTTON_init
-    sample.o(.text) refers to lib_timer.o(.text) for init_timer
+    sample.o(.text) refers to lib_timer.o(.text) for init_timer_2
     system_lpc17xx.o(.text) refers to system_lpc17xx.o(.data) for SystemFrequency
     funct_led.o(.text) refers to funct_led.o(.constdata) for led_mask
     funct_led.o(.text) refers to lib_led.o(.data) for led_value
@@ -300,11 +300,11 @@ Image Symbol Table
     __NVIC_EnableIRQ                         0x0000054d   Thumb Code    34  lib_button.o(.text)
     __NVIC_SetPriority                       0x0000056f   Thumb Code    32  lib_button.o(.text)
     .text                                    0x00000620   Section        0  irq_timer.o(.text)
-    .text                                    0x00000668   Section        0  lib_timer.o(.text)
-    __NVIC_EnableIRQ                         0x00000669   Thumb Code    34  lib_timer.o(.text)
-    __NVIC_SetPriority                       0x0000068b   Thumb Code    32  lib_timer.o(.text)
-    .text                                    0x00000748   Section       74  sys_stackheap_outer.o(.text)
-    .constdata                               0x00000794   Section       32  funct_led.o(.constdata)
+    .text                                    0x00000698   Section        0  lib_timer.o(.text)
+    __NVIC_EnableIRQ                         0x00000699   Thumb Code    34  lib_timer.o(.text)
+    __NVIC_SetPriority                       0x000006bb   Thumb Code    32  lib_timer.o(.text)
+    .text                                    0x000007c8   Section       74  sys_stackheap_outer.o(.text)
+    .constdata                               0x00000814   Section       32  funct_led.o(.constdata)
     STACK                                    0x10000000   Section      512  startup_lpc17xx.o(STACK)
     Stack_Mem                                0x10000000   Data         512  startup_lpc17xx.o(STACK)
     __initial_sp                             0x10000200   Data           0  startup_lpc17xx.o(STACK)
@@ -432,7 +432,6 @@ Image Symbol Table
     SPI_IRQHandler                           0x0000017f   Thumb Code     0  startup_lpc17xx.o(.text)
     SSP0_IRQHandler                          0x0000017f   Thumb Code     0  startup_lpc17xx.o(.text)
     SSP1_IRQHandler                          0x0000017f   Thumb Code     0  startup_lpc17xx.o(.text)
-    TIMER2_IRQHandler                        0x0000017f   Thumb Code     0  startup_lpc17xx.o(.text)
     TIMER3_IRQHandler                        0x0000017f   Thumb Code     0  startup_lpc17xx.o(.text)
     UART0_IRQHandler                         0x0000017f   Thumb Code     0  startup_lpc17xx.o(.text)
     UART1_IRQHandler                         0x0000017f   Thumb Code     0  startup_lpc17xx.o(.text)
@@ -466,14 +465,16 @@ Image Symbol Table
     BUTTON_init                              0x0000058f   Thumb Code   124  lib_button.o(.text)
     TIMER0_IRQHandler                        0x00000621   Thumb Code    54  irq_timer.o(.text)
     TIMER1_IRQHandler                        0x00000657   Thumb Code     8  irq_timer.o(.text)
-    enable_timer                             0x000006ab   Thumb Code    20  lib_timer.o(.text)
-    disable_timer                            0x000006bf   Thumb Code    20  lib_timer.o(.text)
-    reset_timer                              0x000006d3   Thumb Code    30  lib_timer.o(.text)
-    init_timer                               0x000006f1   Thumb Code    76  lib_timer.o(.text)
-    __user_setup_stackheap                   0x00000749   Thumb Code    74  sys_stackheap_outer.o(.text)
-    led_mask                                 0x00000794   Data          32  funct_led.o(.constdata)
-    Region$$Table$$Base                      0x000007b4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x000007e4   Number         0  anon$$obj.o(Region$$Table)
+    TIMER2_IRQHandler                        0x0000065f   Thumb Code    46  irq_timer.o(.text)
+    enable_timer                             0x000006db   Thumb Code    32  lib_timer.o(.text)
+    disable_timer                            0x000006fb   Thumb Code    32  lib_timer.o(.text)
+    reset_timer                              0x0000071b   Thumb Code    46  lib_timer.o(.text)
+    init_timer_2                             0x00000749   Thumb Code    34  lib_timer.o(.text)
+    init_timer                               0x0000076b   Thumb Code    76  lib_timer.o(.text)
+    __user_setup_stackheap                   0x000007c9   Thumb Code    74  sys_stackheap_outer.o(.text)
+    led_mask                                 0x00000814   Data          32  funct_led.o(.constdata)
+    Region$$Table$$Base                      0x00000834   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000864   Number         0  anon$$obj.o(Region$$Table)
     SystemFrequency                          0x2007c000   Data           4  system_lpc17xx.o(.data)
     ScaleFlag                                0x2007c004   Data           1  system_lpc17xx.o(.data)
     led_value                                0x2007c005   Data           1  lib_led.o(.data)
@@ -488,9 +489,9 @@ Memory Map of the image
 
   Image Entry point : 0x000000cd
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000007ec, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x0000086c, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000007e4, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000864, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -558,29 +559,29 @@ Memory Map of the image
     0x000002fc   0x000002fc   0x00000004   Code   RO            4    .ARM.__at_0x02FC    startup_lpc17xx.o
     0x00000300   0x00000300   0x0000024c   Code   RO           85    .text               system_lpc17xx.o
     0x0000054c   0x0000054c   0x000000d4   Code   RO          205    .text               lib_button.o
-    0x00000620   0x00000620   0x00000048   Code   RO          233    .text               irq_timer.o
-    0x00000668   0x00000668   0x000000e0   Code   RO          262    .text               lib_timer.o
-    0x00000748   0x00000748   0x0000004a   Code   RO          305    .text               c_w.l(sys_stackheap_outer.o)
-    0x00000792   0x00000792   0x00000002   PAD
-    0x00000794   0x00000794   0x00000020   Data   RO          120    .constdata          funct_led.o
-    0x000007b4   0x000007b4   0x00000030   Data   RO          444    Region$$Table       anon$$obj.o
+    0x00000620   0x00000620   0x00000078   Code   RO          233    .text               irq_timer.o
+    0x00000698   0x00000698   0x00000130   Code   RO          262    .text               lib_timer.o
+    0x000007c8   0x000007c8   0x0000004a   Code   RO          305    .text               c_w.l(sys_stackheap_outer.o)
+    0x00000812   0x00000812   0x00000002   PAD
+    0x00000814   0x00000814   0x00000020   Data   RO          120    .constdata          funct_led.o
+    0x00000834   0x00000834   0x00000030   Data   RO          444    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x000007e4, Size: 0x00000200, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x00000864, Size: 0x00000200, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x10000000        -       0x00000200   Zero   RW            1    STACK               startup_lpc17xx.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x2007c000, Load base: 0x000007e4, Size: 0x00000068, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x2007c000, Load base: 0x00000864, Size: 0x00000068, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2007c000   0x000007e4   0x00000005   Data   RW           86    .data               system_lpc17xx.o
-    0x2007c005   0x000007e9   0x00000001   Data   RW          155    .data               lib_led.o
-    0x2007c006   0x000007ea   0x00000001   Data   RW          234    .data               irq_timer.o
-    0x2007c007   0x000007eb   0x00000001   PAD
+    0x2007c000   0x00000864   0x00000005   Data   RW           86    .data               system_lpc17xx.o
+    0x2007c005   0x00000869   0x00000001   Data   RW          155    .data               lib_led.o
+    0x2007c006   0x0000086a   0x00000001   Data   RW          234    .data               irq_timer.o
+    0x2007c007   0x0000086b   0x00000001   PAD
     0x2007c008        -       0x00000060   Zero   RW          316    .bss                c_w.l(libspace.o)
     0x2007c068        -       0x00000000   Zero   RW            2    HEAP                startup_lpc17xx.o
 
@@ -592,18 +593,18 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       112         14         32          0          0      18632   funct_led.o
-        88         10          0          0          0        781   irq_button.o
-        72         10          0          1          0        710   irq_timer.o
-       212         22          0          0          0        990   lib_button.o
-        64         14          0          1          0        850   lib_led.o
-       224         12          0          0          0       1664   lib_timer.o
-        36          4          0          0          0       4995   sample.o
-        56         22        204          0        512       1124   startup_lpc17xx.o
-       588         36          0          5          0       1021   system_lpc17xx.o
+       112         14         32          0          0      18584   funct_led.o
+        88         10          0          0          0        765   irq_button.o
+       120         12          0          1          0        848   irq_timer.o
+       212         22          0          0          0        974   lib_button.o
+        64         14          0          1          0        818   lib_led.o
+       304         18          0          0          0       1981   lib_timer.o
+        36          4          0          0          0       4983   sample.o
+        56         22        204          0        512       1092   startup_lpc17xx.o
+       588         36          0          5          0        989   system_lpc17xx.o
 
     ----------------------------------------------------------------------
-      1452        144        284          8        512      30767   Object Totals
+      1580        152        284          8        512      31034   Object Totals
          0          0         48          0          0          0   (incl. Generated)
          0          0          0          1          0          0   (incl. Padding)
 
@@ -652,15 +653,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1736        160        284          8        608      30775   Grand Totals
-      1736        160        284          8        608      30775   ELF Image Totals
-      1736        160        284          8          0          0   ROM Totals
+      1864        168        284          8        608      31042   Grand Totals
+      1864        168        284          8        608      31042   ELF Image Totals
+      1864        168        284          8          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2020 (   1.97kB)
+    Total RO  Size (Code + RO Data)                 2148 (   2.10kB)
     Total RW  Size (RW Data + ZI Data)               616 (   0.60kB)
-    Total ROM Size (Code + RO Data + RW Data)       2028 (   1.98kB)
+    Total ROM Size (Code + RO Data + RW Data)       2156 (   2.11kB)
 
 ==============================================================================
 
