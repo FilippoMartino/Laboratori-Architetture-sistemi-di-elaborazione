@@ -75,19 +75,19 @@ void TIMER2_IRQHandler (void) {
 			- uguale a 0 nessun match e nessun interrupt
 			
 	*/
-	
-	/* verifico se MR0 attivo */
-	if ((LPC_TIM2->MCR & (1)) == 1){
-		// MR0 triggered
+
+	static int MR0 = 1;
+	if (MR0) {
 		LED_On(0);
-	} else if (((LPC_TIM2->MCR) & (1 << 3)) == 1) {
-		// MR1 triggered
+		MR0 = 0;
+		LPC_TIM2->IR = 1;
+		return;
+	} 
+	if (!MR0) {
 		LED_Off(0);
+		MR0 = 1;
+		reset_timer(2);
 	}
-	
-	
-	
-	
 	
 	LPC_TIM2->IR = 1;
 	return;
