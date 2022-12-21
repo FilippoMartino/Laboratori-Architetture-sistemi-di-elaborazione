@@ -32,12 +32,13 @@ int main (void) {
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
   LED_init();                           /* LED Initialization                 */
   BUTTON_init();												/* BUTTON Initialization              */
-	init_timer_2(0x001312D0, 0x002625A0);
+	init_timer_2(0x0000249F, 0x0000927C);
 	//init_timer(0,0x001312D0);							/* TIMER0 Initialization              */
 																				/* K = T*Fr = [s]*[Hz] = [s]*[1/s]	  */
 																				/* T = K / Fr = 0x001312D0 / 25MHz    */
 																				/* T = K / Fr = 1250000 / 25MHz      */
 																				/* T = 0.05s	( 50 milli second)   							*/
+	LED_On(1);
 	enable_timer(2);
 					
 		
