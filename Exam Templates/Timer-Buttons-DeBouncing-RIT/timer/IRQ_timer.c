@@ -12,11 +12,11 @@
 #include "../led/led.h"
 
 /******************************************************************************
-** Function name:		Timer0_IRQHandler
+** Function name:			Timer0_IRQHandler
 **
-** Descriptions:		Timer/Counter 0 interrupt handler
+** Descriptions:			Timer/Counter 0 interrupt handler
 **
-** parameters:			None
+** parameters:				None
 ** Returned value:		None
 **
 ******************************************************************************/
@@ -88,11 +88,11 @@ void TIMER0_IRQHandler (void)
 
 
 /******************************************************************************
-** Function name:		Timer1_IRQHandler
+** Function name:			Timer1_IRQHandler
 **
-** Descriptions:		Timer/Counter 1 interrupt handler
+** Descriptions:			Timer/Counter 1 interrupt handler
 **
-** parameters:			None
+** parameters:				None
 ** Returned value:		None
 **
 ******************************************************************************/
@@ -103,11 +103,11 @@ void TIMER1_IRQHandler (void)
 }
 
 /******************************************************************************
-** Function name:		Timer2_IRQHandler
+** Function name:			Timer2_IRQHandler
 **
-** Descriptions:		Timer/Counter 2 interrupt handler
+** Descriptions:			Timer/Counter 2 interrupt handler
 **
-** parameters:			None
+** parameters:				None
 ** Returned value:		None
 **
 ******************************************************************************/
@@ -117,6 +117,20 @@ void TIMER2_IRQHandler (void)
   return;
 }
 
+/******************************************************************************
+** Function name:			Timer3_IRQHandler
+**
+** Descriptions:			Timer/Counter 3 interrupt handler
+**
+** parameters:				None
+** Returned value:		None
+**
+******************************************************************************/
+void TIMER3_IRQHandler (void)
+{
+  LPC_TIM3->IR = 1;			/* clear interrupt flag */
+  return;
+}
 
 
 

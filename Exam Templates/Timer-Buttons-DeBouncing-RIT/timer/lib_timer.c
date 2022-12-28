@@ -3,7 +3,7 @@
 ** File name:           lib_timer.h
 ** Last modified Date:  2014-09-25
 ** Last Version:        V1.00
-** Descriptions:        atomic functions to be used by higher sw levels
+** Descriptions:        Permette la configurazione e l'utilizzo di 4 timer
 ** Correlated files:    lib_timer.c, funct_timer.c, IRQ_timer.c
 **--------------------------------------------------------------------------------------------------------
 *********************************************************************************************************/
@@ -15,7 +15,7 @@
 **
 ** Descriptions:		Enable timer
 **
-** parameters:			timer number: 0 or 1
+** parameters:			timer number: 0 to 3
 ** Returned value:		None
 **
 ******************************************************************************/
@@ -45,7 +45,7 @@ void enable_timer( uint8_t timer_num )
 **
 ** Descriptions:		Disable timer
 **
-** parameters:			timer number: 0 or 1
+** parameters:			timer number: 0 to 3
 ** Returned value:		None
 **
 ******************************************************************************/
@@ -75,7 +75,7 @@ void disable_timer( uint8_t timer_num )
 **
 ** Descriptions:		Reset timer
 **
-** parameters:			timer number: 0 or 1
+** parameters:			timer number: 0 to 3
 ** Returned value:		None
 **
 ******************************************************************************/
@@ -110,7 +110,24 @@ void reset_timer( uint8_t timer_num )
   return;
 }
 
-uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, uint8_t SRImatchReg, uint32_t TimerInterval )
+/******************************************************************************
+** Function name:		init_timer
+**
+** Descriptions:		inizializzazione timer
+**
+** parameters:			timer number: 0 to 3
+**									Prescaler:		utilizzato per ampliare il tempo massimo, possibili multipli di 2
+**																nel caso non venga utilizzato, inserire 0
+**									MatchReg:		 	registro nel quale si specifica l'intervallo del timer 0 to 3
+**									SRImatchReg:	funzionalità MatchRegister, quella specificata nel MCR, ossia Stop, Reset, Interrupt.
+**									TimerInterval:intervallo di tempo.
+																	
+**									
+** Returned value:	0 if all well, 1 if timer_num not valid
+**
+******************************************************************************/
+
+uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, uint8_t SRImatchReg, uint8_t priority, uint32_t TimerInterval)
 {
   if ( timer_num == 0 )
   {
@@ -138,8 +155,9 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 		}			
 
 	NVIC_EnableIRQ(TIMER0_IRQn);
-	//NVIC_SetPriority(TIMER0_IRQn, 4);		/* less priority than buttons */
-	NVIC_SetPriority(TIMER0_IRQn, 0);		/* more priority than buttons */
+	
+	/* priority set */
+	NVIC_SetPriority(TIMER0_IRQn, priority);	
 	return (0);
   }
   else if ( timer_num == 1 )
@@ -167,8 +185,9 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 			LPC_TIM1->MCR |= SRImatchReg << 3*MatchReg ;
 		}	
 		NVIC_EnableIRQ(TIMER1_IRQn);
-	//NVIC_SetPriority(TIMER1_IRQn, 4);		/* less priority than buttons */
-		NVIC_SetPriority(TIMER1_IRQn, 0);		/* more priority than buttons */
+		
+		/* priority set */
+		NVIC_SetPriority(TIMER1_IRQn, priority);
 		return (0);
 	}
   else if ( timer_num == 2 )
@@ -196,8 +215,9 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 			LPC_TIM2->MCR |= SRImatchReg << 3*MatchReg ;
 		}	
 		NVIC_EnableIRQ(TIMER2_IRQn);
-	//NVIC_SetPriority(TIMER1_IRQn, 4);		/* less priority than buttons */
-		NVIC_SetPriority(TIMER2_IRQn, 0);		/* more priority than buttons */
+		
+		/* priority set */
+		NVIC_SetPriority(TIMER2_IRQn, priority);
 		return (0);
   }
 	  else if ( timer_num == 3 )
@@ -225,10 +245,12 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 			LPC_TIM3->MCR |= SRImatchReg << 3*MatchReg ;
 		}	
 		NVIC_EnableIRQ(TIMER3_IRQn);
-	//NVIC_SetPriority(TIMER3_IRQn, 4);		/* less priority than buttons */
-		NVIC_SetPriority(TIMER3_IRQn, 0);		/* more priority than buttons */
+		
+		/* priority set */
+		NVIC_SetPriority(TIMER3_IRQn, priority);
 		return (0);
 	}
+	
   return (1);
 }
 

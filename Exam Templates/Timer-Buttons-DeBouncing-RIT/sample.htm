@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\sample.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\sample.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Dec 15 15:39:07 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Dec 28 14:16:27 2022
 <BR><P>
-<H3>Maximum Stack Usage =         40 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         56 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; init_timer &rArr; __NVIC_SetPriority
 <P>
@@ -69,7 +69,7 @@ Function Pointers
  <LI><a href="#[e]">TIMER0_IRQHandler</a> from irq_timer.o(.text) referenced from startup_lpc17xx.o(RESET)
  <LI><a href="#[f]">TIMER1_IRQHandler</a> from irq_timer.o(.text) referenced from startup_lpc17xx.o(RESET)
  <LI><a href="#[10]">TIMER2_IRQHandler</a> from irq_timer.o(.text) referenced from startup_lpc17xx.o(RESET)
- <LI><a href="#[11]">TIMER3_IRQHandler</a> from startup_lpc17xx.o(.text) referenced from startup_lpc17xx.o(RESET)
+ <LI><a href="#[11]">TIMER3_IRQHandler</a> from irq_timer.o(.text) referenced from startup_lpc17xx.o(RESET)
  <LI><a href="#[12]">UART0_IRQHandler</a> from startup_lpc17xx.o(.text) referenced from startup_lpc17xx.o(RESET)
  <LI><a href="#[13]">UART1_IRQHandler</a> from startup_lpc17xx.o(.text) referenced from startup_lpc17xx.o(RESET)
  <LI><a href="#[14]">UART2_IRQHandler</a> from startup_lpc17xx.o(.text) referenced from startup_lpc17xx.o(RESET)
@@ -196,7 +196,7 @@ Global Symbols
 <P><STRONG><a name="[76]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[3a]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 56 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; init_timer &rArr; __NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -349,9 +349,6 @@ Global Symbols
 <P><STRONG><a name="[1c]"></a>SSP1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_lpc17xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
 </UL>
-<P><STRONG><a name="[11]"></a>TIMER3_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_lpc17xx.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
-</UL>
 <P><STRONG><a name="[12]"></a>UART0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_lpc17xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
 </UL>
@@ -377,8 +374,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[3b]"></a>main</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, sample.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = main &rArr; init_timer &rArr; __NVIC_SetPriority
+<P><STRONG><a name="[3b]"></a>main</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, sample.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = main &rArr; init_timer &rArr; __NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_timer
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_RIT
@@ -501,6 +498,9 @@ Global Symbols
 <P><STRONG><a name="[10]"></a>TIMER2_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, irq_timer.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
 </UL>
+<P><STRONG><a name="[11]"></a>TIMER3_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, irq_timer.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
+</UL>
 <P><STRONG><a name="[47]"></a>enable_timer</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, lib_timer.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -509,8 +509,8 @@ Global Symbols
 
 <P><STRONG><a name="[7f]"></a>reset_timer</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, lib_timer.o(.text), UNUSED)
 
-<P><STRONG><a name="[46]"></a>init_timer</STRONG> (Thumb, 540 bytes, Stack size 24 bytes, lib_timer.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = init_timer &rArr; __NVIC_SetPriority
+<P><STRONG><a name="[46]"></a>init_timer</STRONG> (Thumb, 542 bytes, Stack size 32 bytes, lib_timer.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = init_timer &rArr; __NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
