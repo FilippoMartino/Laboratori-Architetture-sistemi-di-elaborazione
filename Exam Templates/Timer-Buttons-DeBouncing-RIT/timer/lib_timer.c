@@ -111,19 +111,26 @@ void reset_timer( uint8_t timer_num )
 }
 
 /******************************************************************************
-** Function name:		init_timer
+** 	Function name:	init_timer
 **
-** Descriptions:		inizializzazione timer
+** 	Descriptions:		inizializzazione timer
 **
-** parameters:			timer number: 0 to 3
+** 	parameters:			timer number: 0 to 3
 **									Prescaler:		utilizzato per ampliare il tempo massimo, possibili multipli di 2
 **																nel caso non venga utilizzato, inserire 0
 **									MatchReg:		 	registro nel quale si specifica l'intervallo del timer 0 to 3
 **									SRImatchReg:	funzionalità MatchRegister, quella specificata nel MCR, ossia Stop, Reset, Interrupt.
 **									TimerInterval:intervallo di tempo.
-																	
+**
+**	FUNZIONALITA' SRI: 	vengono controllati 3 bit, partendo dal MSB, il primo determina lo STOP o meno, il secondo il
+**											RESET o meno, il terzo se viene generato un INTERRUPT o meno: valori 1-TRUE 0-FALSE
+**											La funzione provvede poi a spostare il valore di tre bit binario nella giusta posizioni in base al MR che
+**											stiamo configurado (NOTARE che questa libreria permette la configurazione di un MR per TIMER); vediamo due esempi:
+**											- valore 7: [111] STOP-TRUE, RESET-TRUE, INTERRUPT-TRUE
+**											- valore 4: [100] STOP-TRUE, RESET-FALSE, INTERRUPT-FALSE
+**	
 **									
-** Returned value:	0 if all well, 1 if timer_num not valid
+** 	Returned value:	0 if all well, 1 if timer_num not valid
 **
 ******************************************************************************/
 

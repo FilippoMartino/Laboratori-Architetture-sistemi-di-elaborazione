@@ -32,7 +32,7 @@ int main (void) {
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
   LED_init();                           /* LED Initialization                 */
   BUTTON_init();												/* BUTTON Initialization              */
-	init_RIT(0x004C4B40);									/* RIT Initialization 50 msec       */
+	init_RIT(0x004C4B40, 1);									/* RIT Initialization 50 msec       */
 	enable_RIT();												/* enable RIT to count 50ms				 */
 	init_timer(2, 0, 0, 2, 0, 122344);
 	enable_timer(2);

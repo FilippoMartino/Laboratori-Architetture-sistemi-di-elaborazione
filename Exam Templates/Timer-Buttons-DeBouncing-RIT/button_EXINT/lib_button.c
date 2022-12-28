@@ -4,6 +4,13 @@
 
 /**
  * @brief  Function that initializes Buttons
+ * sulla scheda, disposti da sinistra a destra, abbiamo:
+ *	---------------------------------
+ *	|		0		|		1		|		2		|		-		|
+ *	|	EINT0	|	EINT1	|	EINT2	|	RESET	|		<- NAME
+ *	|	 20   |		22	|		24	|		-		|		<- PINSEL4 POSITION
+ *	|	 10   |		11	|		12	|		-		|		<- FIODIR POSITION
+ *	---------------------------------
  */
 void BUTTON_init(void) {
 
