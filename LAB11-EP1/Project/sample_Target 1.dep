@@ -11,7 +11,7 @@ I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\I
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\mpu_armv7.h)(0x60D44B52)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\system_LPC17xx.h)(0x58493F92)
 I (GLCD/GLCD.h)(0x63AF633F)
-I (TouchPanel/TouchPanel.h)(0x63AEC1CD)
+I (TouchPanel/TouchPanel.h)(0x63AF688F)
 I (timer/timer.h)(0x639A94BC)
 F (.\core_cm3.c)(0x639A94BA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\core_cm3.o --omf_browse .\core_cm3.crf --depend .\core_cm3.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602585EE)
@@ -36,7 +36,7 @@ I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\I
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\system_LPC17xx.h)(0x58493F92)
 I (timer\timer.h)(0x639A94BC)
 I (timer\../GLCD/GLCD.h)(0x63AF633F)
-I (timer\../TouchPanel/TouchPanel.h)(0x63AEC1CD)
+I (timer\../TouchPanel/TouchPanel.h)(0x63AF688F)
 F (.\timer\lib_timer.c)(0x639A94BC)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\lib_timer.o --omf_browse .\lib_timer.crf --depend .\lib_timer.d)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\lpc17xx.h)(0x5E1DC4B4)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h)(0x60D44B52)
@@ -69,7 +69,7 @@ F (.\GLCD\HzLib.c)(0x639C6E98)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\
 I (GLCD\HzLib.h)(0x639C6E98)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x602585EE)
 F (.\GLCD\HzLib.h)(0x639C6E98)()
-F (.\TouchPanel\TouchPanel.c)(0x63AF66BA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\touchpanel.o --omf_browse .\touchpanel.crf --depend .\touchpanel.d)
+F (.\TouchPanel\TouchPanel.c)(0x63AF7006)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\touchpanel.o --omf_browse .\touchpanel.crf --depend .\touchpanel.d)
 I (TouchPanel\../GLCD/GLCD.h)(0x63AF633F)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\LPC17xx.h)(0x5E1DC4B4)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h)(0x60D44B52)
@@ -79,5 +79,5 @@ I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\I
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h)(0x60D44B52)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\mpu_armv7.h)(0x60D44B52)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\system_LPC17xx.h)(0x58493F92)
-I (TouchPanel\../TouchPanel/TouchPanel.h)(0x63AEC1CD)
-F (.\TouchPanel\TouchPanel.h)(0x63AEC1CD)()
+I (TouchPanel\../TouchPanel/TouchPanel.h)(0x63AF688F)
+F (.\TouchPanel\TouchPanel.h)(0x63AF688F)()

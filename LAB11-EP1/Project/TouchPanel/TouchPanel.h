@@ -81,8 +81,10 @@ void DeleteCross(uint16_t Xpos,uint16_t Ypos);
 void TP_DrawPoint(uint16_t Xpos,uint16_t Ypos);
 uint8_t setCalibrationMatrix( Coordinate * displayPtr,Coordinate * screenPtr,Matrix * matrixPtr);
 uint8_t getDisplayPoint(Coordinate * displayPtr,Coordinate * screenPtr,Matrix * matrixPtr );
-				
-void MakeBackground(void);
+	
+int 		convertColor(uint16_t toConvert);
+void 		MakeBackground(void);
+					
 					
 				
 
