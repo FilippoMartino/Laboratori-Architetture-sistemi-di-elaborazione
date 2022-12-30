@@ -95,6 +95,18 @@ void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t
 void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor );
 void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
 
+/*	User function	protoyupes --------------------------------------------------*/
+void LCD_SetWindow (uint16_t X_start, uint16_t Y_start, uint16_t width, uint16_t height);
+void LCD_SetOrientation(uint8_t orientation);
+void LCD_WriteCommand (uint8_t index);
+void LCD_WritePixel (uint16_t byte);
+void LCD_ClearWindow (void);
+void LCD_DrawRectangle (uint16_t X_start, uint16_t Y_start, uint16_t width, uint16_t height, uint16_t color);
+void LCD_DrawCircle(uint16_t Xpos,uint16_t Ypos, uint16_t radius, uint16_t color);
+uint16_t LCD_GetPixel(uint16_t i, uint16_t j);
+void LCD_SetBackground(uint16_t color);
+uint16_t LCD_GetBackground(void);
+
 #endif 
 
 /*********************************************************************************************************

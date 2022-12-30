@@ -41,418 +41,581 @@ Coordinate DisplaySample[3] = {{ 45,  45},
 		
 /* Sprites define ------------------------------------------------------------*/													 
 
- typedef struct {
-     const uint32_t *data;
-     uint16_t width;
-     uint16_t height;
-     uint8_t dataSize;
-     } tImage;	
-
-static const uint32_t image_data_Image[3200] = {
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffd6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 
-    0xd6bad6ba, 0xd6bad6ba, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffff2965, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x2965ffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffff2965, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x2965ffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffdf3965, 0x28002800, 0x28002800, 0x28002800, 0x28002800, 0x28002800, 0x28002800, 0x28002800, 
-    0x28002800, 0x28002800, 0x3965ffdf, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xa5142965, 0x29652965, 0x29652965, 
-    0x3965e000, 0xe000e000, 0xe000e000, 0xe000e000, 0xe000e000, 0xe000e000, 0xe000e000, 0xe000e000, 
-    0xe000e000, 0xe000e000, 0xe0003965, 0x29652965, 0x29652965, 0x2965a514, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x9cf30000, 0x00000000, 0x00000000, 
-    0x2800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe0002800, 0x00000000, 0x00000000, 0x00009cf3, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x9cf30000, 0x00000000, 0x00000000, 
-    0x2800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe0002800, 0x00000000, 0x00000000, 0x00009cf3, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffa514, 0x9cf39cf3, 0x5aeb0000, 0x00007000, 0xc000c000, 
-    0xc000e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe000c000, 0xc000c000, 0x70000000, 0x00005aeb, 0x9cf39cf3, 0xa514ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x00000000, 0x00008800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0x88000000, 0x00000000, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x00000000, 0x00008800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0x88000000, 0x00000000, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x70008800, 0x8800b000, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xb0008800, 0x88007000, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0xc000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800c000, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0xc000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800c000, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffdf2965, 0x00000000, 0xc000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e000, 0xe000e000, 0xe000e000, 0xe000e000, 0xe000e000, 
-    0xe000e000, 0xe000e000, 0xe000e000, 0xe000e000, 0xe000e000, 0xe000b800, 0x00000000, 0x2965ffdf, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffff4208, 0x29652965, 
-    0x29652965, 0x29652965, 0x29652965, 0x29650000, 0x00000000, 0xc000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800c000, 0x28002800, 0x28002800, 0x28002800, 0x28002800, 
-    0x28002800, 0x28002800, 0x28002800, 0x28002800, 0x28002800, 0x28002000, 0x00000000, 0x00002965, 
-    0x29652965, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xc000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800c000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xc000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800c000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffe73c, 0x9cf39cf3, 0x9cd3c0c3, 0xc000c000, 
-    0xc000c000, 0xc000a000, 0x00000000, 0x2000b800, 0xc000c000, 0xd800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xb0008800, 0x88007a69, 0x3c103c10, 0x3c103c10, 0x3c103c10, 0x55965e39, 
-    0x5e395e39, 0x5e395e39, 0x6639d6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd69a2124, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x2800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x66bb775e, 
-    0x775e775e, 0x775e775e, 0x7f7effff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x2800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x66bb775e, 
-    0x775e775e, 0x775e775e, 0x7f7effff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x2800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf45dd7, 0x5df85df8, 0x6efc775e, 
-    0x775e775e, 0x775e775e, 0x775edfdf, 0xdfdfdfdf, 0xf7ffffff, 0xffffffff, 0xffffffff, 0xffff54b2, 
-    0x44924492, 0xb618d6ba, 0xd6bae73c, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x2800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4d14775d, 0x775e775e, 0x775e775e, 
-    0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0xdfdfffff, 0xffffffff, 0xffffffff, 0xffff7f7e, 
-    0x775e775e, 0x44920000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x2800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4d14775d, 0x775e775e, 0x775e775e, 
-    0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0xdfdfffff, 0xffffffff, 0xffffffff, 0xffff7f7e, 
-    0x775e775e, 0x44920000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x2800e000, 0xe000e000, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4d146f5d, 0x775d775d, 0x775d775e, 
-    0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0xdfdfffff, 0xffffffff, 0xffffffff, 0xffff7f7e, 
-    0x775e775e, 0x44920000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x1800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44d14, 0x4d144d14, 0x66bb775e, 
-    0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e7f7e, 0x7f7e7f7e, 0x7f7e7f7e, 0x7f7e775e, 
-    0x775e775e, 0x44920000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x1800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x66bb775e, 
-    0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 
-    0x775e775e, 0x44920000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xe800e800, 0xe800c000, 0x00000000, 0x1800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x66bb775e, 
-    0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 
-    0x775e775e, 0x44920000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xd000c000, 0xc000a000, 0x00000000, 0x1800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x55965df8, 
-    0x5df85df8, 0x5df85df8, 0x5df8775d, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775d5df8, 
-    0x5df85df8, 0x338e0000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xc000a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 
-    0x4cf44cf4, 0x4cf44cf4, 0x4d14775d, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775d4d14, 
-    0x4cf44cf4, 0x2aec0000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2800e000, 0xe800e800, 
-    0xc000a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 
-    0x4cf44cf4, 0x4cf44cf4, 0x4d14775d, 0x775e775e, 0x775e775e, 0x775e775e, 0x775e775e, 0x775d4d14, 
-    0x4cf44cf4, 0x2aec0000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x2000d000, 0xd000d000, 
-    0xb800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xc800d000, 0xd000d800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 
-    0x4cf44cf4, 0x4cf44cf4, 0x4cf466bb, 0x66bb66bb, 0x66bb66bb, 0x66bb66bb, 0x66bb66bb, 0x66bb4cf4, 
-    0x4cf44cf4, 0x2aec0000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 
-    0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 
-    0x4cf44cf4, 0x2aec0000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x88000000, 0x00002aec, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 
-    0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 0x4cf44cf4, 
-    0x4cf44cf4, 0x2aec0000, 0x00009cf3, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0x90002800, 0x280032eb, 0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 
-    0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 0x4cd34cd3, 
-    0x4cd34cd3, 0x3b2c2965, 0x2965a514, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe000e000, 0xe000b841, 0x00c300c3, 0x00c300c3, 0x00c300c3, 0x00c300c3, 
-    0x00c300c3, 0x00c300c3, 0x00c300c3, 0x00c300c3, 0x00c300c3, 0x00c300c3, 0x00c300c3, 0x00c300c3, 
-    0x00c300c3, 0xd69affff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800c000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800c000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800b000, 0xc000c000, 
-    0xc000e000, 0xe800e800, 0xe800e800, 0xe800d800, 0xc000c000, 0xc000c000, 0xc000c000, 0xc000c000, 
-    0xc000c000, 0xc000c000, 0xc000c000, 0xc000c000, 0xc000c000, 0xc000c000, 0xc000c000, 0xb8002000, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe0002800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe0002800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e000, 0xd000d000, 0xd0002000, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800d000, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800d000, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800e000, 0xe000e000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800d000, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800d000, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800d000, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xd000e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800d000, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xb800c000, 0xc000d000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xd000c000, 0xc000b800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xc000a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800c000, 0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 
-    0xe800e800, 0xe800e800, 0xe800e800, 0xe800e800, 0xc000a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800b800, 0xd000d000, 0xd000d000, 0xd000d000, 0xd000d000, 
-    0xd000d000, 0xd000d000, 0xd000d000, 0xd000d000, 0xb800a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffd6ba, 0x00000000, 0x1800a800, 0xa800a800, 
-    0xa800a800, 0xa8008800, 0x00000000, 0x1800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 
-    0x00000000, 0xd6baffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xfffff79e, 0xd6bad6ba, 0xd69a6924, 0x60006000, 
-    0x60006000, 0x60005000, 0x00000000, 0x08006000, 0x60006000, 0x9800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa8009800, 0x60006000, 0x60006000, 0x60006000, 0x60006000, 
-    0x60006000, 0x60006000, 0x60006000, 0x60006000, 0x9800a800, 0xa8009800, 0x60006000, 0x6924d69a, 
-    0xd6bad6ba, 0xf79effff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x8800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x8800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffa514, 0x9cf39cf3, 
-    0x9cf39cf3, 0x9cf39cf3, 0x9cf39cf3, 0x9cd318c3, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa8009800, 0x60006000, 0x60000800, 0x00000000, 0x50006000, 
-    0x60006000, 0x60006000, 0x60006000, 0x60006000, 0x9800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x8800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8008800, 0x00000000, 0x2965ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x70008800, 
-    0x88008800, 0x88008800, 0x88008800, 0x88008800, 0x88008800, 0x880092eb, 0x9cf39cf3, 0xa514ffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00009cf3, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff2965, 0x00000000, 0x8800a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa8001800, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00009cf3, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffff4208, 0x29652965, 0x88c3a800, 0xa800a800, 0xa800a800, 
-    0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa800a800, 0xa0003165, 0x29652965, 0x29652965, 
-    0x29652965, 0x29652965, 0x29652965, 0x29652965, 0x29652965, 0x2965a514, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x9cd31800, 0x18001800, 0x18001800, 
-    0x18001800, 0x18001800, 0x18001800, 0x18001800, 0x18001800, 0x3165ffdf, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x9cf30000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x2965ffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x9cf30000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x2965ffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xe73cd6ba, 0xd6bad6ba, 0xd6bad6ba, 
-    0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6bad6ba, 0xd6baffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 
-    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff
+static const struct {
+  unsigned int 	 width;
+  unsigned int 	 height;
+  unsigned int 	 bytes_per_pixel; /* 2:RGB16, 3:RGB, 4:RGBA */ 
+  unsigned char	 pixel_data[80 * 80 * 2 + 1];
+} amogus_1 = {
+  80, 80, 2,
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377<\347\272\326\272\326\272\326\272"
+  "\326\272\326\272\326\272\326\272\326\272\326\272\326\272\326\272\326\272"
+  "\326\272\326\272\326\272\326\272\326\272\326\272\326\236\367\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\363\234\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\272\326\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\363\234\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\323\234\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\232"
+  "\326\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\272\326e)e)"
+  "e)e)e)e)\303\300\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000"
+  "\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340$\221e)e)e)e)e"
+  ")\010B\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\272\326\000\000\000\000\000\000\000\000\000\000\000\000\000\300\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\210\000\000\000\000\000\000\000\000\000\000e)\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\272\326\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\300\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\210\000\000\000"
+  "\000\000\000\000\000\000\000e)\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\070\306\363\234\363\234\020\204\000\000\000\000\000\040\000\270\000\300\000\300\000\330\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\320\000\300\000\300\000\240\000\000\000\000\303"
+  "\030\323\234\363\234\363\234<\347\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000"
+  "\000\000\000\000\000\000\000(\000\340\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\300\000\000\000\000\000\000\000\000\000\000\000\000\272\326\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\363\234\000\000\000\000\000\000\000\000\000\000\000(\000\340\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\300\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000P\000\210\000\210"
+  "\000\220\000\340\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\320\000\210\000\210\000\210\000\020\000\000\000\000\272\326\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\363\234\000\000\000\000\000\210\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\340\000(\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000"
+  "\000\210\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\272"
+  "\326\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\323\234\000\000\000\000\000\210\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\340\000\340\000\340"
+  "\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340\000\340"
+  "\000\340\000\340\000\340\000\340\000\340\000(\000\000\000\000\232\326\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\024\245e"
+  ")e)e)e)e)e)e)e)e)\303\030\000\000\000\000\000\210\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\340\000\070\000(\000(\000(\000(\000(\000(\000(\000(\000"
+  "(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000(\000\000\000\000\000\000$!e)e)\024\245\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\210\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\363\234\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\363\234\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\210\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\363\234\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\024\245\363\234\363\234\353\262\000\300\000\300\000\300\000\300\000\300\000\270\000\040"
+  "\000\000\000\000\000\240\000\300\000\300\000\320\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\320\000\210\000\210\202\210\020D\020<\020<\020<\020<\020<\364L\071^\071"
+  "^\071^\071^\071^\071^\232\276\272\326\272\326\272\326\272\326\272\326\272\326"
+  "\272\326\272\326\272\326\020\204\000\000\000\000\363\234\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377e)\000\000\000\000\000\300\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000"
+  "\000\000\300\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\300\000\000\000\000\303\000\323L\364L\364L\364L\364L\364L\370]^w^w^w^w^w^"
+  "w\337\337\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\363\234\000\000\000\000\363\234\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "e)\000\000\000\000\000\300\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\000\300\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\300"
+  "\000\000\000\000\303\000\323L\364L\364L\364L\364L\364L\370]^w^w^w^w^w^w\337\337\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\363"
+  "\234\000\000\000\000\363\234\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000"
+  "\300\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\000\300\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\300\000\000\000\000\303"
+  "\000\323L\364L\364L\226U\370]\370]zf^w^w^w^w^w^w\276\307\337\337\337\337\337"
+  "\357\377\377\377\377\377\377\377\377\377\377\377\377\370\245\222D\222DU\215"
+  "\272\326\272\326\272\326\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\300\000\350\000\350\000\350"
+  "\000\350\000\350\000\340\000(\000\000\000\000\000\300\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\350\000\350\000\350\000\350\000\300\000\000\000\000\303\000\323L\364L\364L\273"
+  "f^w^w^w^w^w^w^w^w^w^w^w^w\236\267\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\236\267^w^w\071^\000\000\000\000e)\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\300\000\350\000"
+  "\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\000\300\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\300\000\000\000\000\303\000\323L\364L"
+  "\364L\273f^w^w^w^w^w^w^w^w^w^w^w^w\236\267\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\236\267^w^w\071^\000\000\000\000e)\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\300"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\000\300\000\340\000\340\000\340\000"
+  "\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\300\000\000\000\000\303\000"
+  "\323L\364L\364L\273f]w]w]w^w^w^w^w^w^w^w^w^w\236\267\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\236\267^w^w\071^\000\000\000\000e)\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377e)\000"
+  "\000\000\000\000\300\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\000\220\000\250\000"
+  "\250\000\300\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\300\000"
+  "\000\000\000\303\000\323L\364L\364L\364L\024M\024M\370]^w^w^w^w^w^w^w^w^w^w~\177~\177"
+  "~\177~\177~\177~\177^w^w^w\071^\000\000\000\000e)\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\300"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000\000\000\000\210\000\250\000\250\000\300\000"
+  "\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\300\000\000\000\000\303\000"
+  "\323L\364L\364L\364L\364L\364L\370]^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^"
+  "w\071^\000\000\000\000e)\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377e)\000\000\000\000\000\300\000\350\000\350\000\350\000\350\000\350"
+  "\000\340\000(\000\000\000\000\000\210\000\250\000\250\000\300\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\350\000\350\000\300\000\000\000\000\303\000\323L\364L\364L\364L\364L\364L"
+  "\370]^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w^w\071^\000\000\000\000e)\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "e)\000\000\000\000\000\300\000\350\000\350\000\330\000\300\000\300\000\300\000\040\000\000\000\000\000\210\000"
+  "\250\000\250\000\300\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\300\000\000\000\000\303\000\323L\364L\364L\364L\364L\364LUU\370]\370]\370]\370]\370"
+  "]\370]\374n^w^w^w^w^w^w^w^w^wzf\370]\370]\364L\000\000\000\000e)\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "e)\000\000\000\000\000\300\000\350\000\350\000\320\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000"
+  "\250\000\250\000\300\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\300\000\000\000\000\303\000\323L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364"
+  "L\364L\364L\273f^w^w^w^w^w^w^w^w^w\370]\364L\364L\020<\000\000\000\000e)\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377e)\000\000\000\000\000\300\000\350\000\350\000\320\000\250\000\250\000\250\000\030\000\000\000\000\000\210"
+  "\000\250\000\250\000\300\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\300\000\000\000\000\303\000\323L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364"
+  "L\364L\364L\273f^w^w^w^w^w^w^w^w^w\370]\364L\364L\020<\000\000\000\000e)\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377e)\000\000\000\000\000\260\000\320\000\320\000\310\000\250\000\250\000\250\000\030\000\000\000\000\000\210"
+  "\000\250\000\250\000\270\000\320\000\320\000\320\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\300\000\000\000\000\303\000\323L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364"
+  "L\364L\364L\071^\273f\273f\273f\273f\273f\273f\273f\273f\273f\226U\364L\364"
+  "L\020<\000\000\000\000e)\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000\340\000\350"
+  "\000\350\000\350\000\350\000\350\000\300\000\000\000\000\303\000\323L\364L\364L\364L\364L\364"
+  "L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364"
+  "L\364L\364L\364L\364L\364L\020<\000\000\000\000e)\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\340\000\350\000\350\000\350\000\350\000\350\000\300\000\000\000\000\303"
+  "\000\323L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L"
+  "\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\364L\020<\000\000\000\000"
+  "e)\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000\030"
+  "\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000\340\000\350\000\350\000\350"
+  "\000\350\000\350\000\300\000(\000(\303(\323L\323L\323L\323L\323L\323L\323L\323L\323"
+  "L\323L\323L\323L\323L\323L\323L\323L\323L\323L\323L\323L\323L\323L\323L\323"
+  "L\323L\323L\020De)e)\010B\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250\000"
+  "\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000"
+  "\340\000\350\000\350\000\350\000\350\000\350\000\340\000\340\000\340\000\340\303(\303\000\303"
+  "\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303"
+  "\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\303\000\363"
+  "\234\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\340\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\340\000(\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\363\234\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "e)\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000"
+  "\250\000\250\000\250\000\250\000\250\000\250\000\340\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\350\000\340\000(\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\363\234\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000\300\000\300"
+  "\000\300\000\330\000\350\000\350\000\350\000\350\000\350\000\340\000\300\000\300\000\300\000\300"
+  "\000\300\000\300\000\300\000\300\000\300\000\300\000\300\000\300\000\300\000\300\000\300\000\300"
+  "\000\300\000\300\000\300\000\300\000\300\000\300\000\300\000p\000\000\000\000\363\234\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\320\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\210\000\000\000\000\363\234\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\320\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\210\000\000\000\000\363\234\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250\000"
+  "\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250\000"
+  "\250\000\250\000\250\000\320\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000"
+  "\350\000\350\000\350\000\350\000\350\000\350\000\320\000\320\000\320\000\200\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\320\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\320\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\320\000\340\000\340\000\340\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\300\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\300\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\300\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\340\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\260\000\300\000\300\000\300\000\340\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\330\000\300\000\300\000\300\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\340\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\320\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\340\000\350"
+  "\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350\000\350"
+  "\000\350\000\350\000\320\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\320\000\320"
+  "\000\320\000\320\000\320\000\320\000\320\000\320\000\320\000\320\000\320\000\320\000\320\000\320"
+  "\000\320\000\320\000\310\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377e)\000\000\000\000\000\210\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\000\210\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\363\234"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\272\326\272\326\272\326\020\234\000"
+  "`\000`\000`\000`\000`\000`\000\010\000\000\000\000\000P\000`\000`\000\200\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000h\000`\000`\000`\000`\000`\000`\000`"
+  "\000`\000`\000`\000`\000`\000`\000`\000`\000\200\000\250\000\250\000\250\000h\000`\000`\226\275\272\326"
+  "\272\326<\347\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\363\234\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000`\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\030\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000`\000\250\000\250"
+  "\000\250\000\030\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\030\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\000\000\000\000\000\000`\000\250\000\250\000\250\000\030\000\000\000\000\272\326\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\070\306\363\234\363\234\363\234\363\234\363\234\363\234\363\234\363"
+  "\234\363\234\353Z\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000"
+  "\250\000\250\000\250\000\250\000\250\000\250\000h\000`\000`\000\070\000\000\000\000\000\070\000`\000`\000`\000"
+  "`\000`\000`\000`\000`\000`\000\200\000\250\000\250\000\250\000\030\000\000\000\000\272\326\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\363\234\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\000`\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\030\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000`\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000`\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\030\000\000\000\000\272\326\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\363\234\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\000`\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\030\000\000\000\000"
+  "\272\326\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000`\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000`\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\030\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000"
+  "\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\030\000\000\000\000\272\326\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\363\234\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\000"
+  "`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\030\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000`\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000`\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\030\000\000\000\000\272\326\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\363\234\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\000`\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\030\000"
+  "\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000`\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000`\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\030\000\000\000\000\272\326\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\363"
+  "\234\000\000\000\000\000`\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000`\000\000\000\000\000P\000\210\000\210\000\210\000\210"
+  "\000\210\000\210\000\210\000\210\000\210\000\210\000\210\000\210\303\210\323\234\363\234"
+  "\363\234<\347\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000`\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000`\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000e)\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\363\234\000\000\000\000\000`\000"
+  "\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000"
+  "\250\000\250\000\250\000\250\000`\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000e)\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\024\245"
+  "e)e)$i\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250\000\250"
+  "\000\250\000\250\000\250\000\250\000\250$ie)e)e)e)e)e)e)e)e)e)e)e)e)e)e)\010B\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\232\326\000\030\000\030\000\030\000\030\000\030\000\030\000\030\000\030\000\030\000\030\000\030\000\030\000\030"
+  "\000\030\000\030\000\030\232\326\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\272\326\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\272\326\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  "\000\000\000\000\000\000\272\326\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\236\367\272\326\272\326\272\326\272\326\272\326\272\326\272"
+  "\326\272\326\272\326\272\326\272\326\272\326\272\326\272\326\272\326\272"
+  "\326\236\367\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377",
 };
-const tImage Image = { image_data_Image, 80, 80,
-    32 };		 
-															 
+
 /*   */
 
 /*******************************************************************************
@@ -915,7 +1078,8 @@ void TouchPanel_Calibrate(void)
 /* costruiamo la scena */
 void MakeBackground(void){
 
-	int i, j, x, y, pos;
+	int i, j, x, y, pos, color;
+	uint8_t R, G, B;
 	
 		/* sezione superiore */
 	
@@ -924,10 +1088,20 @@ void MakeBackground(void){
 	x = 80;
 	y = 120;
 	pos = 0;
-	for (i = 0; i < 80; i++){
-		for (j = 0; j < 80; j++) {
-			LCD_SetPoint(x + j, y + i, Image.data[pos]);
-			pos ++;
+	for (i = 0; i < amogus_1.height; i++){
+		for (j = 0; j < amogus_1.width; j++) {
+			
+			uint16_t RGB565 = amogus_1.pixel_data[pos];
+			pos += amogus_1.bytes_per_pixel;
+			R = (RGB565 & 0xf800) >> 8;
+			G = (RGB565 & 0x07e0) >> 3;
+			B = (RGB565 & 0x001f) << 3;
+			
+			color = (uint16_t) ((( R >> 3 ) << 11 ) | (( G >> 2 ) << 5 ) | (B >> 3 ));
+			
+			LCD_SetPoint(x + j, y + i, color);
+			
+			
 		}
 	}
 	

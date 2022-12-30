@@ -25,6 +25,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 static uint8_t LCD_Code;
+static uint16_t back_color;
 
 /* Private define ------------------------------------------------------------*/
 #define  ILI9320    0  /* 0x9320 */
@@ -87,7 +88,7 @@ static __attribute__((always_inline)) void LCD_Send (uint16_t byte)
 * Output         : None
 * Return         : None
 * Return         : None
-* Attention		 : None 
+* Attention		 : None
 *******************************************************************************/
 static void wait_delay(int count)
 {
@@ -300,7 +301,7 @@ void LCD_Initialization(void)
 	uint16_t DeviceCode;
 	
 	LCD_Configuration();
-	delay_ms(100);
+	delay_ms(300);
 	DeviceCode = LCD_ReadReg(0x0000);		/* 读取屏ID	*/	
 	
 	if( DeviceCode == 0x9325 || DeviceCode == 0x9328 )	
@@ -310,13 +311,13 @@ void LCD_Initialization(void)
 		LCD_WriteReg(0x0000,0x0001);  	/* start internal osc */
 		LCD_WriteReg(0x0001,0x0100);     
 		LCD_WriteReg(0x0002,0x0700); 	/* power on sequence */
-		LCD_WriteReg(0x0003,(1<<12)|(1<<5)|(1<<4)|(0<<3) ); 	/* importance */
+		LCD_WriteReg(0x0003,0x1018); 	/* Entry Mode Set*/
 		LCD_WriteReg(0x0004,0x0000);                                   
 		LCD_WriteReg(0x0008,0x0207);	           
 		LCD_WriteReg(0x0009,0x0000);         
 		LCD_WriteReg(0x000a,0x0000); 	/* display setting */        
 		LCD_WriteReg(0x000c,0x0001);	/* display setting */        
-		LCD_WriteReg(0x000d,0x0000); 			        
+		LCD_WriteReg(0x000d,0x0000);
 		LCD_WriteReg(0x000f,0x0000);
 		/* Power On sequence */
 		LCD_WriteReg(0x0010,0x0000);   
@@ -372,9 +373,63 @@ void LCD_Initialization(void)
 		
 		LCD_WriteReg(0x0020,0x0000);  /* 行首址0 */                                                          
 		LCD_WriteReg(0x0021,0x0000);  /* 列首址0 */     
-	}
+	}	else if( DeviceCode == 0x9320 || DeviceCode == 0x9300 )  {
+    LCD_Code = ILI9320;
+    LCD_WriteReg(0x00,0x0000);	/* Start Oscillation (don't start here) */
+    LCD_WriteReg(0x01,0x0100);	/* Driver Output Control */
+    LCD_WriteReg(0x02,0x0700);	/* LCD Driver Waveform Control */
+    LCD_WriteReg(0x03,0x1018);	/* Entry Mode Set (if HVM = 1 : High speed write function enabled)*/
+
+    LCD_WriteReg(0x04,0x0000);	/* Resizing Control Register */
+    LCD_WriteReg(0x08,0x0202);	/* Display Control 2 (Porch) */
+    LCD_WriteReg(0x09,0x0000);	/* Display Contral 3.(0x0000) */
+    LCD_WriteReg(0x0a,0x0000);	/* Frame Cycle Contal.(0x0000) */
+		LCD_WriteReg(0x0b,0x0001);	/* RGB Display Interface Control 1 */
+    LCD_WriteReg(0x0c,(1<<0));	/* Extern Display Interface Contral */
+    LCD_WriteReg(0x0d,0x0000);	/* Frame Maker Position */
+    LCD_WriteReg(0x0f,0x0000);	/* Extern Display Interface Contral 2. */
+
+    delay_ms(100);  /* delay 100 ms */
+    LCD_WriteReg(0x07,0x0101);	/* Display Contral */
+    delay_ms(100);  /* delay 100 ms */
+
+    LCD_WriteReg(0x10,(1<<12)|(0<<8)|(1<<7)|(1<<6)|(0<<4));	/* Power Control 1.(0x16b0)	*/
+    LCD_WriteReg(0x11,0x0007);								/* Power Control 2 */
+    LCD_WriteReg(0x12,(1<<8)|(1<<4)|(0<<0));				/* Power Control 3.(0x0138)	*/
+    LCD_WriteReg(0x13,0x0b00);								/* Power Control 4 */
+    LCD_WriteReg(0x29,0x0000);								/* Power Control 7 */
+
+    LCD_WriteReg(0x2b,(1<<14)|(1<<4));
+
+		/* Window Address Area */
+    LCD_WriteReg(0x50,0);       /* Set X Start */
+    LCD_WriteReg(0x51,239);	    /* Set X End */
+    LCD_WriteReg(0x52,0);	      /* Set Y Start */
+    LCD_WriteReg(0x53,319);	    /* Set Y End */
+
+    LCD_WriteReg(0x60,0x2700);	/* Driver Output Control */
+    LCD_WriteReg(0x61,0x0001);	/* Driver Output Control */
+    LCD_WriteReg(0x6a,0x0000);	/* Vertical Srcoll Control */
+
+    LCD_WriteReg(0x80,0x0000);	/* Display Position? Partial Display 1 */
+    LCD_WriteReg(0x81,0x0000);	/* RAM Address Start? Partial Display 1 */
+    LCD_WriteReg(0x82,0x0000);	/* RAM Address End-Partial Display 1 */
+    LCD_WriteReg(0x83,0x0000);	/* Displsy Position? Partial Display 2 */
+    LCD_WriteReg(0x84,0x0000);	/* RAM Address Start? Partial Display 2 */
+    LCD_WriteReg(0x85,0x0000);	/* RAM Address End? Partial Display 2 */
+
+    LCD_WriteReg(0x90,(0<<7)|(16<<0));	/* Frame Cycle Contral.(0x0013)	*/
+    LCD_WriteReg(0x92,0x0000);	/* Panel Interface Contral 2.(0x0000) */
+    LCD_WriteReg(0x93,0x0001);	/* Panel Interface Contral 3. */
+    LCD_WriteReg(0x95,0x0110);	/* Frame Cycle Contral.(0x0110)	*/
+    LCD_WriteReg(0x97,(0<<8));
+    LCD_WriteReg(0x98,0x0000);	/* Frame Cycle Contral */
+
+    LCD_WriteReg(0x07,0x0173);
+  }
 
     delay_ms(50);   /* delay 50 ms */	
+		LCD_SetBackground(White);
 }
 
 /*******************************************************************************
@@ -407,12 +462,21 @@ void LCD_Clear(uint16_t Color)
 	{	
 		LCD_SetCursor(0,0); 
 	}	
-
+/*
 	LCD_WriteIndex(0x0022);
 	for( index = 0; index < MAX_X * MAX_Y; index++ )
 	{
 		LCD_WriteData(Color);
 	}
+*/	
+	LCD_ClearWindow();
+	LCD_CS(0);
+	LCD_WriteCommand(0x22);
+	LCD_RS(1);
+	for (index = 0; index < MAX_X*MAX_Y; index++) {
+		LCD_WritePixel(Color);
+	}
+	LCD_CS(1);
 }
 
 /******************************************************************************
@@ -630,6 +694,28 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
     }
 }
 
+void PutCharHorizontal( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor )
+{
+	uint16_t i, j;
+    uint8_t buffer[16], tmp_char;
+    GetASCIICode(buffer,ASCI);  /* 取字模数据 */
+    for( i=0; i<16; i++ )
+    {
+        tmp_char = buffer[i];
+        for( j=0; j<8; j++ )
+        {
+            if( ((tmp_char >> (7 - j)) & 0x01) == 0x01 )
+            {
+                LCD_SetPoint( Ypos + i, Xpos + j, charColor );  /* 字符颜色 */
+            }
+            else
+            {
+                LCD_SetPoint( Ypos + i, Xpos + j, bkColor );  /* 背景颜色 */
+            }
+        }
+    }
+}
+
 /******************************************************************************
 * Function Name  : GUI_Text
 * Description    : 在指定座标显示字符串
@@ -667,6 +753,153 @@ void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_
     while ( *str != 0 );
 }
 
+void wait()
+{
+	__ASM("nop");
+}
+
+void LCD_WriteCommand (uint8_t index)
+{
+	LCD_RS(0)
+  LCD_RD(1)
+  LCD_Send(index);
+  LCD_WR(0)
+  wait();
+  LCD_WR(1)
+}
+
+void LCD_WritePixel (uint16_t pixel)
+{
+	LCD_Send(pixel);
+  LCD_WR(0)
+  wait();
+  LCD_WR(1)
+}
+
+void LCD_ClearWindow (void)
+{
+	/* Window Address Area */
+	LCD_WriteReg(0x50,0);       									/* Set X Start 	*/
+	LCD_WriteReg(0x51,239);	    									/* Set X End 		*/
+	LCD_WriteReg(0x52,0);	   									  	/* Set Y Start 	*/
+	LCD_WriteReg(0x53,319);										    /* Set Y End 		*/
+}
+
+void LCD_SetWindow (uint16_t X_start, uint16_t Y_start, uint16_t width, uint16_t height)
+{
+	/* Window Address Area	*/
+	LCD_WriteReg(0x50,X_start);       						/* Set X Start	*/
+	LCD_WriteReg(0x51,X_start + width - 1);				/* Set X End 		*/
+	LCD_WriteReg(0x52,Y_start);	      						/* Set Y Start 	*/
+	LCD_WriteReg(0x53,Y_start + height -1);				/* Set Y End 		*/
+	/* Set pos */
+	LCD_WriteReg(0x20, X_start);
+	LCD_WriteReg(0x21, Y_start);
+}
+
+void LCD_SetOrientation(uint8_t orientation)
+{
+	switch (orientation)
+  {
+  	case 'V':
+			LCD_WriteReg(0x03,0x1030);
+  		break;
+  	case 'H':
+			LCD_WriteReg(0x03,0x1018);
+  		break;
+  	default:
+  		break;
+  }
+	return;
+}
+
+void pixel(uint16_t xc,uint16_t yc,uint16_t x,uint16_t y, uint16_t color)
+{
+	LCD_SetPoint(xc+x,yc+y,color);
+	LCD_SetPoint(xc+x,yc-y,color);
+	LCD_SetPoint(xc-x,yc+y,color);
+	LCD_SetPoint(xc-x,yc-y,color);
+	LCD_SetPoint(xc+y,yc+x,color);
+	LCD_SetPoint(xc+y,yc-x,color);
+	LCD_SetPoint(xc-y,yc+x,color);
+	LCD_SetPoint(xc-y,yc-x,color);
+}
+
+void LCD_DrawCircle(uint16_t Xpos,uint16_t Ypos, uint16_t radius, uint16_t color)
+{
+	int x=0;
+	int y=radius;
+	int p=1-radius;
+	pixel(Xpos,Ypos,x,y, color);
+	
+	while(x<y)
+	{
+		if(p<0)
+		{
+			x++;
+			p=p+2*x+1;
+		}
+		else
+		{
+			x++;
+			y--;
+			p=p+2*(x-y)+1;
+		}
+		pixel(Xpos,Ypos,x,y, color);
+	}
+}
+
+void LCD_DrawRectangle (uint16_t X_start, uint16_t Y_start, uint16_t width, uint16_t height, uint16_t color)
+{
+	uint16_t i, j;
+	
+	for (i = 0; i < width; i++) {
+		for (j = 0; j < height; j++) {
+			LCD_SetPoint(X_start + i, Y_start + j, color);
+		}
+	}
+	
+}
+
+void LCD_Darken(uint16_t X_start, uint16_t Y_start, uint16_t width, uint16_t height, uint16_t darken_factor)
+{
+	uint16_t i, j, pixel;
+	uint8_t r, g, b;
+		
+	for (i = X_start; i < X_start + width; i++) {
+		for (j = Y_start; j < Y_start + height; j++) {
+			LCD_SetCursor(i, j);
+			LCD_WriteIndex(0x22);
+			pixel = LCD_ReadData();
+			r = (pixel & 0xF800) >> 10;
+			//r = r >= darken_factor ? r - darken_factor : 0;
+			g = (pixel & 0x07E0) >> 5;
+			//g = g >= darken_factor ? g - darken_factor : 0;
+			b = (pixel & 0x001F);
+			//b = b >= darken_factor ? b - darken_factor : 0;
+			pixel = RGB565CONVERT(r, g, b);
+			LCD_SetPoint(i, j, pixel);
+		}
+	}
+}
+
+uint16_t LCD_GetPixel(uint16_t i, uint16_t j)
+{
+	LCD_SetCursor(i, j);
+	LCD_WriteIndex(0x22);
+	return LCD_ReadData();
+}
+
+void LCD_SetBackground(uint16_t color)
+{
+	back_color = color;
+	LCD_Clear(back_color);
+}
+
+uint16_t LCD_GetBackground(void)
+{
+	return back_color;
+}
 
 
 /*********************************************************************************************************
