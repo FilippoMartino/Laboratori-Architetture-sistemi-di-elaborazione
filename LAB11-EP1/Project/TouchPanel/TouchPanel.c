@@ -499,8 +499,12 @@ void TouchPanel_Calibrate(void)
 
 /* costruiamo la scena */
 void MakeBackground(void){
-		LCD_DrawLine(0, 50, 239, 50, Black);
-		LCD_DrawLine(120, 0, 120, 50, Black);
+	
+		LCD_DrawLine(0, 270, 239, 270, Black);
+		LCD_DrawLine(120, 270, 120, 319, Black);
+		GUI_Text(45, 288, "Meal", Black, White);
+		GUI_Text(160, 288, "Snack", Black, White);
+
 }
 
 /*********************************************************************************************************
