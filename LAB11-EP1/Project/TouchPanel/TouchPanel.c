@@ -1080,28 +1080,30 @@ void MakeBackground(void){
 
 	int i, j, x, y, pos, color;
 	uint8_t R, G, B;
+	uint16_t* RGB565p;
 	
-		/* sezione superiore */
+	/* sezione superiore */
 	
 	GUI_Text(77, 10, (uint8_t *) "AGE  00:00", Black, White);
 
 	x = 80;
 	y = 120;
 	pos = 0;
+	
+	RGB565p = (uint16_t*) &amogus_1.pixel_data;
+	
 	for (i = 0; i < amogus_1.height; i++){
-		for (j = 0; j < amogus_1.width; j++) {
+		for (j = 0; j < amogus_1.width ; j++) {
+		
+			//uint16_t RGB565 = amogus_1.pixel_data[pos];
+			uint16_t RGB565 = *RGB565p++;
 			
-			uint16_t RGB565 = amogus_1.pixel_data[pos];
-			pos += amogus_1.bytes_per_pixel;
 			R = (RGB565 & 0xf800) >> 8;
 			G = (RGB565 & 0x07e0) >> 3;
 			B = (RGB565 & 0x001f) << 3;
-			
 			color = (uint16_t) ((( R >> 3 ) << 11 ) | (( G >> 2 ) << 5 ) | (B >> 3 ));
-			
 			LCD_SetPoint(x + j, y + i, color);
-			
-			
+			//pos += amogus_1.bytes_per_pixel;
 		}
 	}
 	

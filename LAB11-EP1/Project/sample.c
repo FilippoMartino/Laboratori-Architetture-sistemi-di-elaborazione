@@ -46,7 +46,7 @@ int main(void)
 	// RIMUOVERE QUESTO COMMENTO!
 	// TouchPanel_Calibrate();
 	
-	//LCD_Clear(White);
+	// LCD_Clear(White);
 	// GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Blue, White);
 	MakeBackground();
 	
