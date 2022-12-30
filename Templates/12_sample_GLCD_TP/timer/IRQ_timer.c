@@ -27,19 +27,23 @@ void TIMER0_IRQHandler (void)
 {
 	static int clear = 0;
 	char time_in_char[5] = "";
-	
+	/* prende il punto sul display */
   if(getDisplayPoint(&display, Read_Ads7846(), &matrix )){
+		/* se sopra posizione con scritta */
 		if(display.y < 280){
 			TP_DrawPoint(display.x,display.y);
 			GUI_Text(200, 0, (uint8_t *) "     ", Blue, Blue);
 			clear = 0;
 		}
-		else{			
+		else{
+			/* se compreso tra 280 e 318 (in decimale) che dovrebbe essere il limite superiore di y */
 			if(display.y <= 0x13E){			
 				clear++;
+				/* timer in altro a destra del display */
 				if(clear%20 == 0){
 					sprintf(time_in_char,"%4d",clear/20);
 					GUI_Text(200, 0, (uint8_t *) time_in_char, White, Blue);
+					/* dopo 200 volte 500us siamo ad un secondo premuto in questa zona, puliamo */
 					if(clear == 200){	/* 1 seconds = 200 times * 500 us*/
 						LCD_Clear(Blue);
 						GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear ", Blue, White);			
