@@ -1915,6 +1915,9 @@ void TouchPanel_Calibrate(void)
 
 }
 
+
+/* Convert Color to LCD displayable */
+
 int convertColor(uint16_t toConvert){
 	uint8_t R, G, B;
 		
@@ -1940,16 +1943,68 @@ void amogus_still(void){
 			LCD_SetPoint(x + j, y + i, convertColor(*RGB565p++));
 }
 
-void life80(void){
-	int i, j, x, y;
+/*
+	Draw life.
+	Possible life values: 0, 20, 40, 60, 80, 100.
+
+	kind parameter, select the kind of life:
+	-	0 for Happiness
+	- 1 for Satiety
+
+*/
+void life(int life, int kind){
+	
+	int i, j, x, y, h, w;
 	uint16_t* RGB565p;
 	
-	x = 20;
-	y = 40;
-	RGB565p = (uint16_t*) &lifeBar_80.pixel_data;
+	switch (life) {
+		case 100:
+			RGB565p = (uint16_t*) &lifeBar_100.pixel_data;
+			h = lifeBar_100.height;
+			w = lifeBar_100.width;
+		break;
+		case	80:
+			RGB565p = (uint16_t*) &lifeBar_80.pixel_data;
+			h = lifeBar_80.height;
+			w = lifeBar_80.width;
+		break;
+		case 	60:
+			RGB565p = (uint16_t*) &lifeBar_60.pixel_data;
+			h = lifeBar_60.height;
+			w = lifeBar_60.width;
+		break;
+		case	40:
+			RGB565p = (uint16_t*) &lifeBar_40.pixel_data;
+			h = lifeBar_40.height;
+			w = lifeBar_40.width;
+		break;
+		case	20:
+			RGB565p = (uint16_t*) &lifeBar_20.pixel_data;
+			h = lifeBar_20.height;
+			w = lifeBar_20.width;
+		break;
+		case 0:
+			RGB565p = (uint16_t*) &lifeBar_0.pixel_data;
+			h = lifeBar_0.height;
+			w = lifeBar_0.width;
+		break;
+		default:
+			return;
+		break;
+	}
 	
-	for (i = 0; i < lifeBar_80.height; i++)
-		for (j = 0; j < lifeBar_80.width ; j++)
+	if (!kind){
+		x = 20;
+		y = 55;
+	} else if (kind) {
+		x = 140;
+		y = 55;
+	} else {
+		return;
+	}
+	
+	for (i = 0; i < h; i++)
+		for (j = 0; j < w ; j++)
 			LCD_SetPoint(x + j, y + i, convertColor(*RGB565p++));
 	
 }
@@ -1958,9 +2013,11 @@ void life80(void){
 void MakeBackground(void){
 	
 	/* sezione superiore */
-	GUI_Text(77, 10, (uint8_t *) "AGE  00:00", Black, White);
-	
-	life80();
+	GUI_Text(80, 10, (uint8_t *) "AGE  00:00", Black, White);
+	GUI_Text(25, 35, (uint8_t *) "Happiness", Black, White);
+	GUI_Text(152, 35, (uint8_t *) "Satiety", Black, White);
+	life(100, 0);
+	life(100, 1);
 	amogus_still();
 	
 		

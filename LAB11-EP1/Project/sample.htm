@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\sample.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\sample.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Dec 31 00:11:10 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Dec 31 00:34:30 2022
 <BR><P>
 <H3>Maximum Stack Usage =        192 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -549,7 +549,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SetCursor
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wait_delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;life80
+<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;life
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;amogus_still
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Darken
 <LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawRectangle
@@ -734,7 +734,7 @@ Global Symbols
 <P><STRONG><a name="[7f]"></a>convertColor</STRONG> (Thumb, 36 bytes, Stack size 12 bytes, touchpanel.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = convertColor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;life80
+<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;life
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;amogus_still
 </UL>
 
@@ -747,8 +747,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MakeBackground
 </UL>
 
-<P><STRONG><a name="[80]"></a>life80</STRONG> (Thumb, 76 bytes, Stack size 32 bytes, touchpanel.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = life80 &rArr; LCD_SetPoint &rArr; LCD_SetCursor
+<P><STRONG><a name="[80]"></a>life</STRONG> (Thumb, 206 bytes, Stack size 48 bytes, touchpanel.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = life &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convertColor
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SetPoint
@@ -756,10 +756,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MakeBackground
 </UL>
 
-<P><STRONG><a name="[48]"></a>MakeBackground</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, touchpanel.o(.text))
+<P><STRONG><a name="[48]"></a>MakeBackground</STRONG> (Thumb, 154 bytes, Stack size 8 bytes, touchpanel.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = MakeBackground &rArr; GUI_Text &rArr; PutChar &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
-<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;life80
+<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;life
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;amogus_still
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawLine
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GUI_Text
