@@ -47,15 +47,16 @@ int main(void)
 	// TouchPanel_Calibrate();
 	
 	// LCD_Clear(White);
-	// GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Blue, White);
+	
 	MakeBackground();
 	
-	//init_timer(0, 0x1312D0 ); 						/* 50ms * 25MHz = 1.25*10^6 = 0x1312D0 */
-	//init_timer(0, 0x6108 ); 						  /* 1ms * 25MHz = 25*10^3 = 0x6108 */
-	//init_timer(0, 0x4E2 ); 						    /* 500us * 25MHz = 1.25*10^3 = 0x4E2 */
-	init_timer(0, 0xC8 ); 						    /* 8us * 25MHz = 200 ~= 0xC8 */
-	
+	/* Timer 0, per animazione centrale sprite */
+	init_timer(0, 25000000); 						    /* 1s * 25MHz = 25000000 */
 	enable_timer(0);
+	
+	/* Timer 1, per animazione cuori e decremento vita */
+	init_timer(1, 125000000);
+	enable_timer(1);
 	
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);						

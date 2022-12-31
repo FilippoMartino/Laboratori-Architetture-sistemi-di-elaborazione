@@ -13,6 +13,17 @@
 #include "../GLCD/GLCD.h" 
 #include "../TouchPanel/TouchPanel.h"
 
+/* variabili esterne */
+extern int AMOGUS_STAND;
+extern int HAPPINESS;
+extern int SATIETY;
+
+/* funzioni esterne */
+extern void amogusClear(void);
+extern void amogus_stand(void);
+extern void amogus_sit(void);
+extern void life(int life, int kind);
+
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
 **
@@ -23,39 +34,18 @@
 **
 ******************************************************************************/
 
-void TIMER0_IRQHandler (void)
-{
-	static int clear = 0;
-	char time_in_char[5] = "";
-	/* prende il punto sul display */
-  if(getDisplayPoint(&display, Read_Ads7846(), &matrix )){
-		/* se sopra posizione con scritta */
-		if(display.y < 280){
-			TP_DrawPoint(display.x,display.y);
-			GUI_Text(200, 0, (uint8_t *) "     ", Blue, Blue);
-			clear = 0;
-		}
-		else{
-			/* se compreso tra 280 e 318 (in decimale) che dovrebbe essere il limite superiore di y */
-			if(display.y <= 0x13E){			
-				clear++;
-				/* timer in altro a destra del display */
-				if(clear%20 == 0){
-					sprintf(time_in_char,"%4d",clear/20);
-					GUI_Text(200, 0, (uint8_t *) time_in_char, White, Blue);
-					/* dopo 200 volte 500us siamo ad un secondo premuto in questa zona, puliamo */
-					if(clear == 200){	/* 1 seconds = 200 times * 500 us*/
-						LCD_Clear(Blue);
-						GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear ", Blue, White);			
-						clear = 0;
-					}
-				}
-			}
-		}
+/* ogni volta che arrivo qui devo cambiare visualizzazione personaggio */
+void TIMER0_IRQHandler (void) {
+	
+	
+	if (AMOGUS_STAND){
+		amogusClear();
+		amogus_sit();
+	} else {
+		amogusClear();
+		amogus_stand();
 	}
-	else{
-		//do nothing if touch returns values out of bounds
-	}
+	
   LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }
@@ -72,6 +62,51 @@ void TIMER0_IRQHandler (void)
 ******************************************************************************/
 void TIMER1_IRQHandler (void)
 {
+	HAPPINESS -= 1;
+	SATIETY 	-= 1;
+	
+	switch (HAPPINESS){
+		case 4:
+			life(80, 0);
+			break;
+		case 3:
+			life(60, 0);
+			break;
+		case 2:
+			life(40, 0);
+			break;
+		case 1:
+			life(20, 0);
+			break;
+		case 0:
+			HAPPINESS = 5;
+			life(100, 0);
+			//life(0, 0);
+			//RUNNAWAY procedure...
+			break;
+	}
+	
+	switch (SATIETY){
+		case 4:
+			life(80, 1);
+			break;
+		case 3:
+			life(60, 1);
+			break;
+		case 2:
+			life(40, 1);
+			break;
+		case 1:
+			life(20, 1);
+			break;
+		case 0:
+			SATIETY = 5;
+			life(100, 1);
+			//life(0, 1);
+			//RUNNAWAY procedure...
+			break;
+	}
+	
   LPC_TIM1->IR = 1;			/* clear interrupt flag */
   return;
 }
