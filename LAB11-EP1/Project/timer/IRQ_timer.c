@@ -7,61 +7,126 @@
 ** Correlated files:    timer.h
 **--------------------------------------------------------------------------------------------------------
 *********************************************************************************************************/
-#include <string.h>
 #include "lpc17xx.h"
 #include "timer.h"
-#include "../GLCD/GLCD.h" 
-#include "../TouchPanel/TouchPanel.h"
+#include <string.h>
+#include "../RIT/RIT.h"
 
-/* variabili esterne */
+/* extern variabiles */
 extern int AMOGUS_STAND;
 extern int HAPPINESS;
 extern int SATIETY;
+extern int TO_EAT_MEAT;
+extern int EATING;
+extern int ENDGAME;
 
-/* funzioni esterne */
+/* extern functions */
 extern void amogusClear(void);
-extern void amogus_stand(void);
+extern void areaClear(void);
 extern void amogus_sit(void);
-extern void life(int life, int kind);
+extern void amogus_stand(void);
+extern int 	life(int, int);
+extern void timeUpdate(char* toPrint);
+extern void clearCandy(void);
+extern void clearMeat(void);
+extern void runRight(int phase, int fromLeft);
+extern void runLeft(int phase, int fromRight);
+extern void eatRight(void);
+extern void eatLeft(void);
+extern void endgameAnimation(int phase);
+extern void resetGame(void);
+
+/* internal */ 
+
+/* AGE control */
+static int h = 0;
+static int m = 0;
+static int s = 0;
+
+void restoreLife(int value, int kind){
+	switch (value){
+		case 4:
+			life(100, kind);
+			break;
+		case 3:
+			life(80, kind);
+			break;
+		case 2:
+			life(60, kind);
+			break;
+		case 1:
+			life(40, kind);
+			break;
+		case 0:
+			life(20, kind);
+			break;
+		default:
+			break;
+	}
+}
 
 /******************************************************************************
-** Function name:		Timer0_IRQHandler
+** Function name:			Timer0_IRQHandler
 **
-** Descriptions:		Timer/Counter 0 interrupt handler
+** Descriptions:			Timer/Counter 0 interrupt handler
 **
-** parameters:			None
+** parameters:				None
 ** Returned value:		None
 **
 ******************************************************************************/
-
-/* ogni volta che arrivo qui devo cambiare visualizzazione personaggio */
-void TIMER0_IRQHandler (void) {
+void TIMER0_IRQHandler (void)
+{
 	
-	
-	if (AMOGUS_STAND){
-		amogusClear();
+		char time[64];
+		s ++;
+		if (s == 60) {
+			s = 0;
+			m ++;
+		}
+		
+		if (m == 60) {
+			m = 0;
+			h ++;
+		}
+		
+		if (s < 10 && m > 9 && h > 9) {
+			sprintf(time, "AGE: %d:%d:0%d", h, m, s);
+		} else if (s < 10 && m < 10 && h > 9) {
+			sprintf(time, "AGE: %d:0%d:0%d", h, m, s);
+		} else if (s < 10 && m < 10 && h < 10) {
+			sprintf(time, "AGE: 0%d:0%d:0%d", h, m, s);
+		} else {
+			sprintf(time, "AGE: %d:%d:%d", h, m, s);
+		}
+		
+		timeUpdate(time);
+		
+		if (AMOGUS_STAND){
+		//amogusClear();
 		amogus_sit();
 	} else {
-		amogusClear();
+		//amogusClear();
 		amogus_stand();
 	}
+		
+	LPC_TIM0->IR = 1;			/* clear interrupt flag */
 	
-  LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }
 
 
 /******************************************************************************
-** Function name:		Timer1_IRQHandler
+** Function name:			Timer1_IRQHandler
 **
-** Descriptions:		Timer/Counter 1 interrupt handler
+** Descriptions:			Timer/Counter 1 interrupt handler
 **
-** parameters:			None
+** parameters:				None
 ** Returned value:		None
 **
 ******************************************************************************/
 void TIMER1_IRQHandler (void)
 {
+	
 	HAPPINESS -= 1;
 	SATIETY 	-= 1;
 	
@@ -79,10 +144,12 @@ void TIMER1_IRQHandler (void)
 			life(20, 0);
 			break;
 		case 0:
-			HAPPINESS = 5;
-			life(100, 0);
-			//life(0, 0);
-			//RUNNAWAY procedure...
+			life(0, 0);
+			break;
+		case -1:
+			ENDGAME = 1;
+			break;
+		default:
 			break;
 	}
 	
@@ -100,16 +167,119 @@ void TIMER1_IRQHandler (void)
 			life(20, 1);
 			break;
 		case 0:
-			SATIETY = 5;
-			life(100, 1);
-			//life(0, 1);
-			//RUNNAWAY procedure...
+			life(0, 0);
+			break;
+		case -1:
+			ENDGAME = 1;
+			break;
+		default:
 			break;
 	}
 	
   LPC_TIM1->IR = 1;			/* clear interrupt flag */
   return;
 }
+
+/******************************************************************************
+** Function name:			Timer2_IRQHandler
+**
+** Descriptions:			Timer/Counter 2 interrupt handler
+**
+** parameters:				None
+** Returned value:		None
+**
+******************************************************************************/
+void TIMER2_IRQHandler (void)
+{
+	
+	static int phase = 0;
+	static int toRet = 0;
+	int i;
+	
+		if (ENDGAME == 1) {
+
+			if (phase < 8){
+				amogusClear();
+				endgameAnimation(phase);
+				phase ++;
+			} else {
+				areaClear();
+				resetGame();
+			}
+		}
+
+	
+		if (TO_EAT_MEAT && !ENDGAME){
+			
+			if (phase < 5 && !toRet){
+				amogusClear();
+				runLeft(phase, 0);
+				phase ++;
+			} else if (phase == 5) {
+				amogusClear();
+				eatLeft();
+				clearMeat();
+				restoreLife(HAPPINESS, 0);
+				HAPPINESS ++;
+				toRet = 1;
+				phase --;
+			} else if (toRet && phase > 0) {
+				areaClear();
+				runRight(phase, 1);
+				phase --;
+			} else if (toRet && phase == 0){
+				amogusClear();
+				amogus_sit();
+				EATING = 2;
+				toRet = 0;
+			}
+			
+		} else if (!TO_EAT_MEAT && !ENDGAME) {
+			if (phase < 5 && !toRet){
+				amogusClear();
+				runRight(phase, 0);
+				phase ++;
+			} else if (phase == 5) {
+				amogusClear();
+				eatRight();
+				clearCandy();
+				restoreLife(SATIETY, 1);
+				SATIETY ++;
+				toRet = 1;
+				phase --;
+			} else if (toRet && phase > 0) {
+				areaClear();
+				runLeft(phase, 1);
+				phase --;
+			} else if (toRet && phase == 0){
+				amogusClear();
+				amogus_sit();
+				EATING = 2;
+				toRet = 0;
+			}
+		}
+	
+  LPC_TIM2->IR = 1;			/* clear interrupt flag */
+  return;
+}
+
+/******************************************************************************
+** Function name:			Timer3_IRQHandler
+**
+** Descriptions:			Timer/Counter 3 interrupt handler
+**
+** parameters:				None
+** Returned value:		None
+**
+******************************************************************************/
+void TIMER3_IRQHandler (void)
+{
+  LPC_TIM3->IR = 1;			/* clear interrupt flag */
+  return;
+}
+
+
+
 
 /******************************************************************************
 **                            End Of File
