@@ -1,7 +1,7 @@
 Dependencies for Project 'sample', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (.\startup_LPC17xx.s)(0x639A94BC)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "LPC175x_6x SETA 1" --pd "_RTE_ SETA 1"--list .\startup_lpc17xx.lst --xref -o .\startup_lpc17xx.o --depend .\startup_lpc17xx.d)
-F (.\sample.c)(0x63B2F9DF)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\sample.o --omf_browse .\sample.crf --depend .\sample.d)
+F (.\sample.c)(0x63B32765)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\sample.o --omf_browse .\sample.crf --depend .\sample.d)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\LPC17xx.h)(0x5E1DC4B4)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h)(0x60D44B52)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602585EE)
@@ -25,7 +25,7 @@ I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\I
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h)(0x60D44B52)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\mpu_armv7.h)(0x60D44B52)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\system_LPC17xx.h)(0x58493F92)
-F (.\timer\IRQ_timer.c)(0x63B2FE69)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\irq_timer.o --omf_browse .\irq_timer.crf --depend .\irq_timer.d)
+F (.\timer\IRQ_timer.c)(0x63B32632)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\irq_timer.o --omf_browse .\irq_timer.crf --depend .\irq_timer.d)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\lpc17xx.h)(0x5E1DC4B4)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h)(0x60D44B52)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602585EE)
@@ -69,7 +69,7 @@ F (.\GLCD\HzLib.c)(0x639C6E98)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\
 I (GLCD\HzLib.h)(0x639C6E98)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x602585EE)
 F (.\GLCD\HzLib.h)(0x639C6E98)()
-F (.\TouchPanel\TouchPanel.c)(0x63B2FD63)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\touchpanel.o --omf_browse .\touchpanel.crf --depend .\touchpanel.d)
+F (.\TouchPanel\TouchPanel.c)(0x63B315D8)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\touchpanel.o --omf_browse .\touchpanel.crf --depend .\touchpanel.d)
 I (TouchPanel\../GLCD/GLCD.h)(0x63AF633F)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\LPC17xx.h)(0x5E1DC4B4)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h)(0x60D44B52)
@@ -80,8 +80,9 @@ I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\I
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\mpu_armv7.h)(0x60D44B52)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\system_LPC17xx.h)(0x58493F92)
 I (TouchPanel\../TouchPanel/TouchPanel.h)(0x63AF688F)
+I (TouchPanel\../timer/timer.h)(0x63AC41A5)
 F (.\TouchPanel\TouchPanel.h)(0x63AF688F)()
-F (.\RIT\IRQ_RIT.c)(0x63B2FD75)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\irq_rit.o --omf_browse .\irq_rit.crf --depend .\irq_rit.d)
+F (.\RIT\IRQ_RIT.c)(0x63B31FC9)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\RTE\_Target_1-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DLPC175x_6x -D_RTE_ -DSIMULATOR-o .\irq_rit.o --omf_browse .\irq_rit.crf --depend .\irq_rit.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x602585EE)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\lpc17xx.h)(0x5E1DC4B4)
 I (C:\Users\Filippo Martino\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h)(0x60D44B52)

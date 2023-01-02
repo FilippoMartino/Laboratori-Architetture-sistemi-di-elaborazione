@@ -18,6 +18,7 @@ extern int HAPPINESS;
 extern int SATIETY;
 extern int TO_EAT_MEAT;
 extern int EATING;
+extern int ENDGAME;
 
 /* extern functions */
 extern void amogusClear(void);
@@ -32,6 +33,8 @@ extern void runRight(int phase, int fromLeft);
 extern void runLeft(int phase, int fromRight);
 extern void eatRight(void);
 extern void eatLeft(void);
+extern void endgameAnimation(int phase);
+extern void resetGame(void);
 
 /* internal */ 
 
@@ -141,10 +144,12 @@ void TIMER1_IRQHandler (void)
 			life(20, 0);
 			break;
 		case 0:
-			HAPPINESS = 5;
-			life(100, 0);
-			//life(0, 0);
-			//RUNNAWAY procedure...
+			life(0, 0);
+			break;
+		case -1:
+			ENDGAME = 1;
+			break;
+		default:
 			break;
 	}
 	
@@ -162,10 +167,12 @@ void TIMER1_IRQHandler (void)
 			life(20, 1);
 			break;
 		case 0:
-			SATIETY = 5;
-			life(100, 1);
-			//life(0, 1);
-			//RUNNAWAY procedure...
+			life(0, 0);
+			break;
+		case -1:
+			ENDGAME = 1;
+			break;
+		default:
 			break;
 	}
 	
@@ -189,7 +196,20 @@ void TIMER2_IRQHandler (void)
 	static int toRet = 0;
 	int i;
 	
-		if (TO_EAT_MEAT){
+		if (ENDGAME == 1) {
+
+			if (phase < 8){
+				amogusClear();
+				endgameAnimation(phase);
+				phase ++;
+			} else {
+				areaClear();
+				resetGame();
+			}
+		}
+
+	
+		if (TO_EAT_MEAT && !ENDGAME){
 			
 			if (phase < 5 && !toRet){
 				amogusClear();
@@ -210,11 +230,11 @@ void TIMER2_IRQHandler (void)
 			} else if (toRet && phase == 0){
 				amogusClear();
 				amogus_sit();
-				EATING = 0;
+				EATING = 2;
 				toRet = 0;
 			}
 			
-		} else {
+		} else if (!TO_EAT_MEAT && !ENDGAME) {
 			if (phase < 5 && !toRet){
 				amogusClear();
 				runRight(phase, 0);
@@ -234,13 +254,10 @@ void TIMER2_IRQHandler (void)
 			} else if (toRet && phase == 0){
 				amogusClear();
 				amogus_sit();
-				EATING = 0;
+				EATING = 2;
 				toRet = 0;
 			}
 		}
-	
-		
-	
 	
   LPC_TIM2->IR = 1;			/* clear interrupt flag */
   return;

@@ -23,11 +23,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "../GLCD/GLCD.h"
 #include "../TouchPanel/TouchPanel.h"
+#include "../timer/timer.h"
 
 volatile int AMOGUS_STAND;
 volatile int HAPPINESS;
 volatile int SATIETY;
-
+volatile int TO_RELOAD = 0;
 
 /* Private variables ---------------------------------------------------------*/
 Matrix 			matrix ;
@@ -6810,10 +6811,11 @@ void drawMeat (void) {
 /* clear Meat */
 void clearMeat(void) {
 	int x, y;
-	x = 0;
+	
+	x = 20;
 	y = 100;
 	
-	LCD_DrawRectangle(x, y, meat.height, meat.width, White);
+	LCD_DrawRectangle(x, y, meat.width, meat.height, White);
 }
 
 /* pulisce tempo */
@@ -6829,8 +6831,11 @@ void MakeBackground(void){
 	GUI_Text(65, 10, (uint8_t *) "AGE  00:00:00", Black, White);
 	GUI_Text(25, 35, (uint8_t *) "Happiness", Black, White);
 	GUI_Text(152, 35, (uint8_t *) "Satiety", Black, White);
-	life(60, 0);
-	life(80, 1);
+	life(0, 0);
+	life(100, 1);
+	HAPPINESS = 0;
+	//HAPPINESS = 5;
+	//SATIETY = 5;
 	amogus_stand();
 		
 	/* sezione inferiore */
@@ -6956,6 +6961,16 @@ void endgameAnimation(int phase) {
 
 }
 
+void resetGame(void){
+	disable_timer(2);
+	LCD_Clear(Black);
+	GUI_Text(80, 80, (uint8_t *) "GAME OVER", Red, Black);
+	GUI_Text(60, 120, (uint8_t *) "YOUR TAMAGOTCHI", Red, Black);
+	GUI_Text(90, 140, (uint8_t *) "IS DEAD", Red, Black);
+	LCD_DrawLine(0, 270, 239, 270, Red);
+	GUI_Text(75, 288, (uint8_t *) "RESTART GAME", Red, Black);
+	TO_RELOAD = 1;
+}
 
 /*********************************************************************************************************
       END FILE
