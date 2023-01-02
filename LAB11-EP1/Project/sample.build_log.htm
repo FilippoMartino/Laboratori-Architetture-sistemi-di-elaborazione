@@ -22,7 +22,7 @@ Dialog DLL:      TARMP1.DLL V1.26.0.0
  
 <h2>Project:</h2>
 C:\Users\Filippo Martino\Documents\GitHub\Laboratori-Architetture-sistemi-di-elaborazione\LAB11-EP1\Project\sample.uvprojx
-Project File Date:  12/30/2022
+Project File Date:  01/02/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -46,12 +46,17 @@ compiling AsciiLib.c...
 compiling GLCD.c...
 compiling HzLib.c...
 compiling TouchPanel.c...
-TouchPanel\TouchPanel.c(2626): warning:  #111-D: statement is unreachable
+TouchPanel\TouchPanel.c(2798): warning:  #111-D: statement is unreachable
                 break;
 TouchPanel\TouchPanel.c: 1 warning, 0 errors
+compiling IRQ_RIT.c...
+RIT\IRQ_RIT.c(62): warning:  #223-D: function "reset_RIT" declared implicitly
+        reset_RIT();
+RIT\IRQ_RIT.c: 1 warning, 0 errors
+compiling lib_RIT.c...
 linking...
-Program Size: Code=36724 RO-data=42860 RW-data=56 ZI-data=680  
-".\sample.axf" - 0 Error(s), 5 Warning(s).
+Program Size: Code=37288 RO-data=45940 RW-data=56 ZI-data=680  
+".\sample.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -74,7 +79,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.5.0
-Build Time Elapsed:  00:00:11
+Build Time Elapsed:  00:00:08
 </pre>
 </body>
 </html>

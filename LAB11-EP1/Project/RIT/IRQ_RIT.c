@@ -7,9 +7,12 @@
 ** Correlated files:    RIT.h
 **--------------------------------------------------------------------------------------------------------
 *********************************************************************************************************/
+#include <string.h>
 #include "lpc17xx.h"
+#include "../TIMER/timer.h"
+#include "../GLCD/GLCD.h" 
+#include "../TouchPanel/TouchPanel.h"
 #include "RIT.h"
-#include "../led/led.h"
 
 /******************************************************************************
 ** Function name:		RIT_IRQHandler
@@ -26,77 +29,36 @@ volatile int down_0 = 0;
 volatile int down_1 = 0;
 volatile int down_2 = 0;
 
+/* extern variabiles */
+extern int SATIETY;
+extern int HAPPINESS;
+
+/* extern functions */
+extern void drawCandy (void);
+extern void clearCandy(void);
+extern void drawMeat(void);
+extern void clearMeat(void);
+
 void RIT_IRQHandler (void) {			
 	
-	
-	
-	
-	
-	/* ========== PER FUNZIONALITA' ANTI DEBOUNCING ========== */
-	
-	/* BUTTON 0 [EINT0] TRIGGERED */
-	if(down_0 != 0){  
-			down_0 ++;  
-		if((LPC_GPIO2->FIOPIN & (1<<10)) == 0){
-			switch(down_1){
-			case 2:
-				// 	HERE CODE TO BE EXECUTED ONE TIME ON BUTTON 0 [EINT0]
-				break;
-			default:
-				//	HERE CODE TO BE EXECTUED AFTER FIRST ACTION ON TRIGGERED	
-				break;
-			}
-		}	else {
-		down_0 = 0;			
-		NVIC_EnableIRQ(EINT0_IRQn);						/* enable EINT0 interrupts */
-		LPC_PINCON->PINSEL4 |= (1 << 20);     /* External interrupt 0 pin selection */
+	/* funzione per intercettare feeding */
+	getDisplayPoint(&display, Read_Ads7846(), &matrix);
+	if (display.x > 0 && display.x < 120 && display.y > 270) {
+		if (SATIETY < 6){
+			drawMeat();
+			clearMeat();
 		}
 	}
-	
-	/* BUTTON 1 [EINT1] TRIGGERED */
-	if(down_1 != 0){  
-			down_1 ++;  
-		if((LPC_GPIO2->FIOPIN & (1<<11)) == 0){
-			switch(down_1){
-			case 2:
-				// 	HERE CODE TO BE EXECUTED ONE TIME ON BUTTON 0 [EINT1]
-				break;
-			default:
-				//	HERE CODE TO BE EXECTUED AFTER FIRST ACTION ON TRIGGERED	
-				break;
-			}
-		}	else {
-		down_1 = 0;			
-		NVIC_EnableIRQ(EINT1_IRQn);						/* enable EINT1 interrupts */
-		LPC_PINCON->PINSEL4 |= (1 << 22);     /* External interrupt 1 pin selection */
+	/* selezionato pulsante satiety */
+	if (display.x > 120 && display.y > 270){
+		if (SATIETY < 6){
+			drawCandy();
+			clearCandy();
 		}
 	}
-	
-	/* BUTTON 2 [EINT2] TRIGGERED */
-	if(down_2 != 0){  
-			down_2 ++;  
-		if((LPC_GPIO2->FIOPIN & (1<<12)) == 0){
-			switch(down_2){
-			case 2:
-				// 	HERE CODE TO BE EXECUTED ONE TIME ON BUTTON 0 [EINT1]
-				break;
-			default:
-				//	HERE CODE TO BE EXECTUED AFTER FIRST ACTION ON TRIGGERED	
-				break;
-			}
-		}	else {
-		down_2 = 0;			
-		NVIC_EnableIRQ(EINT2_IRQn);						/* enable EINT2 interrupts */
-		LPC_PINCON->PINSEL4 |= (1 << 24);     /* External interrupt 2 pin selection */
-		}
-	}
-	
-	/* ========== FINE FUNZIONALITA' ANTI DEBOUNCING ========== */
-	
-	
-	
 	
 	reset_RIT();
+	
   LPC_RIT->RICTRL |= 0x1;	/* clear interrupt flag */
 	
   return;
