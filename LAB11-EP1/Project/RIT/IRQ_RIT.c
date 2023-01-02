@@ -24,10 +24,8 @@
 **
 ******************************************************************************/
 
-/* variables needed for anti-debouncing function */
-volatile int down_0 = 0;
-volatile int down_1 = 0;
-volatile int down_2 = 0;
+volatile int TO_EAT_MEAT;
+volatile int EATING = 0;
 
 /* extern variabiles */
 extern int SATIETY;
@@ -41,19 +39,44 @@ extern void clearMeat(void);
 
 void RIT_IRQHandler (void) {			
 	
+	if (!EATING) {
+		disable_timer(2);
+		enable_timer(0);
+		enable_timer(1);
+	}
+	
 	/* funzione per intercettare feeding */
 	getDisplayPoint(&display, Read_Ads7846(), &matrix);
+	
 	if (display.x > 0 && display.x < 120 && display.y > 270) {
-		if (SATIETY < 6){
+		display.x = 0;
+		display.y = 0;
+		if (SATIETY < 5 && !EATING){
 			drawMeat();
-			clearMeat();
+			EATING = 1;
+			/* abilitiamo il timer per animazione e disabilitiamo gli altri */
+			TO_EAT_MEAT = 1;
+			enable_timer(2);
+			disable_timer(0);
+			disable_timer(1);
+			/* i timer verranno riabilitati in seguito */
 		}
 	}
+	
 	/* selezionato pulsante satiety */
 	if (display.x > 120 && display.y > 270){
-		if (SATIETY < 6){
+		display.x = 0;
+		display.y = 0;
+		if (SATIETY < 5 && !EATING){
 			drawCandy();
-			clearCandy();
+			EATING = 1;
+			/* abilitiamo il timer per animazione e disabilitiamo gli altri */
+			TO_EAT_MEAT = 0;
+			enable_timer(2);
+			disable_timer(0);
+			disable_timer(1);
+			/* i timer verranno riabilitati in seguito */
+			
 		}
 	}
 	

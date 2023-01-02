@@ -11,3 +11,4 @@
 .\irq_rit.o: RIT\../TIMER/timer.h
 .\irq_rit.o: RIT\../GLCD/GLCD.h
 .\irq_rit.o: RIT\../TouchPanel/TouchPanel.h
+.\irq_rit.o: RIT\RIT.h

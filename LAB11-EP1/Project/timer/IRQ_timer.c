@@ -10,24 +10,57 @@
 #include "lpc17xx.h"
 #include "timer.h"
 #include <string.h>
+#include "../RIT/RIT.h"
 
 /* extern variabiles */
 extern int AMOGUS_STAND;
 extern int HAPPINESS;
 extern int SATIETY;
+extern int TO_EAT_MEAT;
+extern int EATING;
 
 /* extern functions */
 extern void amogusClear(void);
+extern void areaClear(void);
 extern void amogus_sit(void);
 extern void amogus_stand(void);
 extern int 	life(int, int);
 extern void timeUpdate(char* toPrint);
+extern void clearCandy(void);
+extern void clearMeat(void);
+extern void runRight(int phase, int fromLeft);
+extern void runLeft(int phase, int fromRight);
+extern void eatRight(void);
+extern void eatLeft(void);
 
+/* internal */ 
 
-/* internal; AGE control */
+/* AGE control */
 static int h = 0;
 static int m = 0;
 static int s = 0;
+
+void restoreLife(int value, int kind){
+	switch (value){
+		case 4:
+			life(100, kind);
+			break;
+		case 3:
+			life(80, kind);
+			break;
+		case 2:
+			life(60, kind);
+			break;
+		case 1:
+			life(40, kind);
+			break;
+		case 0:
+			life(20, kind);
+			break;
+		default:
+			break;
+	}
+}
 
 /******************************************************************************
 ** Function name:			Timer0_IRQHandler
@@ -38,7 +71,6 @@ static int s = 0;
 ** Returned value:		None
 **
 ******************************************************************************/
-extern unsigned char led_value;					/* defined in funct_led								*/
 void TIMER0_IRQHandler (void)
 {
 	
@@ -67,10 +99,10 @@ void TIMER0_IRQHandler (void)
 		timeUpdate(time);
 		
 		if (AMOGUS_STAND){
-		amogusClear();
+		//amogusClear();
 		amogus_sit();
 	} else {
-		amogusClear();
+		//amogusClear();
 		amogus_stand();
 	}
 		
@@ -152,6 +184,64 @@ void TIMER1_IRQHandler (void)
 ******************************************************************************/
 void TIMER2_IRQHandler (void)
 {
+	
+	static int phase = 0;
+	static int toRet = 0;
+	int i;
+	
+		if (TO_EAT_MEAT){
+			
+			if (phase < 5 && !toRet){
+				amogusClear();
+				runLeft(phase, 0);
+				phase ++;
+			} else if (phase == 5) {
+				amogusClear();
+				eatLeft();
+				clearMeat();
+				restoreLife(HAPPINESS, 0);
+				HAPPINESS ++;
+				toRet = 1;
+				phase --;
+			} else if (toRet && phase > 0) {
+				areaClear();
+				runRight(phase, 1);
+				phase --;
+			} else if (toRet && phase == 0){
+				amogusClear();
+				amogus_sit();
+				EATING = 0;
+				toRet = 0;
+			}
+			
+		} else {
+			if (phase < 5 && !toRet){
+				amogusClear();
+				runRight(phase, 0);
+				phase ++;
+			} else if (phase == 5) {
+				amogusClear();
+				eatRight();
+				clearCandy();
+				restoreLife(SATIETY, 1);
+				SATIETY ++;
+				toRet = 1;
+				phase --;
+			} else if (toRet && phase > 0) {
+				areaClear();
+				runLeft(phase, 1);
+				phase --;
+			} else if (toRet && phase == 0){
+				amogusClear();
+				amogus_sit();
+				EATING = 0;
+				toRet = 0;
+			}
+		}
+	
+		
+	
+	
   LPC_TIM2->IR = 1;			/* clear interrupt flag */
   return;
 }

@@ -32,31 +32,32 @@ compiling sample.c...
 compiling core_cm3.c...
 compiling system_LPC17xx.c...
 compiling IRQ_timer.c...
-timer\IRQ_timer.c(58): warning:  #223-D: function "sprintf" declared implicitly
+timer\IRQ_timer.c(90): warning:  #223-D: function "sprintf" declared implicitly
                         sprintf(time, "AGE: %d:%d:0%d", h, m, s);
-timer\IRQ_timer.c(60): warning:  #223-D: function "sprintf" declared implicitly
+timer\IRQ_timer.c(92): warning:  #223-D: function "sprintf" declared implicitly
                         sprintf(time, "AGE: %d:0%d:0%d", h, m, s);
-timer\IRQ_timer.c(62): warning:  #223-D: function "sprintf" declared implicitly
+timer\IRQ_timer.c(94): warning:  #223-D: function "sprintf" declared implicitly
                         sprintf(time, "AGE: 0%d:0%d:0%d", h, m, s);
-timer\IRQ_timer.c(64): warning:  #223-D: function "sprintf" declared implicitly
+timer\IRQ_timer.c(96): warning:  #223-D: function "sprintf" declared implicitly
                         sprintf(time, "AGE: %d:%d:%d", h, m, s);
-timer\IRQ_timer.c: 4 warnings, 0 errors
+timer\IRQ_timer.c(190): warning:  #177-D: variable "i"  was declared but never referenced
+        int i;
+timer\IRQ_timer.c: 5 warnings, 0 errors
 compiling lib_timer.c...
 compiling AsciiLib.c...
 compiling GLCD.c...
 compiling HzLib.c...
 compiling TouchPanel.c...
-TouchPanel\TouchPanel.c(2798): warning:  #111-D: statement is unreachable
+TouchPanel\TouchPanel.c(6714): warning:  #111-D: statement is unreachable
                 break;
-TouchPanel\TouchPanel.c: 1 warning, 0 errors
+TouchPanel\TouchPanel.c(4989): warning:  #177-D: variable "Dead"  was declared but never referenced
+  } Dead = {
+TouchPanel\TouchPanel.c: 2 warnings, 0 errors
 compiling IRQ_RIT.c...
-RIT\IRQ_RIT.c(62): warning:  #223-D: function "reset_RIT" declared implicitly
-        reset_RIT();
-RIT\IRQ_RIT.c: 1 warning, 0 errors
 compiling lib_RIT.c...
 linking...
-Program Size: Code=37288 RO-data=45940 RW-data=56 ZI-data=680  
-".\sample.axf" - 0 Error(s), 6 Warning(s).
+Program Size: Code=38320 RO-data=119620 RW-data=80 ZI-data=680  
+".\sample.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
