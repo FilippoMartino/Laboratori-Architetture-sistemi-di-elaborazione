@@ -7,61 +7,91 @@
 ** Correlated files:    timer.h
 **--------------------------------------------------------------------------------------------------------
 *********************************************************************************************************/
-#include <string.h>
 #include "lpc17xx.h"
 #include "timer.h"
-#include "../GLCD/GLCD.h" 
-#include "../TouchPanel/TouchPanel.h"
+#include <string.h>
 
-/* variabili esterne */
+/* extern variabiles */
 extern int AMOGUS_STAND;
 extern int HAPPINESS;
 extern int SATIETY;
 
-/* funzioni esterne */
+/* extern functions */
 extern void amogusClear(void);
-extern void amogus_stand(void);
 extern void amogus_sit(void);
-extern void life(int life, int kind);
+extern void amogus_stand(void);
+extern int 	life(int, int);
+extern void timeUpdate(char* toPrint);
+
+
+/* internal; AGE control */
+static int h = 0;
+static int m = 0;
+static int s = 0;
 
 /******************************************************************************
-** Function name:		Timer0_IRQHandler
+** Function name:			Timer0_IRQHandler
 **
-** Descriptions:		Timer/Counter 0 interrupt handler
+** Descriptions:			Timer/Counter 0 interrupt handler
 **
-** parameters:			None
+** parameters:				None
 ** Returned value:		None
 **
 ******************************************************************************/
-
-/* ogni volta che arrivo qui devo cambiare visualizzazione personaggio */
-void TIMER0_IRQHandler (void) {
+extern unsigned char led_value;					/* defined in funct_led								*/
+void TIMER0_IRQHandler (void)
+{
 	
-	
-	if (AMOGUS_STAND){
+		char time[64];
+		s ++;
+		if (s == 60) {
+			s = 0;
+			m ++;
+		}
+		
+		if (m == 60) {
+			m = 0;
+			h ++;
+		}
+		
+		if (s < 10 && m > 9 && h > 9) {
+			sprintf(time, "AGE: %d:%d:0%d", h, m, s);
+		} else if (s < 10 && m < 10 && h > 9) {
+			sprintf(time, "AGE: %d:0%d:0%d", h, m, s);
+		} else if (s < 10 && m < 10 && h < 10) {
+			sprintf(time, "AGE: 0%d:0%d:0%d", h, m, s);
+		} else {
+			sprintf(time, "AGE: %d:%d:%d", h, m, s);
+		}
+		
+		timeUpdate(time);
+		
+		if (AMOGUS_STAND){
 		amogusClear();
 		amogus_sit();
 	} else {
 		amogusClear();
 		amogus_stand();
 	}
+		
+	LPC_TIM0->IR = 1;			/* clear interrupt flag */
 	
-  LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }
 
 
 /******************************************************************************
-** Function name:		Timer1_IRQHandler
+** Function name:			Timer1_IRQHandler
 **
-** Descriptions:		Timer/Counter 1 interrupt handler
+** Descriptions:			Timer/Counter 1 interrupt handler
 **
-** parameters:			None
+** parameters:				None
 ** Returned value:		None
 **
 ******************************************************************************/
 void TIMER1_IRQHandler (void)
 {
+	
 	HAPPINESS -= 1;
 	SATIETY 	-= 1;
 	
@@ -110,6 +140,39 @@ void TIMER1_IRQHandler (void)
   LPC_TIM1->IR = 1;			/* clear interrupt flag */
   return;
 }
+
+/******************************************************************************
+** Function name:			Timer2_IRQHandler
+**
+** Descriptions:			Timer/Counter 2 interrupt handler
+**
+** parameters:				None
+** Returned value:		None
+**
+******************************************************************************/
+void TIMER2_IRQHandler (void)
+{
+  LPC_TIM2->IR = 1;			/* clear interrupt flag */
+  return;
+}
+
+/******************************************************************************
+** Function name:			Timer3_IRQHandler
+**
+** Descriptions:			Timer/Counter 3 interrupt handler
+**
+** parameters:				None
+** Returned value:		None
+**
+******************************************************************************/
+void TIMER3_IRQHandler (void)
+{
+  LPC_TIM3->IR = 1;			/* clear interrupt flag */
+  return;
+}
+
+
+
 
 /******************************************************************************
 **                            End Of File

@@ -28,6 +28,7 @@ volatile int AMOGUS_STAND;
 volatile int HAPPINESS;
 volatile int SATIETY;
 
+
 /* Private variables ---------------------------------------------------------*/
 Matrix 			matrix ;
 Coordinate  display ;
@@ -2656,11 +2657,18 @@ void amogusClear(void) {
 	
 }
 
+
+/* pulisce tempo */
+void timeUpdate(char* toPrint){
+	LCD_DrawRectangle(65, 0, 100, 30, White);
+	GUI_Text(65, 10, (uint8_t *) toPrint, Black, White);
+}
+
 /* costruiamo la scena */
 void MakeBackground(void){
 	
 	/* sezione superiore */
-	GUI_Text(80, 10, (uint8_t *) "AGE  00:00", Black, White);
+	GUI_Text(65, 10, (uint8_t *) "AGE  00:00:00", Black, White);
 	GUI_Text(25, 35, (uint8_t *) "Happiness", Black, White);
 	GUI_Text(152, 35, (uint8_t *) "Satiety", Black, White);
 	life(100, 0);
