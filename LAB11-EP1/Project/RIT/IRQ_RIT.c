@@ -49,7 +49,7 @@ void RIT_IRQHandler (void) {
 	if (TO_RELOAD){
 		if (display.x > 0 && display.y > 270){
 			display.x = 0;
-			display.y = 0;
+			display.y = 0; 	
 			
 			/* Restore di tutte le variabili e gioco */
 			ENDGAME = 0;
