@@ -28,6 +28,8 @@ volatile int TO_EAT_MEAT;
 volatile int EATING = 0;
 volatile int ENDGAME = 0;
 volatile int IS_T2_ENABLED = 0;
+volatile int IS_LEFT_SELECTED = 0;
+volatile int IS_RIGHT_SELECTED = 0;
 
 /* extern variabiles */
 extern int SATIETY;
@@ -39,18 +41,34 @@ extern void drawCandy (void);
 extern void clearCandy(void);
 extern void drawMeat(void);
 extern void clearMeat(void);
+extern void selectLeft(void);
+extern void clearLeft(void);
+extern void selectRight(void);
+extern void clearRight(void);
 
 void RIT_IRQHandler (void) {	
 
 	/* funzione per intercettare feeding */
 	getDisplayPoint(&display, Read_Ads7846(), &matrix);
 	
+	/* if joystick Left */
+	if((LPC_GPIO1->FIOPIN & (1<<27)) == 0  && !IS_LEFT_SELECTED && !EATING){
+		clearRight();
+		selectLeft();
+		IS_LEFT_SELECTED = 1;
+		IS_RIGHT_SELECTED = 0;
+	}
+	/* if joystick Right */
+	if((LPC_GPIO1->FIOPIN & (1<<28)) == 0 && !IS_RIGHT_SELECTED && !EATING){
+		clearLeft();
+		selectRight();
+		IS_LEFT_SELECTED = 0;
+		IS_RIGHT_SELECTED = 1;
+	}
+	
 	/* reset partita */
 	if (TO_RELOAD){
-		if (display.x > 0 && display.y > 270){
-			display.x = 0;
-			display.y = 0; 	
-			
+		if ((LPC_GPIO1->FIOPIN & (1<<25)) == 0){			
 			/* Restore di tutte le variabili e gioco */
 			ENDGAME = 0;
 			LCD_Clear(White);
@@ -87,10 +105,8 @@ void RIT_IRQHandler (void) {
 	
 	/* funzione per intercettare feeding */
 	
-	if (display.x > 0 && display.x < 120 && display.y > 270 && !ENDGAME) {
-		display.x = 0;
-		display.y = 0;
-		if (HAPPINESS < 5 && !EATING){
+	if ((LPC_GPIO1->FIOPIN & (1<<25)) == 0 && IS_LEFT_SELECTED && !ENDGAME) {
+		if (SATIETY < 5 && !EATING){
 			drawMeat();
 			EATING = 1;
 			/* abilitiamo il timer per animazione e disabilitiamo gli altri */
@@ -103,10 +119,8 @@ void RIT_IRQHandler (void) {
 	}
 	
 	/* selezionato pulsante satiety */
-	if (display.x > 120 && display.y > 270 && !ENDGAME){
-		display.x = 0;
-		display.y = 0;
-		if (SATIETY < 5 && !EATING){
+	if ((LPC_GPIO1->FIOPIN & (1<<25)) == 0 && IS_RIGHT_SELECTED && !ENDGAME){
+		if (HAPPINESS < 5 && !EATING){
 			drawCandy();
 			EATING = 1;
 			/* abilitiamo il timer per animazione e disabilitiamo gli altri */

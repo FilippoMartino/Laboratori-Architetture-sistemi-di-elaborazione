@@ -219,8 +219,8 @@ void TIMER2_IRQHandler (void)
 				amogusClear();
 				eatLeft();
 				clearMeat();
-				restoreLife(HAPPINESS, 0);
-				HAPPINESS ++;
+				restoreLife(SATIETY, 1);
+				SATIETY ++;
 				toRet = 1;
 				phase --;
 			} else if (toRet && phase > 0) {
@@ -243,8 +243,8 @@ void TIMER2_IRQHandler (void)
 				amogusClear();
 				eatRight();
 				clearCandy();
-				restoreLife(SATIETY, 1);
-				SATIETY ++;
+				restoreLife(HAPPINESS, 0);
+				HAPPINESS ++;
 				toRet = 1;
 				phase --;
 			} else if (toRet && phase > 0) {

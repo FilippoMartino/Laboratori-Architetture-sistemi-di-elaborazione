@@ -26,6 +26,7 @@
 #include "TouchPanel/TouchPanel.h"
 #include "timer/timer.h"
 #include "RIT/RIT.h"
+#include "joystick/joystick.h"
 
 #define SIMULATOR 1
 
@@ -42,6 +43,7 @@ int main(void)
 	
   LCD_Initialization();
 	
+	joystick_init();
 	TP_Init();
 	TouchPanel_Calibrate();
 	LCD_Clear(White);

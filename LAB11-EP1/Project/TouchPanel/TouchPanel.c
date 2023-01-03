@@ -6824,6 +6824,40 @@ void timeUpdate(char* toPrint){
 	GUI_Text(65, 10, (uint8_t *) toPrint, Black, White);
 }
 
+/* select Left */
+void selectLeft(void){
+	LCD_DrawRectangle(0, 270, 120, 4, Red);
+	LCD_DrawRectangle(0, 270, 4, 50, Red);
+	LCD_DrawRectangle(116, 270, 4, 50, Red);
+	LCD_DrawRectangle(0, 316, 120, 4, Red);
+}
+/* clear left */
+void clearLeft(void){
+	LCD_DrawRectangle(0, 270, 120, 4, White);
+	LCD_DrawRectangle(0, 270, 4, 50, White);
+	LCD_DrawRectangle(116, 270, 4, 50, White);
+	LCD_DrawRectangle(0, 316, 120, 4, White);
+	LCD_DrawLine(0, 270, 120, 270, Black);
+	LCD_DrawLine(120, 270, 120, 319, Black);
+}
+/* select Right */
+void selectRight(void){
+	LCD_DrawRectangle(120, 270, 120, 4, Red);
+	LCD_DrawRectangle(120, 270, 4, 50, Red);
+	LCD_DrawRectangle(236, 270, 4, 50, Red);
+	LCD_DrawRectangle(120, 316, 120, 4, Red);
+}
+/* clear right */
+void clearRight(void){
+	LCD_DrawRectangle(120, 270, 120, 4, White);
+	LCD_DrawRectangle(120, 270, 4, 50, White);
+	LCD_DrawRectangle(236, 270, 4, 50, White);
+	LCD_DrawRectangle(120, 316, 120, 4, White);
+	LCD_DrawLine(120, 270, 240, 270, Black);
+	LCD_DrawLine(120, 270, 120, 319, Black);
+}
+
+
 /* costruiamo la scena */
 void MakeBackground(void){
 	
@@ -6831,9 +6865,10 @@ void MakeBackground(void){
 	GUI_Text(65, 10, (uint8_t *) "AGE  00:00:00", Black, White);
 	GUI_Text(25, 35, (uint8_t *) "Happiness", Black, White);
 	GUI_Text(152, 35, (uint8_t *) "Satiety", Black, White);
-	life(0, 0);
-	life(100, 1);
-	HAPPINESS = 0;
+	life(80, 0);
+	life(60, 1);
+	HAPPINESS = 4;
+	SATIETY = 3;
 	//HAPPINESS = 5;
 	//SATIETY = 5;
 	amogus_stand();
@@ -6967,6 +7002,10 @@ void resetGame(void){
 	GUI_Text(80, 80, (uint8_t *) "GAME OVER", Red, Black);
 	GUI_Text(60, 120, (uint8_t *) "YOUR TAMAGOTCHI", Red, Black);
 	GUI_Text(90, 140, (uint8_t *) "IS DEAD", Red, Black);
+	
+	GUI_Text(72, 180, (uint8_t *) "PRESS SELECT", Red, Black);
+	GUI_Text(85, 200, (uint8_t *) "TO RELOAD", Red, Black);
+	
 	LCD_DrawLine(0, 270, 239, 270, Red);
 	GUI_Text(75, 288, (uint8_t *) "RESTART GAME", Red, Black);
 	TO_RELOAD = 1;
