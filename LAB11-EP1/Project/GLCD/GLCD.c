@@ -281,6 +281,7 @@ static void LCD_SetCursor(uint16_t Xpos,uint16_t Ypos)
 static void delay_ms(uint16_t ms)    
 { 
 	uint16_t i,j; 
+
 	for( i = 0; i < ms; i++ )
 	{ 
 		for( j = 0; j < 1141; j++ );

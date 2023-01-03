@@ -50,6 +50,7 @@ int main(void)
 	
 	MakeBackground();
 	
+	
 	/* Timer 0, per animazione centrale sprite */
 	init_timer(0, 0, 0, 3, 1, 25000000); 						    	/* 1s * 25MHz = 25000000 = 0x17D7840 */
 	enable_timer(0);
