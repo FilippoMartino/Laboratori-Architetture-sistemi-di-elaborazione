@@ -26,11 +26,11 @@ extern char led_value;
 
 void RIT_IRQHandler (void)
 {					
-	static int select=0;
+	static int select = 0;
 	static int J_down = 0;
 	static int position=0;	
 	
-	if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	
+	if((LPC_GPIO1->FIOPIN & (1 << 25)) == 0){	
 		/* Joytick Select pressed p1.25*/
 		/* Joytick Down pressed p1.26 --> using J_DOWN due to emulator issues*/
 		
@@ -39,7 +39,7 @@ void RIT_IRQHandler (void)
 			case 1:
 				led_value++;
 			  if(led_value>=255){
-					led_value =0;
+					led_value = 0;
 				}
 				LED_Out(led_value);
 				break;
