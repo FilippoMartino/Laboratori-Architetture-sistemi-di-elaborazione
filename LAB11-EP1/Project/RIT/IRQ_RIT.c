@@ -69,18 +69,10 @@ void RIT_IRQHandler (void) {
 	/* reset partita */
 	if (TO_RELOAD){
 		if ((LPC_GPIO1->FIOPIN & (1<<25)) == 0){			
-			/* Restore di tutte le variabili e gioco */
-			ENDGAME = 0;
-			LCD_Clear(White);
-			MakeBackground();
-			enable_RIT();
-			enable_timer(0);
-			enable_timer(1);
-			reset_timer(0);
-			reset_timer(1);
-			disable_timer(2);
+			NVIC_SystemReset();
+			LPC_RIT->RICTRL |= 0x1;	/* clear interrupt flag */
+			return;	
 			
-			TO_RELOAD = 0;
 		}
 	}	
 	

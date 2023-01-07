@@ -42,12 +42,8 @@ int main(void)
   SystemInit();  												/* System Initialization (i.e., PLL)  */
 	
   LCD_Initialization();
-	
 	joystick_init();
-	TP_Init();
-	TouchPanel_Calibrate();
-	LCD_Clear(White);
-	
+	TP_Init();	
 	MakeBackground();
 	
 	
@@ -56,10 +52,10 @@ int main(void)
 	enable_timer(0);
 	
 	/* Timer 1, per animazione cuori e decremento vita */
-	//init_timer(1, 0, 0, 3, 0, 125000000); 							/* 5s * 25MHz = 125000000 = 0x07735940 */
-	init_timer(1, 0, 0, 3, 1, 50000000); 									/* 5s * 25MHz = 125000000 = 0x07735940 */
+	init_timer(1, 0, 0, 3, 0, 125000000); 							/* 5s * 25MHz = 125000000 = 0x07735940 */
 	enable_timer(1);
 	
+	/* Rit gestisce il joystick e animazioni cibo con timer 2 */
 	init_RIT(1250000, 0);																	/* 25ms * 25Mhz = 1250000 */
 	enable_RIT();
 	

@@ -95,7 +95,12 @@ void TIMER0_IRQHandler (void)
 			sprintf(time, "AGE: %d:0%d:0%d", h, m, s);
 		} else if (s < 10 && m < 10 && h < 10) {
 			sprintf(time, "AGE: 0%d:0%d:0%d", h, m, s);
-		} else {
+		} else if (s > 9 && m < 10 && h < 10) {
+			sprintf(time, "AGE: 0%d:0%d:%d", h, m, s);
+		} else if (s > 9 && m > 9 && h < 10) {
+			sprintf(time, "AGE: 0%d:%d:%d", h, m, s);
+		}
+		else {
 			sprintf(time, "AGE: %d:%d:%d", h, m, s);
 		}
 		

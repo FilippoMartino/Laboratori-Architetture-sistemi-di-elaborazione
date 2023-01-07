@@ -39,10 +39,14 @@ timer\IRQ_timer.c(95): warning:  #223-D: function "sprintf" declared implicitly
 timer\IRQ_timer.c(97): warning:  #223-D: function "sprintf" declared implicitly
                         sprintf(time, "AGE: 0%d:0%d:0%d", h, m, s);
 timer\IRQ_timer.c(99): warning:  #223-D: function "sprintf" declared implicitly
+                        sprintf(time, "AGE: 0%d:0%d:%d", h, m, s);
+timer\IRQ_timer.c(101): warning:  #223-D: function "sprintf" declared implicitly
+                        sprintf(time, "AGE: 0%d:%d:%d", h, m, s);
+timer\IRQ_timer.c(104): warning:  #223-D: function "sprintf" declared implicitly
                         sprintf(time, "AGE: %d:%d:%d", h, m, s);
-timer\IRQ_timer.c(197): warning:  #177-D: variable "i"  was declared but never referenced
+timer\IRQ_timer.c(202): warning:  #177-D: variable "i"  was declared but never referenced
         int i;
-timer\IRQ_timer.c: 5 warnings, 0 errors
+timer\IRQ_timer.c: 7 warnings, 0 errors
 compiling lib_timer.c...
 compiling AsciiLib.c...
 compiling GLCD.c...
@@ -55,8 +59,8 @@ compiling IRQ_RIT.c...
 compiling lib_RIT.c...
 compiling lib_joystick.c...
 linking...
-Program Size: Code=39484 RO-data=132436 RW-data=104 ZI-data=680  
-".\sample.axf" - 0 Error(s), 6 Warning(s).
+Program Size: Code=39588 RO-data=132436 RW-data=104 ZI-data=680  
+".\sample.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -79,7 +83,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.5.0
-Build Time Elapsed:  00:00:08
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

@@ -6866,11 +6866,9 @@ void MakeBackground(void){
 	GUI_Text(25, 35, (uint8_t *) "Happiness", Black, White);
 	GUI_Text(152, 35, (uint8_t *) "Satiety", Black, White);
 	life(100, 0);
-	life(0, 1);
+	life(100, 1);
 	HAPPINESS = 5;
-	SATIETY = 0;
-	//HAPPINESS = 5;
-	//SATIETY = 5;
+	SATIETY = 5;
 	amogus_stand();
 		
 	/* sezione inferiore */
